@@ -1,1147 +1,1402 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPSInfaq - Student Food Assistance</title>
+<title>UPSInfaq</title>
+
 <style>
 :root {
- --green:#145b43;
- --dark:#18352a;
- --light:#eaf4ee;
- --gold:#d7ad55;
- --grey:#68766f;
- --bg:#f5f7f5;
+  --green: #145b43;
+  --dark: #18352a;
+  --light: #eaf4ee;
+  --gold: #d7ad55;
+  --bg: #f5f7f5;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--dark)}
-header{background:var(--green);color:white;padding:17px 20px;display:flex;justify-content:space-between;align-items:center}
-header h2{margin:0;font-size:22px}
-header small{color:#d8e9df}
-main{max-width:1100px;margin:auto;padding:20px}
-button{border:0;border-radius:9px;padding:11px 16px;background:var(--green);color:white;font-weight:bold;cursor:pointer}
-button.secondary{background:#e5eee8;color:var(--green)}
-button.gold{background:var(--gold);color:#26352b}
-button.danger{background:#a63d3d}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ccd8d0;border-radius:8px;margin:6px 0 14px;font:inherit}
-label{display:block;font-size:13px;font-weight:bold;color:#40574a;margin-top:5px}
-.card{background:white;border:1px solid #e1e9e3;border-radius:14px;padding:18px;margin-bottom:15px;box-shadow:0 3px 12px #18352a0a}
-.login{max-width:450px;margin:40px auto}
-.muted{color:var(--grey);font-size:13px;line-height:1.6}
-.hidden{display:none!important}
-.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:5px 0 12px}
-.tabs button{white-space:nowrap}
-.tabs button.active{background:var(--gold);color:#26352b}
-.tag{display:inline-block;padding:5px 10px;border-radius:20px;background:#e7f2e9;color:#17613e;font-size:12px;font-weight:bold}
-.tag.orange{background:#fff1d9;color:#94600c}
-.food-image{width:100%;height:155px;object-fit:cover;border-radius:10px;background:#edf2ee}
-.price{font-size:20px;color:var(--green);font-weight:bold}
-.qty{display:flex;align-items:center;gap:12px;margin:10px 0}
-.qty button{padding:7px 13px}
-hr{border:0;border-top:1px solid #e1e9e3;margin:16px 0}
-footer{text-align:center;padding:25px;color:#849087;font-size:12px}
-@media(max-width:600px){
- main{padding:13px}
- header{padding:14px}
- .login{margin:20px auto}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+}
+
+header {
+  background: var(--green);
+  color: white;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h2 { margin: 0; }
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  border: 1px solid #e1e9e3;
+}
+
+.login {
+  max-width: 450px;
+  margin: 35px auto;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border: 1px solid #ccd8d0;
+  border-radius: 8px;
+  font: inherit;
+}
+
+button {
+  background: var(--green);
+  color: white;
+  border: 0;
+  padding: 11px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button.secondary {
+  background: #e5eee8;
+  color: var(--green);
+}
+
+button.gold {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.hidden { display: none !important; }
+
+.muted {
+  color: #68766f;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.tabs button { white-space: nowrap; }
+
+.tag {
+  display: inline-block;
+  background: var(--light);
+  color: var(--green);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.food-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #849087;
+  font-size: 12px;
+}
+
+@media(max-width:600px) {
+  main { padding: 13px; }
+  header { padding: 14px; }
 }
 </style>
 </head>
+
 <body>
 
 <header>
- <div>
-  <h2>🌿 UPSInfaq</h2>
-  <small>Student Food Assistance Platform</small>
- </div>
- <div id="headerUser">Welcome</div>
+  <div>
+    <h2>UPSInfaq</h2>
+    <small>Student Food Assistance Platform</small>
+  </div>
+  <span id="headerUser">Welcome</span>
 </header>
 
 <main>
 
 <section id="loginPage" class="login card">
- <h1>Welcome to UPSInfaq</h1>
- <p class="muted">Sign in to access your account.</p>
+  <h1>Welcome to UPSInfaq</h1>
+  <p class="muted">Sign in to access your account.</p>
 
- <label>Full Name</label>
- <input id="loginName" placeholder="Enter your full name">
+  <label>Full Name</label>
+  <input id="loginName" placeholder="Enter your full name">
 
- <label>Email Address</label>
- <input id="loginEmail" type="email" placeholder="Enter your email">
+  <label>Email Address</label>
+  <input id="loginEmail" type="email" placeholder="Enter your email">
 
- <label>Account Role</label>
- <select id="loginRole">
-  <option>Student</option>
-  <option>Donor</option>
-  <option>Organiser</option>
-  <option>Registered Stall</option>
-  <option>Admin</option>
- </select>
-
- <div id="studentFields">
-  <label>Faculty</label>
-  <select id="loginFaculty">
-   <option>FPE</option>
-   <option>FSM</option>
-   <option>FSK</option>
+  <label>Account Role</label>
+  <select id="loginRole">
+    <option>Student</option>
+    <option>Donor</option>
+    <option>Organiser</option>
+    <option>Registered Stall</option>
+    <option>Admin</option>
   </select>
 
-  <label>Residential College</label>
-  <select id="loginCollege">
-   <option>KUO</option>
-   <option>KHAR</option>
-   <option>KAHS</option>
-   <option>KZ</option>
-  </select>
- </div>
+  <div id="studentFields">
+    <label>Faculty</label>
+    <select id="loginFaculty">
+      <option>FPE</option>
+      <option>FSM</option>
+      <option>FSK</option>
+    </select>
 
- <div id="adminField" class="hidden">
-  <label>Admin Access Code</label>
-  <input id="adminCode" type="password" placeholder="Admin code">
- </div>
+    <label>Residential College</label>
+    <select id="loginCollege">
+      <option>KUO</option>
+      <option>KHAR</option>
+      <option>KAHS</option>
+      <option>KZ</option>
+    </select>
+  </div>
 
- <button style="width:100%" onclick="login()">Sign In</button>
- <p id="loginMessage" class="muted"></p>
+  <div id="adminField" class="hidden">
+    <label>Admin Access Code</label>
+    <input id="adminCode" type="password" placeholder="Admin code">
+  </div>
+
+  <button style="width:100%; margin-top:15px" onclick="login()">
+    Sign In
+  </button>
+
+  <p id="loginMessage" class="muted"></p>
 </section>
 
 <section id="appPage" class="hidden">
- <div class="row">
-  <div>
-   <h2 id="welcomeTitle">Dashboard</h2>
-   <p class="muted" id="welcomeText"></p>
+  <div class="row">
+    <div>
+      <h2 id="welcomeTitle">Dashboard</h2>
+      <p id="welcomeText" class="muted"></p>
+    </div>
+    <button class="secondary" onclick="logout()">Sign Out</button>
   </div>
-  <button class="secondary" onclick="logout()">Sign Out</button>
- </div>
 
- <div id="tabs" class="tabs"></div>
- <div id="content"></div>
+  <div id="tabs" class="tabs"></div>
+  <div id="content"></div>
 </section>
 
 </main>
 
 <footer>
- UPSInfaq · Food Assistance with Care
- <br>Universiti Pendidikan Sultan Idris
+  UPSInfaq · Food Assistance with Care
+  <br>Universiti Pendidikan Sultan Idris
 </footer>
 
 <script>
-const $ = id => document.getElementById(id);
-
-$("loginRole").addEventListener("change",function(){
- $("studentFields").classList.toggle("hidden",this.value!=="Student");
- $("adminField").classList.toggle("hidden",this.value!=="Admin");
-});
  
-const upsiDB = {
-  users: [
-    {
-      id: 1,
-      name: "Admin UPSInfaq",
-      email: "admin@upsinfaq.com",
-      password: "admin123",
-      role: "Admin",
-      status: "Active"
-    }
-  ],
+// DATABASE
+const STORAGE_KEY = "UPSINFAQ_DATABASE";
 
+let db = {
+  users: [],
   products: [],
   vendors: [],
   sponsorships: [],
   vouchers: [],
   donations: [],
+  campaigns: [],
   activities: []
 };
 
-// Save database
-function saveUPSInfaq() {
-  localStorage.setItem(
-    "UPSINFAQ_DATABASE_V1",
-    JSON.stringify(upsiDB)
-  );
-}
+let currentUser = null;
+let currentTab = "dashboard";
+let donorCart = [];
 
-// Load saved database
-function loadUPSInfaq() {
-  const savedData = localStorage.getItem(
-    "UPSINFAQ_DATABASE_V1"
-  );
-
-  if (savedData) {
-    const parsedData = JSON.parse(savedData);
-
-    Object.keys(upsiDB).forEach(key => {
-      if (Array.isArray(parsedData[key])) {
-        upsiDB[key] = parsedData[key];
-      }
-    });
-  } else {
-    saveUPSInfaq();
+function loadDatabase() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) db = { ...db, ...JSON.parse(saved) };
+  } catch (error) {
+    console.error("Unable to load database:", error);
   }
 }
 
-// Find account by email
-function findUPSInfaqUser(email) {
-  return upsiDB.users.find(
-    user => user.email.toLowerCase() === email.toLowerCase()
-  );
+function saveDatabase() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+  } catch (error) {
+    alert("Storage is full. Please use smaller images.");
+  }
 }
 
-// Register new account
-function registerUPSInfaqUser(name, email, password, role) {
-  if (findUPSInfaqUser(email)) {
+function createId(prefix) {
+  return prefix + "-" + Date.now().toString(36) +
+    "-" + Math.random().toString(36).slice(2, 7).toUpperCase();
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, function(character) {
     return {
-      success: false,
-      message: "This email is already registered."
-    };
-  }
-
-  if (role === "Student" && !email.endsWith("@siswa.com")) {
-    return {
-      success: false,
-      message: "Students must use an @siswa.com email."
-    };
-  }
-
-  const newUser = {
-    id: Date.now(),
-    name,
-    email,
-    password,
-    role,
-    status: "Pending"
-  };
-
-  upsiDB.users.push(newUser);
-  saveUPSInfaq();
-
-  return {
-    success: true,
-    message: "Account registered successfully."
-  };
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[character];
+  });
 }
 
-// Record activity
-function recordUPSInfaqActivity(message) {
-  upsiDB.activities.unshift({
-    id: Date.now(),
-    message,
+function formatRM(amount) {
+  return "RM " + Number(amount || 0).toFixed(2);
+}
+
+function logActivity(action) {
+  db.activities.unshift({
+    id: createId("ACT"),
+    action,
+    user: currentUser ? currentUser.name : "System",
     date: new Date().toLocaleString()
   });
 
-  saveUPSInfaq();
+  db.activities = db.activities.slice(0, 200);
+  saveDatabase();
 }
 
-// Start database
-loadUPSInfaq();
- 
-// Add a new food item
-function addUPSInfaqProduct(product) {
-  const newProduct = {
-    id: Date.now(),
-    name: product.name,
-    category: product.category || "Dry Goods",
-    price: Number(product.price) || 0,
-    stock: Number(product.stock) || 0,
-    image: product.image || "",
-    type: product.type || "General",
-    sponsorshipId: product.sponsorshipId || null,
-    vendorId: product.vendorId || null,
-    active: true
-  };
-
-  upsiDB.products.push(newProduct);
-  saveUPSInfaq();
-
-  return newProduct;
+function showLoginMessage(message) {
+  document.getElementById("loginMessage").textContent = message;
 }
 
-// Update food stock
-function updateUPSInfaqStock(productId, quantity) {
-  const product = upsiDB.products.find(
-    item => item.id === Number(productId)
+loadDatabase();
+
+// CHANGE LOGIN FIELDS BASED ON ROLE
+document.getElementById("loginRole").addEventListener("change", function() {
+  const role = this.value;
+
+  document.getElementById("studentFields").classList.toggle(
+    "hidden", role !== "Student"
   );
 
-  if (!product) return false;
+  document.getElementById("adminField").classList.toggle(
+    "hidden", role !== "Admin"
+  );
+});
 
-  product.stock = Math.max(0, Number(quantity));
-  saveUPSInfaq();
-  return true;
+// SIGN IN
+function login() {
+  const name = document.getElementById("loginName").value.trim();
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const role = document.getElementById("loginRole").value;
+
+  if (!name || !email) {
+    showLoginMessage("Please enter your name and email.");
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showLoginMessage("Please enter a valid email address.");
+    return;
+  }
+
+  if (role === "Student" && !email.endsWith("@siswa.com")) {
+    showLoginMessage("Students must use an @siswa.com email.");
+    return;
+  }
+
+  if (role === "Admin") {
+    const code = document.getElementById("adminCode").value;
+
+    if (code !== "112233") {
+      showLoginMessage("Incorrect admin access code.");
+      return;
+    }
+  }
+
+  let user = db.users.find(item => item.email === email);
+
+  if (user && user.role !== role) {
+    showLoginMessage("This email is registered under another role.");
+    return;
+  }
+
+  if (!user) {
+    user = {
+      id: createId("USER"),
+      name,
+      email,
+      role,
+      faculty: role === "Student"
+        ? document.getElementById("loginFaculty").value : "",
+      college: role === "Student"
+        ? document.getElementById("loginCollege").value : "",
+      eligibility: role === "Student" ? "Pending" : "Not Applicable",
+      createdAt: new Date().toLocaleString(),
+      active: true
+    };
+
+    db.users.push(user);
+  } else {
+    user.name = name;
+
+    if (role === "Student") {
+      user.faculty = document.getElementById("loginFaculty").value;
+      user.college = document.getElementById("loginCollege").value;
+    }
+  }
+
+  currentUser = user;
+  donorCart = [];
+
+  saveDatabase();
+  logActivity("Signed in as " + role);
+
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("appPage").classList.remove("hidden");
+  document.getElementById("headerUser").textContent = name;
+
+  renderDashboard();
 }
 
-// Add a participating vendor
-function addUPSInfaqVendor(vendor) {
-  const newVendor = {
-    id: Date.now(),
-    name: vendor.name,
-    address: vendor.address || "",
-    mapLink: vendor.mapLink || "",
-    openingHours: vendor.openingHours || "",
+// SIGN OUT
+function logout() {
+  if (currentUser) logActivity("Signed out");
+
+  currentUser = null;
+  donorCart = [];
+
+  document.getElementById("appPage").classList.add("hidden");
+  document.getElementById("loginPage").classList.remove("hidden");
+  document.getElementById("headerUser").textContent = "Welcome";
+
+  document.getElementById("loginName").value = "";
+  document.getElementById("loginEmail").value = "";
+  document.getElementById("adminCode").value = "";
+
+  showLoginMessage("You have signed out successfully.");
+}
+
+ 
+// DEFAULT FOOD CATALOGUE
+if (db.products.length === 0) {
+  const defaultProducts = [
+    ["Rice 1kg", "Dry Goods", 3.50],
+    ["Instant Noodles", "Dry Goods", 1.20],
+    ["Biscuits", "Dry Goods", 2.00],
+    ["Cooking Oil 1kg", "Dry Goods", 3.80],
+    ["Sugar 1kg", "Dry Goods", 2.90],
+    ["Flour 1kg", "Dry Goods", 2.50],
+    ["Canned Sardines", "Dry Goods", 4.20],
+    ["Canned Tuna", "Dry Goods", 4.50],
+    ["Milk Powder", "Dry Goods", 8.00],
+    ["Oats", "Dry Goods", 5.50],
+    ["Tea", "Dry Goods", 3.00],
+    ["Coffee", "Dry Goods", 4.00],
+    ["Soy Sauce", "Dry Goods", 2.80],
+    ["Salt", "Dry Goods", 1.50],
+    ["Peanut Butter", "Dry Goods", 5.00],
+    ["Crackers", "Dry Goods", 2.50],
+    ["UHT Milk", "Dry Goods", 3.00],
+    ["Cereal", "Dry Goods", 6.00],
+    ["Red Beans", "Dry Goods", 3.50],
+    ["Cooking Sauce", "Dry Goods", 3.00],
+    ["Nasi Lemak", "Ready-to-Eat", 4.00],
+    ["Fried Rice", "Ready-to-Eat", 5.00],
+    ["Chicken Rice", "Ready-to-Eat", 6.00],
+    ["Fried Noodles", "Ready-to-Eat", 5.00],
+    ["Bihun Goreng", "Ready-to-Eat", 4.50],
+    ["Sandwich", "Ready-to-Eat", 4.00],
+    ["Bun", "Ready-to-Eat", 2.00],
+    ["Porridge", "Ready-to-Eat", 4.00],
+    ["Curry Puff", "Ready-to-Eat", 2.00],
+    ["Packed Meal", "Ready-to-Eat", 6.00]
+  ];
+
+  defaultProducts.forEach(item => {
+    db.products.push({
+      id: createId("FOOD"),
+      name: item[0],
+      category: item[1],
+      price: item[2],
+      stock: 0,
+      image: "",
+      access: "General",
+      sponsorshipId: "",
+      vendorId: "",
+      active: true
+    });
+  });
+
+  saveDatabase();
+}
+
+// DEFAULT VENDOR
+if (db.vendors.length === 0) {
+  db.vendors.push({
+    id: createId("SHOP"),
+    name: "UPSInfaq Food Collection Point",
+    address: "Universiti Pendidikan Sultan Idris, Tanjong Malim",
+    map: "https://www.google.com/maps/search/?api=1&query=Universiti+Pendidikan+Sultan+Idris",
+    hours: "Monday - Friday, 8:00 AM - 5:00 PM",
+    email: "",
     active: true
-  };
+  });
 
-  upsiDB.vendors.push(newVendor);
-  saveUPSInfaq();
-
-  return newVendor;
+  saveDatabase();
 }
 
-// Create a sponsorship
-function addUPSInfaqSponsorship(sponsorship) {
-  const newSponsorship = {
-    id: Date.now(),
-    name: sponsorship.name,
-    description: sponsorship.description || "",
-    allowAllStudents: Boolean(sponsorship.allowAllStudents),
-    active: true
-  };
-
-  upsiDB.sponsorships.push(newSponsorship);
-  saveUPSInfaq();
-
-  return newSponsorship;
+// PRODUCT HELPERS
+function getProduct(productId) {
+  return db.products.find(item => item.id === productId);
 }
 
-// Check whether a student can claim an item
-function canStudentClaimProduct(student, product) {
-  if (!student || !product || !product.active) {
-    return false;
+function getVendor(vendorId) {
+  return db.vendors.find(item => item.id === vendorId);
+}
+
+function getProductImage(product) {
+  if (product.image) {
+    return escapeHTML(product.image);
   }
 
-  if (product.stock <= 0) {
-    return false;
-  }
+  return "";
+}
 
-  // General food is for eligible students only
-  if (product.type === "General") {
-    return student.status === "Eligible";
-  }
-
-  // Sponsored food follows the sponsor's rules
-  if (product.type === "Sponsored") {
-    const sponsor = upsiDB.sponsorships.find(
+function getProductAccessLabel(product) {
+  if (product.access === "Sponsored") {
+    const sponsor = db.sponsorships.find(
       item => item.id === product.sponsorshipId
     );
 
-    if (!sponsor || !sponsor.active) return false;
+    return sponsor ? sponsor.name : "Sponsored Food";
+  }
 
-    return (
-      student.status === "Eligible" ||
-      sponsor.allowAllStudents === true
-    );
+  return "General Assistance";
+}
+
+// SPONSORSHIP ACCESS CHECK
+function studentCanClaim(product, student) {
+  if (!student || student.role !== "Student") return false;
+  if (!product.active || Number(product.stock) <= 0) return false;
+
+  if (product.access === "General") {
+    return student.eligibility === "Eligible";
+  }
+
+  const sponsor = db.sponsorships.find(
+    item => item.id === product.sponsorshipId
+  );
+
+  if (!sponsor || !sponsor.active) return false;
+
+  if (sponsor.accessRule === "All Students") return true;
+  if (sponsor.accessRule === "Eligible Students") {
+    return student.eligibility === "Eligible";
+  }
+
+  if (sponsor.accessRule === "FPE Students") {
+    return student.faculty === "FPE";
+  }
+
+  if (sponsor.accessRule === "FSM Students") {
+    return student.faculty === "FSM";
+  }
+
+  if (sponsor.accessRule === "FSK Students") {
+    return student.faculty === "FSK";
   }
 
   return false;
 }
 
-// Create a claim voucher
-function createUPSInfaqVoucher(student, product) {
-  if (!canStudentClaimProduct(student, product)) {
-    return {
-      success: false,
-      message: "You are not eligible to claim this item."
-    };
+saveDatabase();
+
+// STUDENT FOOD CLAIM
+function claimFood(productId) {
+  if (!currentUser || currentUser.role !== "Student") return;
+
+  const product = getProduct(productId);
+
+  if (!product || !studentCanClaim(product, currentUser)) {
+    alert("You are not eligible to claim this food.");
+    return;
+  }
+
+  const dailyLimit = 2;
+  const today = new Date().toDateString();
+
+  const todaysClaims = db.vouchers.filter(voucher =>
+    voucher.studentId === currentUser.id &&
+    new Date(voucher.createdAt).toDateString() === today
+  );
+
+  if (todaysClaims.length >= dailyLimit) {
+    alert("You have reached your daily claim limit.");
+    return;
+  }
+
+  const vendor = getVendor(product.vendorId);
+
+  if (!vendor || !vendor.active) {
+    alert("No active collection point is available.");
+    return;
   }
 
   const voucher = {
-    id: "UPSI-" + Date.now(),
-    studentId: student.id,
+    id: createId("VOUCHER"),
+    code: "UPI-" + Math.random().toString(36).slice(2, 8).toUpperCase(),
+    studentId: currentUser.id,
+    studentName: currentUser.name,
     productId: product.id,
     productName: product.name,
-    vendorId: product.vendorId,
-    status: "Unused",
-    createdAt: new Date().toLocaleString()
+    vendorId: vendor.id,
+    status: "Pending",
+    createdAt: new Date().toISOString(),
+    redeemedAt: ""
   };
 
-  upsiDB.vouchers.push(voucher);
-  saveUPSInfaq();
+  db.vouchers.push(voucher);
+  saveDatabase();
+  logActivity("Food voucher created: " + voucher.code);
 
-  return {
-    success: true,
-    voucher
-  };
+  alert("Your voucher has been created: " + voucher.code);
+  renderDashboard();
 }
 
-// Redeem voucher at the registered stall
-function redeemUPSInfaqVoucher(voucherCode, vendorId) {
-  const voucher = upsiDB.vouchers.find(
-    item => item.id === voucherCode
+// STALL VOUCHER REDEMPTION
+function redeemVoucher(voucherCode) {
+  if (!currentUser || currentUser.role !== "Registered Stall") return;
+
+  const voucher = db.vouchers.find(item =>
+    item.code.toUpperCase() === voucherCode.trim().toUpperCase()
   );
 
-  if (!voucher || voucher.status !== "Unused") {
-    return {
-      success: false,
-      message: "Invalid or already used voucher."
-    };
+  if (!voucher) {
+    alert("Voucher not found.");
+    return;
   }
 
-  if (
-    voucher.vendorId &&
-    voucher.vendorId !== Number(vendorId)
-  ) {
-    return {
-      success: false,
-      message: "This voucher belongs to another stall."
-    };
+  if (voucher.status !== "Pending") {
+    alert("This voucher has already been redeemed or cancelled.");
+    return;
   }
 
-  const product = upsiDB.products.find(
-    item => item.id === voucher.productId
+  const vendor = db.vendors.find(item =>
+    item.id === voucher.vendorId &&
+    item.email.toLowerCase() === currentUser.email.toLowerCase()
   );
+
+  if (!vendor) {
+    alert("This voucher does not belong to your registered stall.");
+    return;
+  }
+
+  const product = getProduct(voucher.productId);
 
   if (!product || product.stock <= 0) {
-    return {
-      success: false,
-      message: "Food item is out of stock."
-    };
+    alert("Food stock is unavailable.");
+    return;
   }
 
   product.stock -= 1;
   voucher.status = "Redeemed";
-  voucher.redeemedAt = new Date().toLocaleString();
+  voucher.redeemedAt = new Date().toISOString();
 
-  saveUPSInfaq();
+  saveDatabase();
+  logActivity("Voucher redeemed: " + voucher.code);
 
-  return {
-    success: true,
-    message: "Voucher redeemed successfully."
-  };
-     }
- 
-let donorCart = [];
+  alert("Voucher successfully redeemed.");
+  renderDashboard();
+}
 
-// Add product to donor cart
-function addToDonorCart(productId, quantity = 1) {
-  const product = upsiDB.products.find(
-    item => item.id === Number(productId)
+// CANCEL AN UNREDEEMED VOUCHER
+function cancelVoucher(voucherId) {
+  if (!currentUser || currentUser.role !== "Student") return;
+
+  const voucher = db.vouchers.find(item =>
+    item.id === voucherId &&
+    item.studentId === currentUser.id
   );
 
-  if (!product || !product.active) {
-    return {
-      success: false,
-      message: "Product is unavailable."
-    };
+  if (!voucher || voucher.status !== "Pending") {
+    alert("This voucher cannot be cancelled.");
+    return;
   }
 
-  if (product.stock < quantity || quantity < 1) {
-    return {
-      success: false,
-      message: "Insufficient stock."
-    };
+  voucher.status = "Cancelled";
+  saveDatabase();
+
+  logActivity("Voucher cancelled: " + voucher.code);
+  renderDashboard();
+}
+
+// STUDENT ELIGIBILITY LABEL
+function eligibilityLabel(student) {
+  if (student.eligibility === "Eligible") {
+    return "Eligible";
   }
 
-  const existing = donorCart.find(
-    item => item.productId === product.id
-  );
+  if (student.eligibility === "Non-Eligible") {
+    return "Non-Eligible";
+  }
+
+  return "Pending Verification";
+}
+
+// DONOR SHOPPING CART
+function addToCart(productId) {
+  const product = getProduct(productId);
+
+  if (!currentUser || currentUser.role !== "Donor") return;
+  if (!product || !product.active) return;
+
+  const existing = donorCart.find(item => item.productId === productId);
 
   if (existing) {
-    if (existing.quantity + quantity > product.stock) {
-      return {
-        success: false,
-        message: "Not enough stock available."
-      };
-    }
-
-    existing.quantity += quantity;
+    existing.quantity += 1;
   } else {
     donorCart.push({
-      productId: product.id,
-      name: product.name,
-      price: product.price,
-      quantity
+      productId,
+      quantity: 1
     });
   }
-
-  return {
-    success: true,
-    message: "Added to cart."
-  };
-}
-
-// Change quantity in cart
-function updateDonorCartQuantity(productId, quantity) {
-  const item = donorCart.find(
-    product => product.productId === Number(productId)
-  );
-
-  if (!item) return false;
-
-  if (quantity <= 0) {
-    donorCart = donorCart.filter(
-      product => product.productId !== Number(productId)
-    );
-    return true;
-  }
-
-  const product = upsiDB.products.find(
-    product => product.id === Number(productId)
-  );
-
-  if (!product || quantity > product.stock) {
-    return false;
-  }
-
-  item.quantity = Number(quantity);
-  return true;
-}
-
-// Calculate cart total
-function getDonorCartSummary(tip = 0) {
-  const subtotal = donorCart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
-
-  const serviceCharge = subtotal * 0.02;
-  const optionalTip = Math.max(0, Number(tip) || 0);
-
-  return {
-    subtotal,
-    serviceCharge,
-    tip: optionalTip,
-    total: subtotal + serviceCharge + optionalTip
-  };
-}
-
-// Complete donation checkout
-function checkoutDonorCart(donor, tip = 0) {
-  if (!donor || donor.role !== "Donor") {
-    return {
-      success: false,
-      message: "Please sign in using a donor account."
-    };
-  }
-
-  if (donorCart.length === 0) {
-    return {
-      success: false,
-      message: "Your cart is empty."
-    };
-  }
-
-  // Check stock again before checkout
-  for (const item of donorCart) {
-    const product = upsiDB.products.find(
-      product => product.id === item.productId
-    );
-
-    if (!product || product.stock < item.quantity) {
-      return {
-        success: false,
-        message: "Some products have insufficient stock."
-      };
-    }
-  }
-
-  const summary = getDonorCartSummary(tip);
-
-  const donation = {
-    id: "DON-" + Date.now(),
-    donorId: donor.id,
-    donorName: donor.name,
-    items: donorCart.map(item => ({ ...item })),
-    subtotal: summary.subtotal,
-    serviceCharge: summary.serviceCharge,
-    tip: summary.tip,
-    total: summary.total,
-    date: new Date().toLocaleString(),
-    status: "Confirmed"
-  };
-
-  // Add donated quantities to shared food inventory
-  donorCart.forEach(item => {
-    const product = upsiDB.products.find(
-      product => product.id === item.productId
-    );
-
-    product.stock += item.quantity;
-  });
-
-  upsiDB.donations.push(donation);
-
-  recordUPSInfaqActivity(
-    donor.name + " completed a donation."
-  );
-
-  donorCart = [];
-  saveUPSInfaq();
-
-  return {
-    success: true,
-    donation,
-    message: "Donation recorded successfully."
-  };
-}
-
-// Get donor donation history
-function getDonorHistory(donorId) {
-  return upsiDB.donations.filter(
-    donation => donation.donorId === Number(donorId)
-  );
-}
-
-// Get top 10 donors
-function getTopDonors() {
-  const totals = {};
-
-  upsiDB.donations.forEach(donation => {
-    const key = donation.donorId;
-
-    if (!totals[key]) {
-      totals[key] = {
-        donorId: key,
-        donorName: donation.donorName,
-        total: 0
-      };
-    }
-
-    totals[key].total += donation.total;
-  });
-
-  return Object.values(totals)
-    .sort((a, b) => b.total - a.total)
-    .slice(0, 10);
-}
- 
-// ===== PART 5: ADMIN MANAGEMENT =====
-
-const ADMIN_ACCESS_CODE = "112233";
-
-// Admin login verification
-function verifyUPSInfaqAdmin(code) {
-  return String(code) === ADMIN_ACCESS_CODE;
-}
-
-// Update student eligibility
-function updateStudentEligibility(studentId, status) {
-  const allowedStatuses = [
-    "Pending",
-    "Eligible",
-    "Non-Eligible"
-  ];
-
-  if (!allowedStatuses.includes(status)) {
-    return {
-      success: false,
-      message: "Invalid eligibility status."
-    };
-  }
-
-  const student = upsiDB.users.find(
-    user =>
-      user.id === Number(studentId) &&
-      user.role === "Student"
-  );
-
-  if (!student) {
-    return {
-      success: false,
-      message: "Student account not found."
-    };
-  }
-
-  student.status = status;
-
-  recordUPSInfaqActivity(
-    "Student eligibility updated: " + student.name
-  );
-
-  saveUPSInfaq();
-
-  return {
-    success: true,
-    message: "Student status updated."
-  };
-}
-
-// Activate or deactivate products
-function setProductStatus(productId, active) {
-  const product = upsiDB.products.find(
-    item => item.id === Number(productId)
-  );
-
-  if (!product) return false;
-
-  product.active = Boolean(active);
-  saveUPSInfaq();
-
-  return true;
-}
-
-// Delete product
-function deleteUPSInfaqProduct(productId) {
-  const before = upsiDB.products.length;
-
-  upsiDB.products = upsiDB.products.filter(
-    item => item.id !== Number(productId)
-  );
-
-  saveUPSInfaq();
-
-  return upsiDB.products.length < before;
-}
-
-// Delete vendor
-function deleteUPSInfaqVendor(vendorId) {
-  const before = upsiDB.vendors.length;
-
-  upsiDB.vendors = upsiDB.vendors.filter(
-    item => item.id !== Number(vendorId)
-  );
-
-  saveUPSInfaq();
-
-  return upsiDB.vendors.length < before;
-}
-
-// Update vendor information
-function updateUPSInfaqVendor(vendorId, updates) {
-  const vendor = upsiDB.vendors.find(
-    item => item.id === Number(vendorId)
-  );
-
-  if (!vendor) return false;
-
-  Object.assign(vendor, updates);
-  saveUPSInfaq();
-
-  return true;
-}
-
-// Update sponsorship rules
-function updateUPSInfaqSponsorship(sponsorshipId, updates) {
-  const sponsorship = upsiDB.sponsorships.find(
-    item => item.id === Number(sponsorshipId)
-  );
-
-  if (!sponsorship) return false;
-
-  Object.assign(sponsorship, updates);
-  saveUPSInfaq();
-
-  return true;
-}
-
-// Get admin dashboard statistics
-function getUPSInfaqAdminStats() {
-  return {
-    totalUsers: upsiDB.users.length,
-
-    totalStudents: upsiDB.users.filter(
-      user => user.role === "Student"
-    ).length,
-
-    pendingStudents: upsiDB.users.filter(
-      user =>
-        user.role === "Student" &&
-        user.status === "Pending"
-    ).length,
-
-    eligibleStudents: upsiDB.users.filter(
-      user =>
-        user.role === "Student" &&
-        user.status === "Eligible"
-    ).length,
-
-    totalProducts: upsiDB.products.length,
-
-    activeVendors: upsiDB.vendors.filter(
-      vendor => vendor.active
-    ).length,
-
-    totalVouchers: upsiDB.vouchers.length,
-
-    redeemedVouchers: upsiDB.vouchers.filter(
-      voucher => voucher.status === "Redeemed"
-    ).length,
-
-    totalDonations: upsiDB.donations.length,
-
-    donationValue: upsiDB.donations.reduce(
-      (total, donation) => total + donation.total,
-      0
-    )
-  };
-}
-
-// Get recent admin activities
-function getUPSInfaqRecentActivities(limit = 10) {
-  return upsiDB.activities.slice(0, limit);
-}
- 
-// ===== PART 6: LOGIN & ROLE DASHBOARDS =====
-
-let currentUser = null;
-let currentTab = "home";
-
-// Safe text display
-function safeText(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
-}
-
-// Login
-function login() {
-  const name = $("loginName").value.trim();
-  const email = $("loginEmail").value.trim().toLowerCase();
-  const role = $("loginRole").value;
-  const message = $("loginMessage");
-
-  if (!name || !email) {
-    message.textContent = "Please enter your name and email.";
-    return;
-  }
-
-  if (role === "Student" && !email.endsWith("@siswa.com")) {
-    message.textContent = "Students must use an @siswa.com email.";
-    return;
-  }
-
-  if (role === "Admin" && !verifyUPSInfaqAdmin($("adminCode").value)) {
-    message.textContent = "Incorrect admin access code.";
-    return;
-  }
-
-  let user = findUPSInfaqUser(email);
-
-  if (user && user.role !== role) {
-    message.textContent = "This email is registered under another role.";
-    return;
-  }
-
-  if (!user) {
-    if (role === "Admin") {
-      user = {
-        id: Date.now(),
-        name,
-        email,
-        role,
-        status: "Active"
-      };
-      upsiDB.users.push(user);
-      saveUPSInfaq();
-    } else {
-      const result = registerUPSInfaqUser(
-        name,
-        email,
-        "demo-account",
-        role
-      );
-
-      if (!result.success) {
-        message.textContent = result.message;
-        return;
-      }
-
-      user = findUPSInfaqUser(email);
-    }
-  }
-
-  user.name = name;
-
-  if (role === "Student") {
-    user.faculty = $("loginFaculty").value;
-    user.college = $("loginCollege").value;
-  }
-
-  saveUPSInfaq();
-
-  currentUser = user;
-  currentTab = "home";
-
-  $("loginPage").classList.add("hidden");
-  $("appPage").classList.remove("hidden");
-  $("headerUser").textContent = name;
-
-  openDashboard();
-}
-
-// Logout
-function logout() {
-  currentUser = null;
-
-  $("appPage").classList.add("hidden");
-  $("loginPage").classList.remove("hidden");
-  $("headerUser").textContent = "Welcome";
-  $("loginMessage").textContent = "";
-}
-
-// Dashboard navigation
-function openDashboard() {
-  $("welcomeTitle").textContent =
-    currentUser.role + " Dashboard";
-
-  $("welcomeText").textContent =
-    "Welcome, " + currentUser.name;
-
-  let menu = ["home"];
-
-  if (currentUser.role === "Student") {
-    menu = ["home", "food", "vouchers", "profile"];
-  }
-
-  if (currentUser.role === "Donor") {
-    menu = ["home", "shop", "cart", "history", "leaderboard"];
-  }
-
-  if (currentUser.role === "Admin") {
-    menu = ["home", "students", "inventory", "vendors", "sponsorships", "reports"];
-  }
-
-  if (currentUser.role === "Organiser") {
-    menu = ["home", "campaigns", "events", "reports"];
-  }
-
-  if (currentUser.role === "Registered Stall") {
-    menu = ["home", "vouchers", "reports", "shop profile"];
-  }
-
-  $("tabs").innerHTML = menu.map(tab =>
-    `<button class="${tab === currentTab ? "active" : "secondary"}"
-      onclick="showTab('${tab}')">${tab.toUpperCase()}</button>`
-  ).join("");
 
   renderDashboard();
 }
 
-// Change dashboard tab
-function showTab(tab) {
-  currentTab = tab;
-  openDashboard();
-}
+function changeCartQuantity(productId, change) {
+  const item = donorCart.find(item => item.productId === productId);
+  if (!item) return;
 
-// Dashboard content
-function renderDashboard() {
-  const area = $("content");
+  item.quantity += change;
 
-  if (currentUser.role === "Student") {
-    renderStudentDashboard(area);
-  } else if (currentUser.role === "Donor") {
-    renderDonorDashboard(area);
-  } else if (currentUser.role === "Admin") {
-    renderAdminDashboard(area);
-  } else if (currentUser.role === "Organiser") {
-    area.innerHTML = `
-      <div class="card">
-        <h3>Organiser Dashboard</h3>
-        <p>Manage food campaigns, events and volunteers.</p>
-        <p class="muted">Campaign management can be connected to a shared database in the next development stage.</p>
-      </div>`;
-  } else {
-    renderStallDashboard(area);
+  if (item.quantity <= 0) {
+    donorCart = donorCart.filter(item => item.productId !== productId);
   }
+
+  renderDashboard();
 }
 
-// Student dashboard
-function renderStudentDashboard(area) {
-  if (currentTab === "food") {
-    const products = upsiDB.products.filter(product =>
-      canStudentClaimProduct(currentUser, product)
-    );
+function getCartTotal() {
+  return donorCart.reduce((total, item) => {
+    const product = getProduct(item.productId);
+    return total + (product ? product.price * item.quantity : 0);
+  }, 0);
+}
 
-    area.innerHTML = `
-      <h3>Available Food</h3>
-      <div class="grid">
-        ${products.map(product => `
-          <div class="card">
-            ${product.image ? `<img class="food-image" src="${safeText(product.image)}">` : ""}
-            <h3>${safeText(product.name)}</h3>
-            <p class="muted">Available stock: ${product.stock}</p>
-            <button onclick="studentClaim(${product.id})">Claim Food</button>
-          </div>
-        `).join("") || "<p>No food available at the moment.</p>"}
-      </div>`;
+// DEMO DONATION CHECKOUT
+function checkoutDonation() {
+  if (!currentUser || currentUser.role !== "Donor") return;
+  if (donorCart.length === 0) {
+    alert("Your cart is empty.");
     return;
   }
 
-  if (currentTab === "vouchers") {
-    const vouchers = upsiDB.vouchers.filter(
-      voucher => voucher.studentId === currentUser.id
-    );
+  const itemsTotal = getCartTotal();
+  const serviceCharge = itemsTotal * 0.02;
+  const tipInput = document.getElementById("donorTip");
+  const tip = Math.max(0, Number(tipInput ? tipInput.value : 0));
+  const grandTotal = itemsTotal + serviceCharge + tip;
 
-    area.innerHTML = `
-      <h3>My Vouchers</h3>
-      ${vouchers.map(voucher => `
-        <div class="card">
-          <b>${safeText(voucher.productName)}</b>
-          <p>Voucher: ${safeText(voucher.id)}</p>
-          <span class="tag">${safeText(voucher.status)}</span>
-        </div>
-      `).join("") || "<p>You have no vouchers yet.</p>"}`;
-    return;
-  }
-
-  if (currentTab === "profile") {
-    area.innerHTML = `
-      <div class="card">
-        <h3>Student Profile</h3>
-        <p>Name: ${safeText(currentUser.name)}</p>
-        <p>Email: ${safeText(currentUser.email)}</p>
-        <p>Faculty: ${safeText(currentUser.faculty)}</p>
-        <p>College: ${safeText(currentUser.college)}</p>
-        <p>Eligibility: <b>${safeText(currentUser.status)}</b></p>
-      </div>`;
-    return;
-  }
-
-  area.innerHTML = `
-    <div class="grid">
-      <div class="card">
-        <h3>Eligibility Status</h3>
-        <span class="tag">${safeText(currentUser.status)}</span>
-      </div>
-      <div class="card">
-        <h3>My Vouchers</h3>
-        <p>${upsiDB.vouchers.filter(v => v.studentId === currentUser.id).length}</p>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Welcome to UPSInfaq</h3>
-      <p>Find available food and claim your assistance here.</p>
-    </div>`;
-}
-
-// Student claim action
-function studentClaim(productId) {
-  const product = upsiDB.products.find(
-    item => item.id === Number(productId)
+  const confirmed = confirm(
+    "Donation summary\n\nItems: " + formatRM(itemsTotal) +
+    "\nService charge (2%): " + formatRM(serviceCharge) +
+    "\nOptional tip: " + formatRM(tip) +
+    "\n\nTotal: " + formatRM(grandTotal) +
+    "\n\nContinue with demo checkout?"
   );
 
-  const result = createUPSInfaqVoucher(currentUser, product);
+  if (!confirmed) return;
 
-  alert(result.message);
+  const donation = {
+    id: createId("DON"),
+    donorId: currentUser.id,
+    donorName: currentUser.name,
+    items: donorCart.map(item => {
+      const product = getProduct(item.productId);
+      return {
+        productId: item.productId,
+        name: product.name,
+        quantity: item.quantity,
+        unitPrice: product.price
+      };
+    }),
+    itemsTotal,
+    serviceCharge,
+    tip,
+    total: grandTotal,
+    date: new Date().toISOString(),
+    status: "Demo Completed"
+  };
 
-  if (result.success) {
-    showTab("vouchers");
+  donation.items.forEach(item => {
+    const product = getProduct(item.productId);
+    if (product) product.stock += item.quantity;
+  });
+
+  db.donations.push(donation);
+  donorCart = [];
+
+  saveDatabase();
+  logActivity("Demo donation completed: " + donation.id);
+
+  alert("Thank you! Your demo donation has been recorded.");
+  renderDashboard();
+}
+
+// DONOR SPONSORSHIP
+function sponsorStudent(studentId, amount) {
+  if (!currentUser || currentUser.role !== "Donor") return;
+
+  const student = db.users.find(user =>
+    user.id === studentId && user.role === "Student"
+  );
+
+  if (!student) {
+    alert("Student account not found.");
+    return;
+  }
+
+  const value = Number(amount);
+
+  if (!Number.isFinite(value) || value <= 0) {
+    alert("Please enter a valid sponsorship amount.");
+    return;
+  }
+
+  db.donations.push({
+    id: createId("SPONSOR"),
+    donorId: currentUser.id,
+    donorName: currentUser.name,
+    studentId: student.id,
+    studentName: student.name,
+    total: value,
+    date: new Date().toISOString(),
+    status: "Demo Sponsorship"
+  });
+
+  saveDatabase();
+  logActivity("Student sponsorship recorded.");
+  alert("Demo sponsorship recorded successfully.");
+  renderDashboard();
+}
+
+// ADMIN: UPDATE STUDENT ELIGIBILITY
+function updateEligibility(studentId, status) {
+  if (!currentUser || currentUser.role !== "Admin") return;
+
+  const student = db.users.find(user =>
+    user.id === studentId && user.role === "Student"
+  );
+
+  if (!student) return;
+
+  student.eligibility = status;
+  saveDatabase();
+  logActivity("Updated eligibility for " + student.name);
+  renderDashboard();
+}
+
+// ADMIN: ADD FOOD PRODUCT
+function addProduct() {
+  if (!currentUser || currentUser.role !== "Admin") return;
+
+  const name = document.getElementById("newFoodName").value.trim();
+  const category = document.getElementById("newFoodCategory").value;
+  const price = Number(document.getElementById("newFoodPrice").value);
+  const stock = Number(document.getElementById("newFoodStock").value);
+  const access = document.getElementById("newFoodAccess").value;
+  const vendorId = document.getElementById("newFoodVendor").value;
+
+  if (!name || !Number.isFinite(price) || price < 0 ||
+      !Number.isInteger(stock) || stock < 0) {
+    alert("Please enter valid product details.");
+    return;
+  }
+
+  db.products.push({
+    id: createId("FOOD"),
+    name,
+    category,
+    price,
+    stock,
+    image: "",
+    access,
+    sponsorshipId: "",
+    vendorId,
+    active: true
+  });
+
+  saveDatabase();
+  logActivity("Added food product: " + name);
+  alert("Food product added.");
+  renderDashboard();
+}
+
+// ADMIN: UPLOAD A SMALL PRODUCT IMAGE
+function uploadFoodImage(productId, fileInput) {
+  if (!currentUser || currentUser.role !== "Admin") return;
+
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please select an image file.");
+    return;
+  }
+
+  if (file.size > 500000) {
+    alert("Please use an image smaller than 500KB.");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    const product = getProduct(productId);
+    if (!product) return;
+
+    product.image = event.target.result;
+    saveDatabase();
+    logActivity("Updated image for " + product.name);
+    renderDashboard();
+  };
+
+  reader.readAsDataURL(file);
+}
+
+// ADMIN: UPDATE PRODUCT STOCK
+function updateProductStock(productId, amount) {
+  if (!currentUser || currentUser.role !== "Admin") return;
+
+  const product = getProduct(productId);
+  const newStock = Number(amount);
+
+  if (!product || !Number.isInteger(newStock) || newStock < 0) {
+    alert("Please enter a valid stock quantity.");
+    return;
+  }
+
+  product.stock = newStock;
+  saveDatabase();
+  logActivity("Updated stock for " + product.name);
+  renderDashboard();
+}
+
+// ADMIN: DELETE PRODUCT
+function deleteProduct(productId) {
+  if (!currentUser || currentUser.role !== "Admin") return;
+
+  const product = getProduct(productId);
+  if (!product) return;
+
+  if (!confirm("Delete " + product.name + "?")) return;
+
+  db.products = db.products.filter(item => item.id !== productId);
+  saveDatabase();
+  logActivity("Deleted food product: " + product.name);
+  renderDashboard();
+}
+
+// ADMIN: CREATE SPONSORSHIP
+function addSponsorship() {
+  if (!currentUser || currentUser.role !== "Admin") return;
+
+  const name = document.getElementById("sponsorName").value.trim();
+  const accessRule = document.getElementById("sponsorAccess").value;
+  const description = document.getElementById("sponsorDescription").value.trim();
+
+  if (!name) {
+    alert("Please enter a sponsorship name.");
+    return;
+  }
+
+  db.sponsorships.push({
+    id: createId("SP"),
+    name,
+    accessRule,
+    description,
+    active: true,
+    createdAt: new Date().toISOString()
+  });
+
+  saveDatabase();
+  logActivity("Created sponsorship: " + name);
+  alert("Sponsorship created.");
+  renderDashboard();
+}
+
+// ADMIN: ADD REGISTERED STALL
+function addVendor() {
+  if (!currentUser || currentUser.role !== "Admin") return;
+
+  const name = document.getElementById("vendorName").value.trim();
+  const email = document.getElementById("vendorEmail").value.trim().toLowerCase();
+  const address = document.getElementById("vendorAddress").value.trim();
+  const map = document.getElementById("vendorMap").value.trim();
+  const hours = document.getElementById("vendorHours").value.trim();
+
+  if (!name || !email || !address) {
+    alert("Please enter the stall name, email and address.");
+    return;
+  }
+
+  db.vendors.push({
+    id: createId("SHOP"),
+    name,
+    email,
+    address,
+    map,
+    hours,
+    active: true
+  });
+
+  saveDatabase();
+  logActivity("Added registered stall: " + name);
+  alert("Registered stall added.");
+  renderDashboard();
+}
+
+// DASHBOARD NAVIGATION
+function setTab(tabName) {
+  currentTab = tabName;
+  renderDashboard();
+}
+
+function renderDashboard() {
+  if (!currentUser) return;
+
+  const role = currentUser.role;
+  const tabs = document.getElementById("tabs");
+
+  document.getElementById("welcomeTitle").textContent =
+    role + " Dashboard";
+
+  document.getElementById("welcomeText").textContent =
+    "Welcome, " + currentUser.name;
+
+  let availableTabs = [];
+
+  if (role === "Student") {
+    availableTabs = [
+      ["dashboard", "Home"],
+      ["food", "Food Catalogue"],
+      ["vouchers", "My Vouchers"],
+      ["history", "My History"]
+    ];
+  } else if (role === "Donor") {
+    availableTabs = [
+      ["dashboard", "Home"],
+      ["food", "Donation Catalogue"],
+      ["cart", "My Cart"],
+      ["donations", "My Donations"],
+      ["leaderboard", "Top Donors"]
+    ];
+  } else if (role === "Admin") {
+    availableTabs = [
+      ["dashboard", "Overview"],
+      ["users", "Students"],
+      ["food", "Food Inventory"],
+      ["sponsorships", "Sponsorships"],
+      ["vendors", "Registered Stalls"],
+      ["vouchers", "Vouchers"],
+      ["reports", "Reports"]
+    ];
+  } else if (role === "Organiser") {
+    availableTabs = [
+      ["dashboard", "Home"],
+      ["campaigns", "Campaigns"],
+      ["reports", "Reports"]
+    ];
+  } else if (role === "Registered Stall") {
+    availableTabs = [
+      ["dashboard", "Stall Home"],
+      ["vouchers", "Redeem Voucher"],
+      ["reports", "Daily Report"]
+    ];
+  }
+
+  if (!availableTabs.some(item => item[0] === currentTab)) {
+    currentTab = "dashboard";
+  }
+
+  tabs.innerHTML = availableTabs.map(item =>
+    `<button class="${currentTab === item[0] ? "active" : ""}"
+      onclick="setTab('${item[0]}')">${item[1]}</button>`
+  ).join("");
+
+  const content = document.getElementById("content");
+
+  if (role === "Student") renderStudent(content);
+  else if (role === "Donor") renderDonor(content);
+  else if (role === "Admin") renderAdmin(content);
+  else if (role === "Organiser") renderOrganiser(content);
+  else if (role === "Registered Stall") renderStall(content);
+}
+
+// STUDENT DASHBOARD
+function renderStudent(content) {
+  if (currentTab === "dashboard") {
+    content.innerHTML = `
+      <div class="card">
+        <h3>Student Assistance</h3>
+        <p>Your eligibility status:
+          <span class="tag">${escapeHTML(eligibilityLabel(currentUser))}</span>
+        </p>
+        <p class="muted">General assistance is available to eligible students.
+        Sponsored food may have different access conditions.</p>
+        <button onclick="setTab('food')">Browse Food</button>
+      </div>`;
+  }
+
+  if (currentTab === "food") {
+    const products = db.products.filter(product =>
+      product.active &&
+      studentCanClaim(product, currentUser)
+    );
+
+    content.innerHTML = `
+      <h3>Available Food</h3>
+      <div class="grid">
+        ${products.map(product => {
+          const vendor = getVendor(product.vendorId);
+          return `
+            <div class="card">
+              ${product.image
+                ? `<img class="food-image" src="${product.image}" alt="${escapeHTML(product.name)}">`
+                : `<div class="food-image"></div>`}
+              <h3>${escapeHTML(product.name)}</h3>
+              <span class="tag">${escapeHTML(getProductAccessLabel(product))}</span>
+              <p>Available stock: ${product.stock}</p>
+              <p class="muted">${vendor ? escapeHTML(vendor.name) : "Collection point not assigned"}</p>
+              ${vendor && vendor.map
+                ? `<a href="${escapeHTML(vendor.map)}" target="_blank" rel="noopener">View location</a>`
+                : ""}
+              <br><br>
+              <button onclick="claimFood('${product.id}')">Claim Food</button>
+            </div>`;
+        }).join("") || `<p class="muted">No food is currently available for your account.</p>`}
+      </div>`;
+  }
+
+  if (currentTab === "vouchers" || currentTab === "history") {
+    const vouchers = db.vouchers.filter(item =>
+      item.studentId === currentUser.id
+    );
+
+    content.innerHTML = `
+      <h3>My Food Vouchers</h3>
+      ${vouchers.map(item => `
+        <div class="card">
+          <h3>${escapeHTML(item.productName)}</h3>
+          <p>Voucher: <strong>${escapeHTML(item.code)}</strong></p>
+          <p>Status: <span class="tag">${escapeHTML(item.status)}</span></p>
+          <p class="muted">${new Date(item.createdAt).toLocaleString()}</p>
+          ${item.status === "Pending"
+            ? `<button class="secondary" onclick="cancelVoucher('${item.id}')">Cancel Voucher</button>`
+            : ""}
+        </div>
+      `).join("") || `<p class="muted">No vouchers yet.</p>`}`;
   }
 }
 
-// Donor dashboard
-function renderDonorDashboard(area) {
-  if (currentTab === "shop") {
-    area.innerHTML = `
-      <h3>Food Donation Catalogue</h3>
-      <div class="grid">
-        ${upsiDB.products.filter(p => p.active).map(product => `
-          <div class="card">
-            ${product.image ? `<img class="food-image" src="${safeText(product.image)}">` : ""}
-            <h3>${safeText(product.name)}</h3>
-            <p class="price">RM ${Number(product.price).toFixed(2)}</p>
-            <p class="muted">Stock: ${product.stock}</p>
-            <button onclick="donorAddItem(${product.id})">Add to Cart</button>
-          </div>
-        `).join("") || "<p>No products available yet.</p>"}
+// DONOR DASHBOARD
+function renderDonor(content) {
+  if (currentTab === "dashboard") {
+    content.innerHTML = `
+      <div class="card">
+        <h3>Make a Difference</h3>
+        <p class="muted">Your contribution helps provide food assistance to UPSI students.</p>
+        <button onclick="setTab('food')">Start Donating</button>
       </div>`;
-    return;
+  }
+
+  if (currentTab === "food") {
+    content.innerHTML = `
+      <h3>Donation Catalogue</h3>
+      <p class="muted">Choose dry goods or ready-to-eat meals for the food assistance stock.</p>
+      <div class="grid">
+        ${db.products.filter(item => item.active).map(product => `
+          <div class="card">
+            ${product.image
+              ? `<img class="food-image" src="${product.image}" alt="${escapeHTML(product.name)}">`
+              : `<div class="food-image"></div>`}
+            <h3>${escapeHTML(product.name)}</h3>
+            <p>${escapeHTML(product.category)}</p>
+            <p class="price">${formatRM(product.price)}</p>
+            <button onclick="addToCart('${product.id}')">Add to Cart</button>
+          </div>
+        `).join("")}
+      </div>`;
   }
 
   if (currentTab === "cart") {
-    const summary = getDonorCartSummary();
-
-    area.innerHTML = `
+    content.innerHTML = `
       <h3>My Donation Cart</h3>
-      ${donorCart.map(item => `
-        <div class="card">
-          <b>${safeText(item.name)}</b>
-          <p>RM ${item.price.toFixed(2)} × ${item.quantity}</p>
-          <button class="secondary" onclick="changeCartItem(${item.productId}, ${item.quantity - 1})">−</button>
-          <button class="secondary" onclick="changeCartItem(${item.productId}, ${item.quantity + 1})">+</button>
-        </div>
-      `).join("") || "<p>Your cart is empty.</p>"}
+      ${donorCart.map(item => {
+        const product = getProduct(item.productId);
+        if (!product) return "";
+        return `
+          <div class="card row">
+            <div>
+              <strong>${escapeHTML(product.name)}</strong>
+              <p>${formatRM(product.price)} × ${item.quantity}</p>
+            </div>
+            <div>
+              <button class="secondary" onclick="changeCartQuantity('${product.id}',-1)">−</button>
+              ${item.quantity}
+              <button class="secondary" onclick="changeCartQuantity('${product.id}',1)">+</button>
+            </div>
+          </div>`;
+      }).join("") || `<p class="muted">Your cart is empty.</p>`}
 
       <div class="card">
-        <p>Subtotal: RM ${summary.subtotal.toFixed(2)}</p>
-        <p>Service charge (2%): RM ${summary.serviceCharge.toFixed(2)}</p>
-        <label>Optional Tip (RM)</label>
-        <input id="donorTip" type="number" min="0" value="0">
-        <button onclick="confirmDonorCheckout()">Confirm Donation</button>
+        <p>Items total: <strong>${formatRM(getCartTotal())}</strong></p>
+        <p>Service charge: 2%</p>
+        <label>Optional tip (RM)</label>
+        <input id="donorTip" type="number" min="0" step="0.50" value="0">
+        <button class="gold" onclick="checkoutDonation()">Confirm Demo Donation</button>
+        <p class="muted">Demo checkout only. No real payment is collected.</p>
       </div>`;
-    return;
   }
 
-  if (currentTab === "history") {
-    const history = getDonorHistory(currentUser.id);
+  if (currentTab === "donations") {
+    const donations = db.donations.filter(item =>
+      item.donorId === currentUser.id
+    );
 
-    area.innerHTML = `
+    content.innerHTML = `
       <h3>Donation History</h3>
-      ${history.map(donation => `
+      ${donations.map(item => `
         <div class="card">
-          <b>${safeText(donation.id)}</b>
-          <p>Total: RM ${donation.total.toFixed(2)}</p>
-          <p class="muted">${safeText(donation.date)}</p>
+          <strong>${escapeHTML(item.id)}</strong>
+          <p>${formatRM(item.total)}</p>
+          <p class="muted">${new Date(item.date).toLocaleString()}</p>
+          <span class="tag">${escapeHTML(item.status)}</span>
         </div>
-      `).join("") || "<p>No donation history yet.</p>"}`;
-    return;
+      `).join("") || `<p class="muted">No donations recorded yet.</p>`}`;
   }
 
   if (currentTab === "leaderboard") {
-    area.innerHTML = `
+    const totals = {};
+
+    db.donations.forEach(item => {
+      totals[item.donorId] = (totals[item.donorId] || 0) + Number(item.total || 0);
+    });
+
+    const leaders = Object.entries(totals)
+      .map(([id, total]) => ({
+        user: db.users.find(user => user.id === id),
+        total
+      }))
+      .filter(item => item.user)
+      .sort((a, b) => b.total - a.total)
+      .slice(0, 10);
+
+    content.innerHTML = `
       <h3>Top 10 Donors</h3>
-      ${getTopDonors().map((donor, index) => `
-        <div class="card">
-          #${index + 1} ${safeText(donor.donorName)}
-          <b>RM ${donor.total.toFixed(2)}</b>
+      ${leaders.map((item, index) => `
+        <div class="card row">
+          <strong>#${index + 1} ${escapeHTML(item.user.name)}</strong>
+          <strong>${formatRM(item.total)}</strong>
         </div>
-      `).join("") || "<p>No donations recorded yet.</p>"}`;
+      `).join("") || `<p class="muted">No donor records yet.</p>`}`;
+  }
+}
+
+// ORGANISER DASHBOARD
+function renderOrganiser(content) {
+  if (currentTab === "dashboard") {
+    content.innerHTML = `
+      <div class="card">
+        <h3>Organiser Portal</h3>
+        <p class="muted">Manage food assistance campaigns and community activities.</p>
+        <button onclick="setTab('campaigns')">Manage Campaigns</button>
+      </div>`;
+  }
+
+  if (currentTab === "campaigns") {
+    content.innerHTML = `
+      <h3>Create Campaign</h3>
+      <div class="card">
+        <label>Campaign Name</label>
+        <input id="campaignName" placeholder="Campaign name">
+        <label>Description</label>
+        <textarea id="campaignDescription"></textarea>
+        <label>Event Date</label>
+        <input id="campaignDate" type="date">
+        <label>Location</label>
+        <input id="campaignLocation" placeholder="Event location">
+        <button onclick="addCampaign()">Create Campaign</button>
+      </div>
+      ${db.campaigns.map(item => `
+        <div class="card">
+          <h3>${escapeHTML(item.name)}</h3>
+          <p>${escapeHTML(item.description)}</p>
+          <p>${escapeHTML(item.date)} · ${escapeHTML(item.location)}</p>
+        </div>
+      `).join("")}`;
+  }
+
+  if (currentTab === "reports") {
+    content.innerHTML = `
+      <div class="card">
+        <h3>Campaign Summary</h3>
+        <p>Total campaigns: ${db.campaigns.length}</p>
+      </div>`;
+  }
+}
+
+function addCampaign() {
+  if (!currentUser || currentUser.role !== "Organiser") return;
+
+  const name = document.getElementById("campaignName").value.trim();
+  const description = document.getElementById("campaignDescription").value.trim();
+  const date = document.getElementById("campaignDate").value;
+  const location = document.getElementById("campaignLocation").value.trim();
+
+  if (!name || !date || !location) {
+    alert("Please enter the campaign name, date and location.");
     return;
   }
 
-  area.innerHTML = `
-    <div class="card">
-      <h3>Thank you for supporting UPSInfaq!</h3>
-      <p>Your contributions help provide food assistance to UPSI students.</p>
-    </div>`;
+  db.campaigns.push({
+    id: createId("CAMP"),
+    name,
+    description,
+    date,
+    location,
+    organiserId: currentUser.id
+  });
+
+  saveDatabase();
+  logActivity("Created campaign: " + name);
+  alert("Campaign created.");
+  renderDashboard();
 }
 
-// Donor cart actions
-function donorAddItem(productId) {
-  const result = addToDonorCart(productId, 1);
-  alert(result.message);
-}
+// REGISTERED STALL DASHBOARD
+function renderStall(content) {
+  const vendor = db.vendors.find(item =>
+    item.email.toLowerCase() === currentUser.email.toLowerCase()
+  );
 
-function changeCartItem(productId, quantity) {
-  updateDonorCartQuantity(productId, quantity);
-  showTab("cart");
-}
+  if (currentTab === "dashboard") {
+    content.innerHTML = `
+      <div class="card">
+        <h3>Registered Stall Portal</h3>
+        ${vendor ? `
+          <p><strong>${escapeHTML(vendor.name)}</strong></p>
+          <p>${escapeHTML(vendor.address)}</p>
+          <p>${escapeHTML(vendor.hours)}</p>
+          ${vendor.map ? `<a href="${escapeHTML(vendor.map)}" target="_blank" rel="noopener">Open Google Maps</a>` : ""}
+        ` : `<p class="muted">Your account is not linked to a registered stall yet. Please contact the administrator.</p>`}
+        <hr>
+        <p>Subscription: RM50/month after the first 2 free months.</p>
+        <p class="muted">Subscription information only. No payment is collected here.</p>
+      </div>`;
+  }
 
-function confirmDonorCheckout() {
-  const tip = Number($("donorTip")?.value || 0);
-  const result = checkoutDonorCart(currentUser, tip);
+  if (currentTab === "vouchers") {
+    content.innerHTML = `
+      <div class="card">
+        <h3>Redeem Student Voucher</h3>
+        <label>Voucher Code</label>
+        <input id="redeemCode" placeholder="Enter voucher code">
+        <button onclick="redeemVoucher(document.getElementById('redeemCode').value)">Redeem Voucher</button>
+      </div>`;
+  }
 
-  alert(result.message);
+  if (currentTab === "reports") {
+    const redeemed = db.vouchers.filter(item =>
+      item.status === "Redeemed" &&
+      vendor &&
+      item.vendorId === vendor.id
+    );
 
-  if (result.success) {
-    showTab("history");
+    content.innerHTML = `
+      <div class="card">
+        <h3>Daily Report</h3>
+        <p>Redeemed vouchers: ${redeemed.length}</p>
+      </div>`;
   }
 }
 
-// Admin dashboard
-function renderAdminDashboard(area) {
-  if (currentTab === "students") {
-    area.innerHTML = `
-      <h3>Student Management</h3>
-      ${upsiDB.users.filter(u => u.role === "Student").map(student => `
+// ADMIN DASHBOARD
+function renderAdmin(content) {
+  if (currentTab === "dashboard") {
+    content.innerHTML = `
+      <h3>Administration Overview</h3>
+      <div class="grid">
+        <div class="card"><h2>${db.users.length}</h2><p>Accounts</p></div>
+        <div class="card"><h2>${db.products.length}</h2><p>Food Products</p></div>
+        <div class="card"><h2>${db.vouchers.length}</h2><p>Vouchers</p></div>
+        <div class="card"><h2>${db.donations.length}</h2><p>Donation Records</p></div>
+      </div>
+      <div class="card">
+        <h3>Admin Access</h3>
+        <p class="muted">Manage students, food stock, sponsorships, stalls and reports.</p>
+      </div>`;
+  }
+
+  if (currentTab === "users") {
+    const students = db.users.filter(user => user.role === "Student");
+
+    content.innerHTML = `
+      <h3>Student Accounts</h3>
+      ${students.map(student => `
         <div class="card">
-          <b>${safeText(student.name)}</b>
-          <p>${safeText(student.email)}</p>
-          <p>Status: ${safeText(student.status)}</p>
-          <button onclick="adminSetStudent(${student.id}, 'Eligible')">Eligible</button>
-          <button class="secondary" onclick="adminSetStudent(${student.id}, 'Pending')">Pending</button>
-          <button class="danger" onclick="adminSetStudent(${student.id}, 'Non-Eligible')">Non-Eligible</button>
+          <strong>${escapeHTML(student.name)}</strong>
+          <p>${escapeHTML(student.email)}</p>
+          <p>${escapeHTML(student.faculty)} · ${escapeHTML(student.college)}</p>
+          <p>Status: <span class="tag">${escapeHTML(student.eligibility)}</span></p>
+          <select id="eligibility-${student.id}">
+            <option ${student.eligibility === "Pending" ? "selected" : ""}>Pending</option>
+            <option ${student.eligibility === "Eligible" ? "selected" : ""}>Eligible</option>
+            <option ${student.eligibility === "Non-Eligible" ? "selected" : ""}>Non-Eligible</option>
+          </select>
+          <button onclick="updateEligibility('${student.id}',document.getElementById('eligibility-${student.id}').value)">Save Status</button>
         </div>
-      `).join("") || "<p>No students registered.</p>"}`;
-    return;
+      `).join("") || `<p class="muted">No student accounts yet.</p>`}`;
   }
 
-  if (currentTab === "inventory") {
-    area.innerHTML = `
+  if (currentTab === "food") {
+    content.innerHTML = `
       <h3>Food Inventory</h3>
       <div class="card">
         <label>Food Name</label>
@@ -1149,241 +1404,141 @@ function renderAdminDashboard(area) {
         <label>Category</label>
         <select id="newFoodCategory">
           <option>Dry Goods</option>
-          <option>Ready-to-Eat Meals</option>
+          <option>Ready-to-Eat</option>
         </select>
         <label>Price (RM)</label>
-        <input id="newFoodPrice" type="number" min="0" value="0">
-        <label>Stock</label>
-        <input id="newFoodStock" type="number" min="0" value="0">
-        <label>Food Type</label>
-        <select id="newFoodType">
+        <input id="newFoodPrice" type="number" min="0" step="0.01">
+        <label>Initial Stock</label>
+        <input id="newFoodStock" type="number" min="0" step="1">
+        <label>Access Type</label>
+        <select id="newFoodAccess">
           <option>General</option>
           <option>Sponsored</option>
         </select>
-        <button onclick="adminAddFood()">Add Food Item</button>
+        <label>Collection Stall</label>
+        <select id="newFoodVendor">
+          ${db.vendors.map(vendor => `
+            <option value="${vendor.id}">${escapeHTML(vendor.name)}</option>
+          `).join("")}
+        </select>
+        <button onclick="addProduct()">Add Food Product</button>
       </div>
-      ${upsiDB.products.map(product => `
-        <div class="card">
-          <b>${safeText(product.name)}</b>
-          <p>Stock: ${product.stock}</p>
-          <button class="danger" onclick="adminDeleteFood(${product.id})">Delete</button>
-        </div>
-      `).join("")}`;
-    return;
-  }
 
-  if (currentTab === "vendors") {
-    area.innerHTML = `
-      <h3>Registered Stalls</h3>
-      <div class="card">
-        <label>Stall Name</label>
-        <input id="newVendorName" placeholder="Stall name">
-        <label>Address</label>
-        <input id="newVendorAddress" placeholder="Stall address">
-        <label>Google Maps Link</label>
-        <input id="newVendorMap" placeholder="Paste Google Maps link">
-        <label>Opening Hours</label>
-        <input id="newVendorHours" placeholder="e.g. 8 AM - 5 PM">
-        <button onclick="adminAddVendor()">Add Stall</button>
-      </div>
-      ${upsiDB.vendors.map(vendor => `
-        <div class="card">
-          <b>${safeText(vendor.name)}</b>
-          <p>${safeText(vendor.address)}</p>
-          <a href="${safeText(vendor.mapLink)}" target="_blank">View Map</a>
-        </div>
-      `).join("")}`;
-    return;
+      <div class="grid">
+        ${db.products.map(product => `
+          <div class="card">
+            ${product.image
+              ? `<img class="food-image" src="${product.image}" alt="${escapeHTML(product.name)}">`
+              : ""}
+            <strong>${escapeHTML(product.name)}</strong>
+            <p>${escapeHTML(product.category)} · ${formatRM(product.price)}</p>
+            <label>Stock</label>
+            <input id="stock-${product.id}" type="number" min="0" value="${product.stock}">
+            <button class="secondary" onclick="updateProductStock('${product.id}',document.getElementById('stock-${product.id}').value)">Update Stock</button>
+            <label>Upload Image</label>
+            <input type="file" accept="image/*" onchange="uploadFoodImage('${product.id}',this)">
+            <br><br>
+            <button class="danger" onclick="deleteProduct('${product.id}')">Delete</button>
+          </div>
+        `).join("")}
+      </div>`;
   }
 
   if (currentTab === "sponsorships") {
-    area.innerHTML = `
+    content.innerHTML = `
       <h3>Sponsorship Management</h3>
       <div class="card">
         <label>Sponsorship Name</label>
-        <input id="newSponsorName" placeholder="e.g. Friday Food Donation">
-        <label>Description</label>
-        <input id="newSponsorDescription" placeholder="Description">
+        <input id="sponsorName" placeholder="Example: FPE Food Sponsorship">
         <label>Who can claim?</label>
-        <select id="newSponsorAccess">
-          <option value="false">Eligible students only</option>
-          <option value="true">All students</option>
+        <select id="sponsorAccess">
+          <option>All Students</option>
+          <option>Eligible Students</option>
+          <option>FPE Students</option>
+          <option>FSM Students</option>
+          <option>FSK Students</option>
         </select>
-        <button onclick="adminAddSponsor()">Create Sponsorship</button>
+        <label>Description</label>
+        <textarea id="sponsorDescription"></textarea>
+        <button onclick="addSponsorship()">Create Sponsorship</button>
       </div>
-      ${upsiDB.sponsorships.map(sponsor => `
+      ${db.sponsorships.map(item => `
         <div class="card">
-          <b>${safeText(sponsor.name)}</b>
-          <p>${sponsor.allowAllStudents ? "All students" : "Eligible students only"}</p>
+          <strong>${escapeHTML(item.name)}</strong>
+          <p>${escapeHTML(item.accessRule)}</p>
+          <p class="muted">${escapeHTML(item.description)}</p>
         </div>
       `).join("")}`;
-    return;
   }
 
-  if (currentTab === "reports") {
-    const stats = getUPSInfaqAdminStats();
-
-    area.innerHTML = `
-      <h3>Platform Reports</h3>
-      <div class="grid">
-        <div class="card">Total Users: ${stats.totalUsers}</div>
-        <div class="card">Students: ${stats.totalStudents}</div>
-        <div class="card">Pending: ${stats.pendingStudents}</div>
-        <div class="card">Eligible: ${stats.eligibleStudents}</div>
-        <div class="card">Food Items: ${stats.totalProducts}</div>
-        <div class="card">Active Stalls: ${stats.activeVendors}</div>
-        <div class="card">Vouchers: ${stats.totalVouchers}</div>
-        <div class="card">Redeemed: ${stats.redeemedVouchers}</div>
-        <div class="card">Donations: ${stats.totalDonations}</div>
-        <div class="card">Donation Value: RM ${stats.donationValue.toFixed(2)}</div>
-      </div>`;
-    return;
-  }
-
-  const stats = getUPSInfaqAdminStats();
-
-  area.innerHTML = `
-    <h3>Admin Overview</h3>
-    <div class="grid">
-      <div class="card"><h2>${stats.totalUsers}</h2>Total Users</div>
-      <div class="card"><h2>${stats.totalProducts}</h2>Food Items</div>
-      <div class="card"><h2>${stats.activeVendors}</h2>Active Stalls</div>
-      <div class="card"><h2>${stats.pendingStudents}</h2>Pending Students</div>
-    </div>
-    <div class="card">
-      <h3>Recent Activities</h3>
-      ${getUPSInfaqRecentActivities().map(activity =>
-        `<p>${safeText(activity.message)} <small>${safeText(activity.date)}</small></p>`
-      ).join("") || "<p>No activity recorded yet.</p>"}
-    </div>`;
-}
-
-// Admin actions
-function adminSetStudent(id, status) {
-  const result = updateStudentEligibility(id, status);
-  alert(result.message);
-  showTab("students");
-}
-
-function adminAddFood() {
-  const name = $("newFoodName").value.trim();
-
-  if (!name) {
-    alert("Please enter a food name.");
-    return;
-  }
-
-  addUPSInfaqProduct({
-    name,
-    category: $("newFoodCategory").value,
-    price: $("newFoodPrice").value,
-    stock: $("newFoodStock").value,
-    type: $("newFoodType").value
-  });
-
-  alert("Food item added.");
-  showTab("inventory");
-}
-
-function adminDeleteFood(id) {
-  if (confirm("Delete this food item?")) {
-    deleteUPSInfaqProduct(id);
-    showTab("inventory");
-  }
-}
-
-function adminAddVendor() {
-  const name = $("newVendorName").value.trim();
-
-  if (!name) {
-    alert("Please enter a stall name.");
-    return;
-  }
-
-  addUPSInfaqVendor({
-    name,
-    address: $("newVendorAddress").value,
-    mapLink: $("newVendorMap").value,
-    openingHours: $("newVendorHours").value
-  });
-
-  alert("Stall added.");
-  showTab("vendors");
-}
-
-function adminAddSponsor() {
-  const name = $("newSponsorName").value.trim();
-
-  if (!name) {
-    alert("Please enter a sponsorship name.");
-    return;
-  }
-
-  addUPSInfaqSponsorship({
-    name,
-    description: $("newSponsorDescription").value,
-    allowAllStudents: $("newSponsorAccess").value === "true"
-  });
-
-  alert("Sponsorship created.");
-  showTab("sponsorships");
-}
-
-// Registered stall dashboard
-function renderStallDashboard(area) {
-  if (currentTab === "vouchers") {
-    area.innerHTML = `
-      <h3>Redeem Student Voucher</h3>
+  if (currentTab === "vendors") {
+    content.innerHTML = `
+      <h3>Registered Stalls</h3>
       <div class="card">
-        <label>Voucher Code</label>
-        <input id="stallVoucherCode" placeholder="Enter voucher code">
-        <button onclick="stallRedeemVoucher()">Redeem Voucher</button>
+        <label>Stall Name</label>
+        <input id="vendorName" placeholder="Stall name">
+        <label>Stall Login Email</label>
+        <input id="vendorEmail" type="email" placeholder="Stall account email">
+        <label>Address</label>
+        <input id="vendorAddress" placeholder="Full address">
+        <label>Google Maps Link</label>
+        <input id="vendorMap" placeholder="https://maps.google.com/...">
+        <label>Operating Hours</label>
+        <input id="vendorHours" placeholder="Example: 8 AM - 5 PM">
+        <button onclick="addVendor()">Add Registered Stall</button>
       </div>
-      <h3>Recent Vouchers</h3>
-      ${upsiDB.vouchers.filter(v => v.status === "Redeemed").map(v => `
+      ${db.vendors.map(vendor => `
         <div class="card">
-          ${safeText(v.productName)}
-          <p>${safeText(v.id)}</p>
-          <span class="tag">Redeemed</span>
+          <strong>${escapeHTML(vendor.name)}</strong>
+          <p>${escapeHTML(vendor.address)}</p>
+          <p>${escapeHTML(vendor.email)}</p>
+          ${vendor.map ? `<a href="${escapeHTML(vendor.map)}" target="_blank" rel="noopener">View Map</a>` : ""}
         </div>
       `).join("")}`;
-    return;
+  }
+
+  if (currentTab === "vouchers") {
+    content.innerHTML = `
+      <h3>Voucher Records</h3>
+      ${db.vouchers.map(voucher => `
+        <div class="card">
+          <strong>${escapeHTML(voucher.code)}</strong>
+          <p>${escapeHTML(voucher.studentName)} · ${escapeHTML(voucher.productName)}</p>
+          <span class="tag">${escapeHTML(voucher.status)}</span>
+          <p class="muted">${new Date(voucher.createdAt).toLocaleString()}</p>
+        </div>
+      `).join("") || `<p class="muted">No vouchers recorded.</p>`}`;
   }
 
   if (currentTab === "reports") {
-    const redeemed = upsiDB.vouchers.filter(
-      voucher => voucher.status === "Redeemed"
+    const totalDonations = db.donations.reduce(
+      (sum, item) => sum + Number(item.total || 0), 0
     );
 
-    area.innerHTML = `
-      <div class="card">
-        <h3>Stall Report</h3>
-        <p>Total redeemed vouchers: ${redeemed.length}</p>
-      </div>`;
-    return;
+    content.innerHTML = `
+      <h3>Platform Reports</h3>
+      <div class="grid">
+        <div class="card"><h2>${db.users.length}</h2><p>Total Accounts</p></div>
+        <div class="card"><h2>${db.products.reduce((sum,item) => sum + Number(item.stock || 0),0)}</h2><p>Total Food Stock</p></div>
+        <div class="card"><h2>${db.vouchers.filter(item => item.status === "Redeemed").length}</h2><p>Redeemed Vouchers</p></div>
+        <div class="card"><h2>${formatRM(totalDonations)}</h2><p>Demo Donation Records</p></div>
+      </div>
+      <h3>Recent Activity</h3>
+      ${db.activities.slice(0,30).map(item => `
+        <div class="card">
+          <strong>${escapeHTML(item.action)}</strong>
+          <p class="muted">${escapeHTML(item.user)} · ${escapeHTML(item.date)}</p>
+        </div>
+      `).join("")}`;
   }
-
-  area.innerHTML = `
-    <div class="card">
-      <h3>Registered Stall Portal</h3>
-      <p>Manage student voucher redemption and view your reports.</p>
-      <p class="muted">Demo subscription: RM50/month after the first two free months.</p>
-    </div>`;
 }
 
-// Redeem voucher
-function stallRedeemVoucher() {
-  const code = $("stallVoucherCode").value.trim();
+// INITIAL LOGIN FIELD DISPLAY
+document.getElementById("loginRole").dispatchEvent(
+  new Event("change")
+);
 
-  const result = redeemUPSInfaqVoucher(
-    code,
-    currentUser.vendorId || 0
-  );
-
-  alert(result.message);
-  showTab("vouchers");
- }
- 
+// END OF APPLICATION SCRIPT
 </script>
 </body>
 </html>
