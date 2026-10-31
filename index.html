@@ -1581,6 +1581,14 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("authOverlay").classList.add("hidden");
 });
 </script>
+<script>
+(async function checkLoginRedirect() {
+  const { data } = await supabaseClient.auth.getSession();
 
+  if (data.session) {
+    window.location.href = "dashboard.html";
+  }
+})();
+</script>
 </body>
 </html>
