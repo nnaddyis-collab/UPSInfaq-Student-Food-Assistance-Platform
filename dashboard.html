@@ -62,7 +62,8 @@
   <main>
     <section class="welcome">
       <h1>Student Dashboard</h1>
-      <p>Welcome to UPSInfaq Student Food Assistance Platform.</p>
+      <p id="studentEmail">Loading your account...</p>
+<p id="studentName">Welcome, Student!</p>
       <p>No UPSI student should face hunger alone.</p>
     </section>
 
@@ -101,6 +102,26 @@
       await supabaseClient.auth.signOut();
       window.location.href = "index.html";
     }
+    async function logout() {
+  await supabaseClient.auth.signOut();
+  window.location.href = "index.html";
+}
+
+async function loadStudentProfile() {
+  const { data: { user }, error } = await supabaseClient.auth.getUser();
+
+  if (error || !user) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  document.getElementById("studentEmail").textContent = user.email;
+  document.getElementById("studentName").textContent =
+    "Welcome, " + (user.user_metadata?.full_name || "Student") + "!";
+}
+
+loadStudentProfile();
+</script>
   </script>
 </body>
 </html>
