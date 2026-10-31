@@ -1,17 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UPSInfaq Student Dashboard</title>
+
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f5f3eb;
       color: #173d31;
     }
+
     header {
       background: #123d30;
       color: #f4d78b;
@@ -20,27 +24,38 @@
       justify-content: space-between;
       align-items: center;
     }
-    main { max-width: 1000px; margin: 35px auto; padding: 20px; }
-    h1 { margin-top: 0; }
+
+    main {
+      max-width: 1000px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
     .welcome {
       background: #123d30;
       color: white;
       padding: 30px;
       border-radius: 16px;
     }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 18px;
       margin-top: 25px;
     }
+
     .card {
       background: white;
       padding: 24px;
       border-radius: 14px;
       box-shadow: 0 3px 12px #00000010;
     }
-    .card h2 { color: #a77b27; }
+
+    .card h2 {
+      color: #a77b27;
+    }
+
     button {
       background: #c69b43;
       color: #173d31;
@@ -50,78 +65,163 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .logout { background: #f4d78b; }
+
+    .logout {
+      background: #f4d78b;
+    }
+
+    .food-catalogue {
+      margin-top: 35px;
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <strong>UPSInfaq</strong>
-    <button class="logout" onclick="logout()">Log Out</button>
-  </header>
 
-  <main>
-    <section class="welcome">
-      <h1>Student Dashboard</h1>
-      <p id="studentEmail">Loading your account...</p>
-<p id="studentName">Welcome, Student!</p>
-      <p>No UPSI student should face hunger alone.</p>
-    </section>
+<header>
+  <strong>UPSInfaq</strong>
+  <button class="logout" onclick="logout()">Log Out</button>
+</header>
 
-    <section class="cards">
+<main>
+
+  <section class="welcome">
+    <h1>Student Dashboard</h1>
+    <p id="studentEmail">Loading your account...</p>
+    <p id="studentName">Welcome, Student!</p>
+    <p>No UPSI student should face hunger alone.</p>
+  </section>
+
+  <section class="cards">
+
+    <div class="card">
+      <h2>Food Catalogue</h2>
+      <p>Explore available food items and meals.</p>
+      <button onclick="document.getElementById('foodCatalogue').scrollIntoView({behavior:'smooth'})">
+        Explore Food
+      </button>
+    </div>
+
+    <div class="card">
+      <h2>My Claims</h2>
+      <p>View your food claims and collection status.</p>
+      <button onclick="alert('My Claims coming soon!')">
+        View Claims
+      </button>
+    </div>
+
+    <div class="card">
+      <h2>My Wishlist</h2>
+      <p>Keep track of food items you wish to receive.</p>
+      <button onclick="alert('Wishlist coming soon!')">
+        View Wishlist
+      </button>
+    </div>
+
+  </section>
+
+  <!-- FOOD CATALOGUE -->
+
+  <section class="food-catalogue" id="foodCatalogue">
+
+    <h1>🍱 Student Food Catalogue</h1>
+    <p>Choose food items available for student assistance.</p>
+
+    <div class="cards">
+
       <div class="card">
-        <h2>Food Catalogue</h2>
-        <p>Explore available food items and meals.</p>
-        <button onclick="alert('Food Catalogue coming soon!')">Explore Food</button>
+        <h2>🍚 Rice 1kg</h2>
+        <p>Category: Dry Food</p>
+        <p>Stock: To be connected</p>
+        <button onclick="alert('Food claim feature coming soon!')">
+          Request Food
+        </button>
       </div>
 
       <div class="card">
-        <h2>My Claims</h2>
-        <p>View your food claims and collection status.</p>
-        <button onclick="alert('My Claims coming soon!')">View Claims</button>
+        <h2>🍜 Instant Noodles</h2>
+        <p>Category: Dry Food</p>
+        <p>Stock: To be connected</p>
+        <button onclick="alert('Food claim feature coming soon!')">
+          Request Food
+        </button>
       </div>
 
       <div class="card">
-        <h2>My Wishlist</h2>
-        <p>Keep track of food items you wish to receive.</p>
-        <button onclick="alert('Wishlist coming soon!')">View Wishlist</button>
+        <h2>🥫 Canned Food</h2>
+        <p>Category: Dry Food</p>
+        <p>Stock: To be connected</p>
+        <button onclick="alert('Food claim feature coming soon!')">
+          Request Food
+        </button>
       </div>
-    </section>
-  </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    const SUPABASE_URL = "https://vfzhszkzoufsocrgxdur.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_d8TdD672EiNxb3CsLrCecw_L2XKYPp5";
+      <div class="card">
+        <h2>🍞 Bread</h2>
+        <p>Category: Dry Food</p>
+        <p>Stock: To be connected</p>
+        <button onclick="alert('Food claim feature coming soon!')">
+          Request Food
+        </button>
+      </div>
 
-    const supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
+      <div class="card">
+        <h2>🍱 Cooked Meal</h2>
+        <p>Category: Ready-to-eat Meal</p>
+        <p>Stock: To be connected</p>
+        <button onclick="alert('Food claim feature coming soon!')">
+          Request Food
+        </button>
+      </div>
 
-    async function logout() {
-      await supabaseClient.auth.signOut();
-      window.location.href = "index.html";
-    }
-    async function logout() {
+      <div class="card">
+        <h2>🥪 Sandwich</h2>
+        <p>Category: Ready-to-eat Meal</p>
+        <p>Stock: To be connected</p>
+        <button onclick="alert('Food claim feature coming soon!')">
+          Request Food
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://vfzhszkzoufsocrgxdur.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_d8TdD672EiNxb3CsLrCecw_L2XKYPp5";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+async function logout() {
   await supabaseClient.auth.signOut();
   window.location.href = "index.html";
 }
 
 async function loadStudentProfile() {
-  const { data: { user }, error } = await supabaseClient.auth.getUser();
+  const { data: { user }, error } =
+    await supabaseClient.auth.getUser();
 
   if (error || !user) {
     window.location.href = "index.html";
     return;
   }
 
-  document.getElementById("studentEmail").textContent = user.email;
+  document.getElementById("studentEmail").textContent =
+    user.email;
+
   document.getElementById("studentName").textContent =
     "Welcome, " + (user.user_metadata?.full_name || "Student") + "!";
 }
 
 loadStudentProfile();
 </script>
-  </script>
+
 </body>
 </html>
