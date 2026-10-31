@@ -1,74 +1,671 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#123c2b">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123c2b">
 <title>UPSInfaq | Campus Food Assistance</title>
 <style>
-:root{--green:#174b35;--green2:#246b4b;--mint:#e9f4ed;--cream:#fbfaf5;--gold:#c9a45c;--ink:#203128;--muted:#718078;--line:#e5ebe6;--white:#fff;--red:#b94b4b;--shadow:0 12px 35px #173c2810}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.app{min-height:100vh}.top{background:linear-gradient(120deg,#123c2b,#246b4b);color:white;padding:18px max(18px,calc((100% - 1180px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;position:sticky;top:0;z-index:10;box-shadow:0 5px 20px #0e332322}.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.2px}.logo{width:42px;height:42px;border-radius:14px;background:#ffffff20;display:grid;place-items:center;font-size:22px;border:1px solid #ffffff40}.brand small{display:block;font-size:10px;letter-spacing:1.7px;font-weight:600;opacity:.75;margin-top:2px}.topright{display:flex;gap:9px;align-items:center}.pill{border:1px solid #ffffff50;background:#ffffff16;color:white;border-radius:99px;padding:8px 12px;font-size:12px}.wrap{max-width:1180px;margin:auto;padding:24px 18px 70px}.hero{background:linear-gradient(115deg,#e8f2e9,#f8f4e8);border:1px solid #dfe9df;border-radius:26px;padding:30px;display:grid;grid-template-columns:1.35fr .65fr;gap:20px;align-items:center;margin-bottom:22px}.eyebrow{color:var(--green2);font-size:11px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}.hero h1{font-size:clamp(27px,4vw,43px);line-height:1.1;margin:10px 0;color:#183d2c}.hero p{color:#63746a;max-width:650px;line-height:1.65}.heroart{font-size:100px;text-align:center;filter:drop-shadow(0 12px 15px #173c2820)}.btn{border:0;border-radius:12px;padding:11px 16px;background:var(--green);color:white;font-weight:700;font-size:13px;box-shadow:0 5px 13px #174b3520}.btn:hover{background:var(--green2)}.btn.light{background:#edf4ee;color:var(--green);box-shadow:none}.btn.gold{background:#c9a45c;color:#233329}.btn.danger{background:#fff0f0;color:#a83d3d;box-shadow:none}.btn.outline{background:white;color:var(--green);border:1px solid var(--line);box-shadow:none}.btn.small{padding:8px 11px;font-size:12px}.btn:disabled{opacity:.45;cursor:not-allowed}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);background:white;padding:10px 15px;border-radius:99px;font-size:12px;font-weight:750;color:#627269}.tab.active{background:var(--green);border-color:var(--green);color:white}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:white;border:1px solid var(--line);border-radius:19px;padding:17px;box-shadow:var(--shadow)}.card h3{margin:0 0 7px;font-size:16px}.muted{color:var(--muted);font-size:12px;line-height:1.55}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:26px 0 13px}.sectionhead h2{margin:0;font-size:21px;color:#1b422f}.sectionhead p{margin:4px 0 0}.stat{font-size:27px;font-weight:850;color:var(--green);margin:7px 0}.statlabel{font-size:11px;color:var(--muted);font-weight:700}.foodimg{width:100%;height:145px;object-fit:cover;border-radius:13px;background:#edf2ed}.foodcard{overflow:hidden;padding:11px}.foodcard h3{margin:10px 2px 3px}.foodcard .muted{margin:0 2px 8px}.foodfoot{display:flex;justify-content:space-between;align-items:center;gap:7px;margin:8px 2px 2px}.stock{font-size:11px;font-weight:800;color:var(--green2)}.stock.out{color:var(--red)}.price{font-weight:850;color:var(--green)}.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}.field label{font-size:12px;font-weight:750;color:#52645a}.field input,.field select,.field textarea{border:1px solid #dce5de;border-radius:11px;padding:11px 12px;background:#fff;color:var(--ink);outline:none;width:100%}.field input:focus,.field select:focus,.field textarea:focus{border-color:#6c9b7e;box-shadow:0 0 0 3px #dceee1}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.notice{background:#f3f7f2;border:1px solid #e0e9df;border-radius:13px;padding:12px;color:#53685b;font-size:12px;line-height:1.55}.warning{background:#fff7e8;border-color:#f1dfb9;color:#795c25}.badge{display:inline-flex;align-items:center;border-radius:99px;padding:5px 9px;font-size:10px;font-weight:800;background:#eaf4ed;color:#286044}.badge.red{background:#fff0ef;color:#a54242}.badge.gold{background:#f8f0dd;color:#86672d}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:#66766d;font-size:10px;text-transform:uppercase;letter-spacing:.7px}.empty{text-align:center;padding:30px;color:var(--muted);font-size:13px}.modalback{position:fixed;inset:0;background:#10291dcc;z-index:30;display:grid;place-items:center;padding:16px}.modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:white;border-radius:22px;padding:23px;box-shadow:0 20px 70px #0003}.modal h2{margin:0 0 7px}.close{float:right;border:0;background:#eff3ef;border-radius:50%;width:32px;height:32px;font-size:18px}.qrbox{border:1px dashed #9ab5a0;border-radius:16px;padding:18px;text-align:center;background:#f7faf7}.qrbox img{width:170px;height:170px;max-width:100%;background:white;padding:8px;border-radius:12px}.receipt{border:1px solid #e4e9e4;border-radius:16px;padding:20px;background:linear-gradient(160deg,#fff,#f7faf6)}.receipt .rhead{text-align:center;border-bottom:1px dashed #bdc9bf;padding-bottom:15px;margin-bottom:12px}.receipt h2{color:var(--green);letter-spacing:1px}.receiptrow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:12px}.receiptrow.total{font-weight:900;font-size:16px;border-top:1px solid #dce5de;margin-top:7px;padding-top:13px}.progress{height:9px;background:#edf1ed;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,#317650,#9abd7b);border-radius:99px}.maplink{color:var(--green2);font-weight:750;text-decoration:none;font-size:12px}.footer{text-align:center;color:#87948c;font-size:11px;padding:24px 0}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:60;background:#173f2c;color:white;border-radius:99px;padding:12px 18px;font-size:12px;box-shadow:0 8px 30px #0003;max-width:90%;text-align:center}.loginbox{max-width:460px;margin:45px auto}.loginbox .card{padding:25px}.rolegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.roleopt{border:1px solid var(--line);background:white;border-radius:12px;padding:13px;text-align:left;color:var(--ink);font-weight:750}.roleopt.selected{border:2px solid var(--green);background:#eff7f0}.roleopt small{display:block;color:var(--muted);font-weight:500;margin-top:4px}.mobilemenu{display:none}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr;padding:23px}.heroart{display:none}.top{padding:13px 15px}.topright .pill{display:none}}
-@media(max-width:520px){.wrap{padding:16px 12px 55px}.grid,.grid.two{grid-template-columns:1fr 1fr;gap:10px}.card{padding:13px}.foodimg{height:112px}.foodcard{padding:8px}.foodcard h3{font-size:13px}.foodfoot{align-items:flex-start;flex-direction:column}.hero h1{font-size:29px}.sectionhead h2{font-size:18px}.tab{padding:9px 12px}.grid.four{grid-template-columns:1fr 1fr}.topright .btn{padding:8px 10px}.brand{font-size:14px}.brand small{font-size:8px}}
-@media print{body *{visibility:hidden!important}#printArea,#printArea *{visibility:visible!important}#printArea{position:absolute;left:0;top:0;width:100%;padding:20px}.no-print{display:none!important}}
-</style></head>
-<body><div class="app">
-<header class="top"><div class="brand"><div class="logo">♡</div><div>UPSInfaq<small>SHARE FOOD · SHARE HOPE</small></div></div><div class="topright"><span class="pill" id="userPill">Guest access</span><button class="btn gold small" id="headerAction" onclick="showAuth()">Sign in</button></div></header>
-<main class="wrap" id="root"></main><div class="footer">UPSInfaq · Campus Food Assistance Platform · Demo prototype</div></div><div id="modalHost"></div><div id="toastHost"></div>
+:root{--green:#174b35;--green2:#246b4b;--mint:#e9f4ed;--cream:#fbfaf5;--gold:#c9a45c;--ink:#203128;--muted:#718078;--line:#e5ebe6;--white:#fff;--red:#b94b4b;--shadow:0 12px 35px #173c2810}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.app{min-height:100vh}
+.top{background:linear-gradient(120deg,#123c2b,#246b4b);color:white;padding:18px max(18px,calc((100% - 1180px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;position:sticky;top:0;z-index:10;box-shadow:0 5px 20px #0e332322}
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.2px}
+.logo{width:42px;height:42px;border-radius:14px;background:#ffffff20;display:grid;place-items:center;font-size:22px;border:1px solid #ffffff40}
+.brand small{display:block;font-size:10px;letter-spacing:1.7px;font-weight:600;opacity:.75;margin-top:2px}
+.topright{display:flex;gap:9px;align-items:center}
+.pill{border:1px solid #ffffff50;background:#ffffff16;color:white;border-radius:99px;padding:8px 12px;font-size:12px}
+.wrap{max-width:1180px;margin:auto;padding:24px 18px 70px}
+.hero{background:linear-gradient(115deg,#e8f2e9,#f8f4e8);border:1px solid #dfe9df;border-radius:26px;padding:30px;display:grid;grid-template-columns:1.35fr .65fr;gap:20px;align-items:center;margin-bottom:22px}
+.eyebrow{color:var(--green2);font-size:11px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}
+.hero h1{font-size:clamp(27px,4vw,43px);line-height:1.1;margin:10px 0;color:#183d2c}
+.hero p{color:#63746a;max-width:650px;line-height:1.65}
+.heroart{font-size:100px;text-align:center;filter:drop-shadow(0 12px 15px #173c2820)}
+.btn{border:0;border-radius:12px;padding:11px 16px;background:var(--green);color:white;font-weight:700;font-size:13px;box-shadow:0 5px 13px #174b3520}
+.btn:hover{background:var(--green2)}
+.btn.light{background:#edf4ee;color:var(--green);box-shadow:none}
+.btn.gold{background:#c9a45c;color:#233329}
+.btn.danger{background:#fff0f0;color:#a83d3d;box-shadow:none}
+.btn.outline{background:white;color:var(--green);border:1px solid var(--line);box-shadow:none}
+.btn.small{padding:8px 11px;font-size:12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.tab{border:1px solid var(--line);background:white;padding:10px 15px;border-radius:99px;font-size:12px;font-weight:750;color:#627269}
+.tab.active{background:var(--green);border-color:var(--green);color:white}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:white;border:1px solid var(--line);border-radius:19px;padding:17px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 7px;font-size:16px}
+.muted{color:var(--muted);font-size:12px;line-height:1.55}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:26px 0 13px}
+.sectionhead h2{margin:0;font-size:21px;color:#1b422f}
+.sectionhead p{margin:4px 0 0}
+.stat{font-size:27px;font-weight:850;color:var(--green);margin:7px 0}
+.statlabel{font-size:11px;color:var(--muted);font-weight:700}
+.foodimg{width:100%;height:145px;object-fit:cover;border-radius:13px;background:#edf2ed}
+.foodcard{overflow:hidden;padding:11px}
+.foodcard h3{margin:10px 2px 3px}
+.foodcard .muted{margin:0 2px 8px}
+.foodfoot{display:flex;justify-content:space-between;align-items:center;gap:7px;margin:8px 2px 2px}
+.stock{font-size:11px;font-weight:800;color:var(--green2)}
+.stock.out{color:var(--red)}
+.price{font-weight:850;color:var(--green)}
+.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.field label{font-size:12px;font-weight:750;color:#52645a}
+.field input,.field select,.field textarea{border:1px solid #dce5de;border-radius:11px;padding:11px 12px;background:#fff;color:var(--ink);outline:none;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#6c9b7e;box-shadow:0 0 0 3px #dceee1}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row>*{flex:1}
+.notice{background:#f3f7f2;border:1px solid #e0e9df;border-radius:13px;padding:12px;color:#53685b;font-size:12px;line-height:1.55}
+.warning{background:#fff7e8;border-color:#f1dfb9;color:#795c25}
+.badge{display:inline-flex;align-items:center;border-radius:99px;padding:5px 9px;font-size:10px;font-weight:800;background:#eaf4ed;color:#286044}
+.badge.red{background:#fff0ef;color:#a54242}
+.badge.gold{background:#f8f0dd;color:#86672d}
+.tablewrap{overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:#66766d;font-size:10px;text-transform:uppercase;letter-spacing:.7px}
+.empty{text-align:center;padding:30px;color:var(--muted);font-size:13px}
+.modalback{position:fixed;inset:0;background:#10291dcc;z-index:30;display:grid;place-items:center;padding:16px}
+.modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:white;border-radius:22px;padding:23px;box-shadow:0 20px 70px #0003}
+.modal h2{margin:0 0 7px}
+.close{float:right;border:0;background:#eff3ef;border-radius:50%;width:32px;height:32px;font-size:18px}
+.qrbox{border:1px dashed #9ab5a0;border-radius:16px;padding:18px;text-align:center;background:#f7faf7}
+.qrbox img{width:170px;height:170px;max-width:100%;background:white;padding:8px;border-radius:12px}
+.receipt{border:1px solid #e4e9e4;border-radius:16px;padding:20px;background:linear-gradient(160deg,#fff,#f7faf6)}
+.receipt .rhead{text-align:center;border-bottom:1px dashed #bdc9bf;padding-bottom:15px;margin-bottom:12px}
+.receipt h2{color:var(--green);letter-spacing:1px}
+.receiptrow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:12px}
+.receiptrow.total{font-weight:900;font-size:16px;border-top:1px solid #dce5de;margin-top:7px;padding-top:13px}
+.progress{height:9px;background:#edf1ed;border-radius:99px;overflow:hidden}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#317650,#9abd7b);border-radius:99px}
+.maplink{color:var(--green2);font-weight:750;text-decoration:none;font-size:12px}
+.footer{text-align:center;color:#87948c;font-size:11px;padding:24px 0}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:60;background:#173f2c;color:white;border-radius:99px;padding:12px 18px;font-size:12px;box-shadow:0 8px 30px #0003;max-width:90%;text-align:center}
+.loginbox{max-width:460px;margin:45px auto}
+.loginbox .card{padding:25px}
+.rolegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.roleopt{border:1px solid var(--line);background:white;border-radius:12px;padding:13px;text-align:left;color:var(--ink);font-weight:750}
+.roleopt.selected{border:2px solid var(--green);background:#eff7f0}
+.roleopt small{display:block;color:var(--muted);font-weight:500;margin-top:4px}
+.mobilemenu{display:none}
+@media(max-width:800px){
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+.hero{grid-template-columns:1fr;padding:23px}
+.heroart{display:none}
+.top{padding:13px 15px}
+.topright .pill{display:none}
+}
+@media(max-width:520px){
+.wrap{padding:16px 12px 55px}
+.grid,.grid.two{grid-template-columns:1fr 1fr;gap:10px}
+.card{padding:13px}
+.foodimg{height:112px}
+.foodcard{padding:8px}
+.foodcard h3{font-size:13px}
+.foodfoot{align-items:flex-start;flex-direction:column}
+.hero h1{font-size:29px}
+.sectionhead h2{font-size:18px}
+.tab{padding:9px 12px}
+.grid.four{grid-template-columns:1fr 1fr}
+.topright .btn{padding:8px 10px}
+.brand{font-size:14px}
+.brand small{font-size:8px}
+}
+@media print{
+body *{visibility:hidden!important}
+#printArea,#printArea *{visibility:visible!important}
+#printArea{position:absolute;left:0;top:0;width:100%;padding:20px}
+.no-print{display:none!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+<div class="brand"><div class="logo">♡</div><div>UPSInfaq<small>SHARE FOOD · SHARE HOPE</small></div></div>
+<div class="topright">
+<span class="pill" id="userPill">Guest access</span>
+<button class="btn gold small" id="headerAction" onclick="showAuth()">Sign in</button>
+</div>
+</header>
+<main class="wrap" id="root"></main>
+<div class="footer">UPSInfaq · Campus Food Assistance Platform · Demo prototype</div>
+</div>
+<div id="modalHost"></div>
+<div id="toastHost"></div>
+
 <script>
-const $=id=>document.getElementById(id);const money=n=>'RM '+Number(n||0).toFixed(2);const now=()=>new Date().toISOString();const fmt=d=>new Date(d).toLocaleString('en-MY',{dateStyle:'medium',timeStyle:'short'});const uid=prefix=>prefix+'-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+const $=id=>document.getElementById(id);
+const money=n=>'RM '+Number(n||0).toFixed(2);
+const now=()=>new Date().toISOString();
+const fmt=d=>new Date(d).toLocaleString('en-MY',{dateStyle:'medium',timeStyle:'short'});
+const uid=prefix=>prefix+'-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
 const imageFor=(keywords,lock)=>`https://loremflickr.com/700/500/${encodeURIComponent(keywords)}?lock=${lock}`;
+
 const dry=[
-['Rice 5kg',18.90,'uncooked rice grains rice bag'],['Instant Noodles',1.20,'instant noodles packet ramen'],['Cream Biscuits',4.50,'cream sandwich biscuits cookies'],['UHT Milk 1L',6.20,'milk carton bottle'],['Tea Bags',5.90,'tea bags tea cup'],['Milo 400g',12.90,'malt chocolate drink powder tin'],['Bihun 400g',3.20,'rice vermicelli dry noodles'],['Cooking Oil 1kg',7.50,'cooking oil bottle'],['Sugar 1kg',3.40,'white sugar bag'],['Wheat Flour 1kg',3.20,'wheat flour bag'],['Canned Sardines',6.90,'sardines tin canned fish'],['Baked Beans',4.80,'baked beans tin'],['Breakfast Cereal',9.90,'breakfast cereal corn flakes box'],['Rolled Oats',7.90,'rolled oats bowl packet'],['Crackers',4.20,'plain crackers biscuits'],['White Bread',3.50,'white sandwich bread loaf'],['Peanut Butter',8.90,'peanut butter jar'],['Fruit Jam',6.50,'strawberry jam jar'],['Canned Tuna',7.20,'canned tuna tin'],['Coffee 200g',10.90,'instant coffee jar']
-].map((x,i)=>({id:'D'+i,name:x[0],price:x[1],stock:[18,45,22,14,16,12,20,11,24,19,9,13,8,15,17,10,7,9,12,11][i],img:imageFor(x[2],i+101),category:'Dry Goods'}));
+['Rice 5kg',18.90,'uncooked rice grains rice bag'],
+['Instant Noodles',1.20,'instant noodles packet ramen'],
+['Cream Biscuits',4.50,'cream sandwich biscuits cookies'],
+['UHT Milk 1L',6.20,'milk carton bottle'],
+['Tea Bags',5.90,'tea bags tea cup'],
+['Milo 400g',12.90,'malt chocolate drink powder tin'],
+['Bihun 400g',3.20,'rice vermicelli dry noodles'],
+['Cooking Oil 1kg',7.50,'cooking oil bottle'],
+['Sugar 1kg',3.40,'white sugar bag'],
+['Wheat Flour 1kg',3.20,'wheat flour bag'],
+['Canned Sardines',6.90,'sardines tin canned fish'],
+['Baked Beans',4.80,'baked beans tin'],
+['Breakfast Cereal',9.90,'breakfast cereal corn flakes box'],
+['Rolled Oats',7.90,'rolled oats bowl packet'],
+['Crackers',4.20,'plain crackers biscuits'],
+['White Bread',3.50,'white sandwich bread loaf'],
+['Peanut Butter',8.90,'peanut butter jar'],
+['Fruit Jam',6.50,'strawberry jam jar'],
+['Canned Tuna',7.20,'canned tuna tin'],
+['Coffee 200g',10.90,'instant coffee jar']
+].map((x,i)=>({
+id:'D'+i,name:x[0],price:x[1],
+stock:[18,45,22,14,16,12,20,11,24,19,9,13,8,15,17,10,7,9,12,11][i],
+img:imageFor(x[2],i+101),category:'Dry Goods'
+}));
+
 const meals=[
-['Nasi Lemak',5.00,'nasi lemak banana leaf sambal egg peanuts',18],['Nasi Ayam',7.00,'Malaysian chicken rice roasted chicken rice cucumber',15],['Nasi Goreng Kampung',6.00,'nasi goreng kampung fried rice anchovies vegetables',12],['Mee Goreng',5.50,'Malaysian mee goreng fried yellow noodles',10],['Nasi Kandar',8.00,'nasi kandar Malaysian rice curry chicken',9],['Nasi Kerabu',7.00,'nasi kerabu blue rice herbs salted egg',8],['Bihun Goreng',5.00,'Malaysian fried bihun rice vermicelli noodles',11],['Kuey Teow Goreng',6.00,'char kuey teow flat rice noodles',10],['Roti Canai Set',3.50,'roti canai Malaysian flatbread dhal curry',20],['Chicken Sandwich',4.50,'chicken sandwich sliced bread lettuce',14]
-].map((x,i)=>({id:'M'+i,name:x[0],price:x[1],img:imageFor(x[2],i+201),stock:x[3],category:'Ready Meals'}));
-const defaultState=()=>({users:[],current:null,dry,meals,donations:[],vouchers:[],campaigns:[{id:'CAMP-001',name:'Breakfast for Better Days',desc:'Help provide nutritious breakfast packs for students.',target:1000,raised:420,goalPacks:100,packs:42,date:'2026-11-15',location:'UPSI Campus',status:'Active',img:'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=80'}],volunteers:[],feedback:[],notifications:[],redemptions:[],adminLogs:[],stalls:[{id:'ST-01',name:'Kafe Harmoni',location:'UPSI Campus',hours:'8:00 AM – 6:00 PM',address:'Sultan Idris Education University, Tanjong Malim',active:true},{id:'ST-02',name:'Dapur Siswa',location:'Tanjong Malim',hours:'9:00 AM – 5:00 PM',address:'Tanjong Malim, Perak',active:true}],settings:{service:2,claimLimit:1}});
-let state;try{state=JSON.parse(localStorage.getItem('upsinfaq_v3'))||defaultState()}catch(e){state=defaultState()}if(!state.dry||state.dry.length!==20)state.dry=dry;if(!state.meals||state.meals.length!==10)state.meals=meals;if(!state.campaigns)state.campaigns=defaultState().campaigns;if(!state.users)state.users=[];if(!state.donations)state.donations=[];if(!state.vouchers)state.vouchers=[];if(!state.stalls)state.stalls=defaultState().stalls;
-state.dry=state.dry.map((p,i)=>({...p,img:dry.find(x=>x.id===p.id)?.img||imageFor(p.name+' grocery product',i+101)}));state.meals=state.meals.map((p,i)=>({...p,img:meals.find(x=>x.id===p.id)?.img||imageFor(p.name+' Malaysian food',i+201)}));
-let page='home',studentTab='all',donorTab='catalogue',orgTab='campaigns',adminTab='overview',stallTab='vouchers',selectedRole='Student',cart={},tip=0;
-function save(){localStorage.setItem('upsinfaq_v3',JSON.stringify(state))}function toast(s){$('toastHost').innerHTML='<div class="toast">'+esc(s)+'</div>';setTimeout(()=>$('toastHost').innerHTML='',2800)}function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function current(){return state.users.find(u=>u.id===state.current)||null}function isRole(r){return current()?.role===r}function header(){let u=current();$('userPill').textContent=u?u.name+' · '+u.role:'Guest access';$('headerAction').textContent=u?'Sign out':'Sign in';$('headerAction').onclick=u?logout:showAuth}
-function go(p){page=p;render()}function home(){return `<section class="hero"><div><div class="eyebrow">A little help can make a big difference</div><h1>Good food.<br>Stronger students.</h1><p>UPSInfaq connects students who need food assistance with caring donors, campus organisers and registered food stalls. Together, we make support simple, trusted and accessible.</p><div class="row" style="max-width:330px"><button class="btn" onclick="showAuth('Student')">Get food support</button><button class="btn light" onclick="showAuth('Donor')">Donate now</button></div></div><div class="heroart">🥗</div></section><div class="grid four"><div class="card"><div class="stat">${state.donations.reduce((s,d)=>s+d.total,0).toFixed(0)}</div><div class="statlabel">RM DONATED IN THIS DEMO</div></div><div class="card"><div class="stat">${state.vouchers.length}</div><div class="statlabel">VOUCHERS CREATED</div></div><div class="card"><div class="stat">${state.users.filter(u=>u.role==='Donor').length}</div><div class="statlabel">REGISTERED DONORS</div></div><div class="card"><div class="stat">${state.campaigns.length}</div><div class="statlabel">COMMUNITY CAMPAIGNS</div></div></div><div class="sectionhead"><div><h2>Explore UPSInfaq</h2><p class="muted">Choose how you would like to make a difference.</p></div></div><div class="grid">${[['🎓','Student','Claim food assistance and manage your vouchers.'],['💚','Donor','Donate food items or sponsor meals.'],['📋','Organiser','Create campaigns and manage volunteers.'],['🍽️','Registered Stall','Redeem student vouchers and track collections.'],['🛡️','Admin','Manage users, stock and platform activity.']].map(x=>`<div class="card"><div style="font-size:30px">${x[0]}</div><h3>${x[1]}</h3><p class="muted">${x[2]}</p><button class="btn light small" onclick="showAuth('${x[1]}')">Continue as ${x[1]}</button></div>`).join('')}</div><div class="sectionhead"><div><h2>Current campaigns</h2><p class="muted">Support a programme that matters.</p></div><button class="btn outline small" onclick="go('campaigns')">View all</button></div>${campaignCards()}</section>`}
-function campaignCards(){if(!state.campaigns.length)return '<div class="empty">No campaigns yet.</div>';return `<div class="grid">${state.campaigns.map(c=>`<div class="card"><img class="foodimg" src="${esc(c.img||'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=80')}" onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80'"><div class="eyebrow" style="margin-top:12px">${esc(c.status||'Active')}</div><h3>${esc(c.name)}</h3><p class="muted">${esc(c.desc)}</p><div class="progress"><span style="width:${Math.min(100,(c.raised/Math.max(1,c.target))*100)}%"></span></div><div class="foodfoot"><span class="muted">${money(c.raised)} of ${money(c.target)}</span><button class="btn small" onclick="sponsorCampaign('${c.id}')">Support</button></div><p class="muted">📍 ${esc(c.location)} · ${esc(c.date)}</p></div>`).join('')}</div>`}
-function showAuth(role){selectedRole=role||'Student';modal(`<button class="close" onclick="closeModal()">×</button><div class="eyebrow">Welcome to UPSInfaq</div><h2>Sign in or create account</h2><p class="muted">Select your role to continue. This is a demonstration prototype.</p><div class="rolegrid">${['Student','Donor','Organiser','Registered Stall','Admin'].map(r=>`<button class="roleopt ${selectedRole===r?'selected':''}" onclick="selectedRole='${r}';showAuth('${r}')">${r}<small>${({Student:'Food assistance',Donor:'Give support',Organiser:'Manage programmes','Registered Stall':'Redeem vouchers',Admin:'Platform management'})[r]}</small></button>`).join('')}</div><div id="authFields">${authFields()}</div>`)}
-function authFields(){return `<div class="field"><label>Full name</label><input id="authName" placeholder="Enter your name"></div><div class="field"><label>Email address</label><input id="authEmail" type="email" placeholder="name@example.com"></div><div class="field"><label>Password</label><input id="authPass" type="password" placeholder="At least 6 characters"></div>${selectedRole==='Student'?`<div class="row"><div class="field"><label>Faculty</label><select id="faculty"><option>FPE</option><option>FSM</option><option>FSK</option></select></div><div class="field"><label>College</label><select id="college"><option>KUO</option><option>KHAR</option><option>KAHS</option><option>KZ</option></select></div></div>`:''}${selectedRole==='Registered Stall'?`<div class="field"><label>Stall name</label><input id="stallName" placeholder="Registered stall name"></div>`:''}${selectedRole==='Admin'?`<div class="field"><label>Admin Access Code</label><input id="adminCode" type="password" inputmode="numeric" placeholder="Enter admin access code"></div><div class="notice warning">Demo only: code 112233 is visible in the front-end source and is not secure for real deployment.</div>`:''}<div class="row" style="margin-top:15px"><button class="btn" onclick="registerLogin()">Continue</button><button class="btn light" onclick="closeModal()">Cancel</button></div>`}
-function registerLogin(){let name=$('authName')?.value.trim(),email=$('authEmail')?.value.trim().toLowerCase(),pass=$('authPass')?.value;if(!name||!email||!pass||pass.length<6)return toast('Please complete all fields. Password must be at least 6 characters.');if(selectedRole==='Student'&&!email.endsWith('@siswa.com'))return toast('Please use your @siswa.com student email.');if(selectedRole==='Admin'&&$('adminCode')?.value!=='112233')return toast('Invalid Admin Access Code.');let extra={};if(selectedRole==='Student')extra={faculty:$('faculty').value,college:$('college').value};if(selectedRole==='Registered Stall')extra.stallName=$('stallName')?.value.trim()||name;let existing=state.users.find(u=>u.email===email&&u.role===selectedRole);if(existing){if(existing.pass!==pass)return toast('Incorrect password for this account.');state.current=existing.id}else{let u={id:uid('USR'),name,email,pass,role:selectedRole,...extra,created:now()};state.users.push(u);state.current=u.id}save();closeModal();toast('Welcome to UPSInfaq, '+name+'!');render()}
-function logout(){state.current=null;save();page='home';render();toast('You have signed out.')}
-function studentPage(){let u=current();let mine=state.vouchers.filter(v=>v.studentId===u.id);return `<div class="eyebrow">Student portal</div><h1 style="margin:6px 0 4px">Hello, ${esc(u.name.split(' ')[0])} 👋</h1><p class="muted">Find food support, claim available items and manage your vouchers.</p><div class="grid four"><div class="card"><div class="stat">${mine.length}</div><div class="statlabel">MY VOUCHERS</div></div><div class="card"><div class="stat">${mine.filter(v=>v.status==='Active').length}</div><div class="statlabel">ACTIVE</div></div><div class="card"><div class="stat">${mine.filter(v=>v.status==='Redeemed').length}</div><div class="statlabel">REDEEMED</div></div><div class="card"><div class="stat">${esc(u.college||'—')}</div><div class="statlabel">MY COLLEGE</div></div></div><div class="tabs"><button class="tab ${studentTab==='all'?'active':''}" onclick="studentTab='all';render()">All food</button><button class="tab ${studentTab==='dry'?'active':''}" onclick="studentTab='dry';render()">Dry goods</button><button class="tab ${studentTab==='meals'?'active':''}" onclick="studentTab='meals';render()">Ready meals</button><button class="tab ${studentTab==='vouchers'?'active':''}" onclick="studentTab='vouchers';render()">My vouchers</button><button class="tab ${studentTab==='history'?'active':''}" onclick="studentTab='history';render()">Claim history</button></div>${studentTab==='vouchers'||studentTab==='history'?voucherList(mine,studentTab==='history'):foodCatalog(studentTab==='dry'?state.dry:studentTab==='meals'?state.meals:[...state.dry,...state.meals],true)}`}
-function foodCatalog(items,claim){return `<div class="grid">${items.map(p=>`<div class="card foodcard"><img class="foodimg" src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='https://loremflickr.com/700/500/food?lock=999'"><h3>${esc(p.name)}</h3><div class="muted">${esc(p.category)} · ${money(p.price)}</div><div class="foodfoot"><span class="stock ${p.stock<=0?'out':''}">${p.stock>0?p.stock+' available':'Out of stock'}</span><button class="btn small" ${p.stock<=0?'disabled':''} onclick="claimItem('${p.id}')">Claim</button></div></div>`).join('')}</div>`}
-function claimItem(id){let u=current(),p=[...state.dry,...state.meals].find(x=>x.id===id);if(!p||p.stock<1)return toast('Sorry, this item is out of stock.');let activeToday=state.vouchers.filter(v=>v.studentId===u.id&&v.status==='Active'&&new Date(v.created).toDateString()===new Date().toDateString()).length;if(activeToday>=Number(state.settings.claimLimit||1))return toast('Your daily claim limit has been reached.');p.stock--;let v={id:uid('VCH'),studentId:u.id,studentName:u.name,itemId:p.id,item:p.name,stallId:state.stalls[0]?.id||'',stall:state.stalls[0]?.name||'Campus Foodbank',created:now(),expires:new Date(Date.now()+48*3600000).toISOString(),status:'Active'};state.vouchers.push(v);state.notifications.push({id:uid('NTF'),userId:u.id,text:'Your '+p.name+' voucher is ready for collection.',created:now()});save();modal(voucherModal(v));toast('Claim successful. Your voucher is ready.')}
-function voucherModal(v){let qr='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(v.id);return `<button class="close" onclick="closeModal();render()">×</button><div class="eyebrow">Claim successful</div><h2>Your food voucher</h2><div class="qrbox"><img src="${qr}" alt="Voucher QR code"><h3>${esc(v.item)}</h3><div class="badge">${esc(v.status)}</div><p class="muted">Voucher ID: <b>${esc(v.id)}</b><br>Show this QR code at ${esc(v.stall)}.<br>Expires: ${fmt(v.expires)}</p></div><div class="notice warning" style="margin-top:12px">Demo QR: redemption is simulated in this browser. Real cross-device verification requires a secure shared database.</div><button class="btn" style="width:100%;margin-top:12px" onclick="closeModal();studentTab='vouchers';render()">Open My Vouchers</button>`}
-function voucherList(list,history){if(!list.length)return '<div class="card empty">No vouchers yet. Browse available food to make your first claim.</div>';return `<div class="grid">${list.slice().reverse().map(v=>`<div class="card"><div class="row"><b>${esc(v.item)}</b><span class="badge ${v.status==='Active'?'':'gold'}">${esc(v.status)}</span></div><p class="muted">${esc(v.id)}<br>Created ${fmt(v.created)}<br>Expires ${fmt(v.expires)}<br>Collect at ${esc(v.stall)}</p>${v.status==='Active'?`<button class="btn small" onclick="modal(voucherModal(state.vouchers.find(x=>x.id==='${v.id}')))" >View QR</button>`:''}</div>`).join('')}</div>`}
-function donorPage(){let u=current(),mine=state.donations.filter(d=>d.donorId===u.id);return `<div class="eyebrow">Donor portal</div><h1 style="margin:6px 0">Make kindness count 💚</h1><p class="muted">Donate essential groceries, sponsor meals and see the impact of your generosity.</p><div class="grid four"><div class="card"><div class="stat">${money(mine.reduce((s,d)=>s+d.total,0))}</div><div class="statlabel">MY CONTRIBUTIONS</div></div><div class="card"><div class="stat">${mine.length}</div><div class="statlabel">DONATIONS</div></div><div class="card"><div class="stat">${mine.reduce((s,d)=>s+d.items.reduce((a,x)=>a+x.qty,0),0)}</div><div class="statlabel">ITEMS DONATED</div></div><div class="card"><div class="stat">${state.dry.filter(p=>p.stock<5).length}</div><div class="statlabel">LOW STOCK ITEMS</div></div></div><div class="tabs"><button class="tab ${donorTab==='catalogue'?'active':''}" onclick="donorTab='catalogue';render()">Donate items</button><button class="tab ${donorTab==='history'?'active':''}" onclick="donorTab='history';render()">Donation history</button><button class="tab ${donorTab==='leaderboard'?'active':''}" onclick="donorTab='leaderboard';render()">Leaderboard</button><button class="tab ${donorTab==='wishlist'?'active':''}" onclick="donorTab='wishlist';render()">Food wish list</button></div>${donorTab==='catalogue'?donorCatalogue():donorTab==='history'?donationHistory(mine):donorTab==='leaderboard'?leaderboard():wishlist()}`}
-function donorCatalogue(){return `<div class="notice">Choose grocery items and quantities. Your donation adds confirmed quantities to the shared demo foodbank stock. A 2% service charge is shown separately.</div><div class="grid" style="margin-top:14px">${state.dry.map(p=>`<div class="card foodcard"><img class="foodimg" src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='https://loremflickr.com/700/500/food?lock=999'"><h3>${esc(p.name)}</h3><div class="muted">Unit price: ${money(p.price)}</div><div class="foodfoot"><span class="stock">Current stock: ${p.stock}</span><input aria-label="Quantity" type="number" min="0" max="100" value="${cart[p.id]||0}" style="width:72px;padding:7px;border:1px solid #dce5de;border-radius:9px" onchange="setCart('${p.id}',this.value)"></div><div class="muted" style="margin:6px 2px">Line total: <b>${money(p.price*(cart[p.id]||0))}</b></div></div>`).join('')}</div><div class="card" style="margin-top:16px"><h3>Donation summary</h3><div class="receiptrow"><span>Subtotal</span><b>${money(cartSubtotal())}</b></div><div class="receiptrow"><span>Service charge (2%)</span><b>${money(cartSubtotal()*.02)}</b></div><div class="field"><label>Optional tip (RM)</label><input type="number" min="0" step="0.50" value="${tip}" onchange="tip=Math.max(0,Number(this.value)||0);render()"></div><label class="muted" style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="anonymousDonation" type="checkbox"> Display my name as Anonymous in the leaderboard</label><div class="receiptrow total"><span>Total</span><span>${money(cartSubtotal()*1.02+tip)}</span></div><button class="btn" style="width:100%;margin-top:12px" ${cartSubtotal()<=0?'disabled':''} onclick="completeDonation()">Confirm demo donation</button><p class="muted">Demo only: no real payment is processed. Real donations need a payment provider and verified payment status.</p></div>`}
-function setCart(id,val){cart[id]=Math.max(0,Math.min(100,parseInt(val)||0));render()}function cartSubtotal(){return state.dry.reduce((s,p)=>s+p.price*(cart[p.id]||0),0)}
-function completeDonation(){let u=current(),items=state.dry.filter(p=>(cart[p.id]||0)>0).map(p=>({id:p.id,name:p.name,qty:cart[p.id],unit:p.price,line:p.price*cart[p.id]}));if(!items.length)return;let subtotal=items.reduce((s,x)=>s+x.line,0),fee=subtotal*.02,total=subtotal+fee+tip;let d={id:uid('DON'),donorId:u.id,donorName:u.name,anonymous:$('anonymousDonation')?.checked||false,items,subtotal,fee,tip,total,created:now(),status:'Confirmed (demo)'};items.forEach(x=>{let p=state.dry.find(y=>y.id===x.id);p.stock+=x.qty});state.donations.push(d);state.notifications.push({id:uid('NTF'),userId:u.id,text:'Thank you! Your donation '+d.id+' has been recorded.',created:now()});save();cart={};tip=0;donorTab='history';modal(receiptHTML(d));render()}
-function receiptHTML(d){return `<button class="close no-print" onclick="closeModal()">×</button><div id="printArea" class="receipt"><div class="rhead"><div style="font-size:30px">♡</div><div class="eyebrow">UPSInfaq · Share Food, Share Hope</div><h2>DONATION RECEIPT</h2><div class="muted">Thank you for making a difference.</div></div><div class="receiptrow"><span>Receipt No.</span><b>${esc(d.id)}</b></div><div class="receiptrow"><span>Donor</span><b>${esc(d.anonymous?'Anonymous':d.donorName)}</b></div><div class="receiptrow"><span>Date</span><b>${fmt(d.created)}</b></div><hr style="border:0;border-top:1px dashed #bdc9bf">${d.items.map(x=>`<div class="receiptrow"><span>${esc(x.name)} × ${x.qty}<br><small>${money(x.unit)} each</small></span><b>${money(x.line)}</b></div>`).join('')}<hr style="border:0;border-top:1px dashed #bdc9bf"><div class="receiptrow"><span>Subtotal</span><b>${money(d.subtotal)}</b></div><div class="receiptrow"><span>Service charge (2%)</span><b>${money(d.fee)}</b></div><div class="receiptrow"><span>Optional tip</span><b>${money(d.tip)}</b></div><div class="receiptrow total"><span>Total</span><span>${money(d.total)}</span></div><p class="muted" style="text-align:center;margin-top:18px">This is a demonstration receipt, not a tax invoice or proof of real payment.</p></div><button class="btn no-print" style="width:100%;margin-top:12px" onclick="window.print()">Print / Save as PDF</button>`}
-function donationHistory(list){return list.length?`<div class="tablewrap card"><table><thead><tr><th>Receipt</th><th>Date</th><th>Items</th><th>Total</th><th>Receipt</th></tr></thead><tbody>${list.slice().reverse().map(d=>`<tr><td>${esc(d.id)}</td><td>${fmt(d.created)}</td><td>${d.items.length} item types</td><td>${money(d.total)}</td><td><button class="btn light small" onclick="modal(receiptHTML(state.donations.find(x=>x.id==='${d.id}')))" >View</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="card empty">Your donation history will appear here.</div>'}
-function leaderboard(){let mode=window.lbMode||'week',cut=Date.now()-(mode==='week'?7:30)*86400000,rows={};state.donations.filter(d=>new Date(d.created).getTime()>=cut).forEach(d=>{let k=d.anonymous?'Anonymous donor':d.donorName;rows[k]=(rows[k]||0)+d.total});let arr=Object.entries(rows).sort((a,b)=>b[1]-a[1]).slice(0,10);return `<div class="tabs"><button class="tab ${mode==='week'?'active':''}" onclick="window.lbMode='week';render()">This week</button><button class="tab ${mode==='month'?'active':''}" onclick="window.lbMode='month';render()">This month</button></div><div class="card"><h3>Top 10 community supporters</h3>${arr.length?arr.map((x,i)=>`<div class="receiptrow"><span>${['🥇','🥈','🥉'][i]||'#'+(i+1)} &nbsp; ${esc(x[0])}</span><b>${money(x[1])}</b></div>`).join(''):'<div class="empty">Be the first supporter in this period!</div>'}</div>`}
-function wishlist(){let arr=state.dry.slice().sort((a,b)=>a.stock-b.stock).slice(0,8);return `<div class="notice">These are items with the lowest current stock. Donors can help replenish them.</div><div class="grid" style="margin-top:13px">${arr.map(p=>`<div class="card foodcard"><img class="foodimg" src="${p.img}" alt="${esc(p.name)}" onerror="this.onerror=null;this.src='https://loremflickr.com/700/500/groceries?lock=998'"><h3>${esc(p.name)}</h3><span class="stock ${p.stock<5?'out':''}">${p.stock} in stock</span></div>`).join('')}</div>`}
-function sponsorCampaign(id){let c=state.campaigns.find(x=>x.id===id);if(!c)return;modal(`<button class="close" onclick="closeModal()">×</button><h2>Support ${esc(c.name)}</h2><p class="muted">In a live version, this would open a secure payment flow. For this demo, support is recorded as campaign interest only.</p><div class="field"><label>Contribution amount (RM)</label><input id="sponsorAmount" type="number" min="1" value="20"></div><button class="btn" onclick="let a=Number($('sponsorAmount').value);if(a>0){c.raised+=a;save();closeModal();render();toast('Demo campaign support recorded.')}else toast('Enter a valid amount.')">Record demo support</button>`)}
-function organiserPage(){return `<div class="eyebrow">Programme organiser</div><h1 style="margin:6px 0">Create meaningful impact</h1><p class="muted">Plan campaigns, prepare food packs, coordinate volunteers and track programme outcomes.</p><div class="tabs"><button class="tab ${orgTab==='campaigns'?'active':''}" onclick="orgTab='campaigns';render()">Campaigns</button><button class="tab ${orgTab==='create'?'active':''}" onclick="orgTab='create';render()">Create campaign</button><button class="tab ${orgTab==='volunteers'?'active':''}" onclick="orgTab='volunteers';render()">Volunteers</button><button class="tab ${orgTab==='reports'?'active':''}" onclick="orgTab='reports';render()">Reports & budget</button><button class="tab ${orgTab==='feedback'?'active':''}" onclick="orgTab='feedback';render()">Feedback</button></div>${orgTab==='campaigns'?campaignCards():orgTab==='create'?createCampaign():orgTab==='volunteers'?volunteerPanel():orgTab==='reports'?organiserReports():feedbackPanel()}`}
-function createCampaign(){return `<div class="card"><h3>New food assistance campaign</h3><div class="field"><label>Campaign name</label><input id="cName" placeholder="e.g. Exam Week Food Support"></div><div class="field"><label>Description</label><textarea id="cDesc" rows="3" placeholder="What is this campaign for?"></textarea></div><div class="row"><div class="field"><label>Fundraising target (RM)</label><input id="cTarget" type="number" min="1" value="1000"></div><div class="field"><label>Target food packs</label><input id="cPacks" type="number" min="1" value="100"></div></div><div class="row"><div class="field"><label>End date</label><input id="cDate" type="date"></div><div class="field"><label>Location</label><input id="cLocation" value="UPSI Campus"></div></div><div class="field"><label>Campaign image URL (optional)</label><input id="cImg" placeholder="https://..."></div><button class="btn" onclick="createCampaignSave()">Publish campaign</button></div>`}
-function createCampaignSave(){let name=$('cName').value.trim();if(!name)return toast('Please enter a campaign name.');let c={id:uid('CAMP'),name,desc:$('cDesc').value.trim(),target:Math.max(1,Number($('cTarget').value)||1000),raised:0,goalPacks:Math.max(1,Number($('cPacks').value)||1),packs:0,date:$('cDate').value||'To be announced',location:$('cLocation').value.trim()||'UPSI Campus',status:'Active',img:$('cImg').value.trim()||'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80'};state.campaigns.unshift(c);save();orgTab='campaigns';render();toast('Campaign published.')}
-function volunteerPanel(){return `<div class="card"><h3>Volunteer registration</h3><p class="muted">Register to help with packing, registration or food distribution.</p><div class="row"><div class="field"><label>Volunteer name</label><input id="vName" placeholder="Full name"></div><div class="field"><label>Campaign</label><select id="vCamp">${state.campaigns.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></div></div><div class="field"><label>Preferred task</label><select id="vTask"><option>Food packing</option><option>Registration</option><option>Food distribution</option><option>Logistics</option></select></div><button class="btn" onclick="addVolunteer()">Register volunteer</button></div><div class="card" style="margin-top:13px"><h3>Volunteer list (${state.volunteers.length})</h3>${state.volunteers.length?state.volunteers.map(v=>`<div class="receiptrow"><span><b>${esc(v.name)}</b><br><small>${esc(v.task)} · ${esc(v.campaign)}</small></span><span class="badge">Registered</span></div>`).join(''):'<div class="empty">No volunteers registered yet.</div>'}</div>`}
-function addVolunteer(){let name=$('vName').value.trim();if(!name)return toast('Enter volunteer name.');let c=state.campaigns.find(x=>x.id===$('vCamp').value);state.volunteers.push({id:uid('VOL'),name,task:$('vTask').value,campaign:c?.name||'General'});save();render();toast('Volunteer registered.')}
-function organiserReports(){let total=state.donations.reduce((s,d)=>s+d.total,0),claimed=state.vouchers.length,redeemed=state.vouchers.filter(v=>v.status==='Redeemed').length;return `<div class="grid four"><div class="card"><div class="stat">${money(total)}</div><div class="statlabel">DEMO DONATIONS</div></div><div class="card"><div class="stat">${claimed}</div><div class="statlabel">VOUCHERS ISSUED</div></div><div class="card"><div class="stat">${redeemed}</div><div class="statlabel">VOUCHERS REDEEMED</div></div><div class="card"><div class="stat">${state.volunteers.length}</div><div class="statlabel">VOLUNTEERS</div></div></div><div class="card" style="margin-top:14px"><h3>Programme budget tracker</h3><p class="muted">Demo budget planner. Enter a programme budget and expenses to view the remaining balance.</p><div class="row"><div class="field"><label>Allocated budget (RM)</label><input id="budget" type="number" value="1000"></div><div class="field"><label>Expenses (RM)</label><input id="expenses" type="number" value="250"></div></div><button class="btn small" onclick="let b=Number($('budget').value),e=Number($('expenses').value);$('budgetResult').textContent='Remaining balance: '+money(b-e)">Calculate balance</button><p id="budgetResult" class="stat" style="font-size:18px">Remaining balance: RM 750.00</p><button class="btn light small" onclick="downloadReport()">Download CSV report</button></div>`}
-function downloadReport(){let rows=[['Voucher ID','Student','Item','Status','Created'],...state.vouchers.map(v=>[v.id,v.studentName,v.item,v.status,v.created])];let csv=rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='upsinfaq-report.csv';a.click();URL.revokeObjectURL(a.href)}
-function feedbackPanel(){return `<div class="card"><h3>Programme feedback</h3><div class="field"><label>Your feedback</label><textarea id="fbText" rows="3" placeholder="Share your experience..."></textarea></div><button class="btn" onclick="let t=$('fbText').value.trim();if(t){state.feedback.push({text:t,created:now()});save();render();toast('Feedback submitted.')}else toast('Please enter feedback.')">Submit feedback</button>${state.feedback.map(f=>`<p class="notice">${esc(f.text)}<br><small>${fmt(f.created)}</small></p>`).join('')}</div>`}
-function stallPage(){let u=current();let stall=state.stalls.find(s=>s.name===u.stallName)||state.stalls[0];return `<div class="eyebrow">Registered stall portal</div><h1 style="margin:6px 0">${esc(stall?.name||u.stallName||'Your stall')}</h1><p class="muted">Manage student food vouchers and track daily collections.</p><div class="grid four"><div class="card"><div class="stat">${state.vouchers.filter(v=>v.stallId===stall?.id&&v.status==='Active').length}</div><div class="statlabel">PENDING VOUCHERS</div></div><div class="card"><div class="stat">${state.redemptions.length}</div><div class="statlabel">REDEMPTIONS</div></div><div class="card"><div class="stat">RM50</div><div class="statlabel">MONTHLY SUBSCRIPTION</div></div><div class="card"><div class="stat">2 months</div><div class="statlabel">FREE TRIAL</div></div></div><div class="tabs"><button class="tab ${stallTab==='vouchers'?'active':''}" onclick="stallTab='vouchers';render()">Incoming vouchers</button><button class="tab ${stallTab==='redeem'?'active':''}" onclick="stallTab='redeem';render()">Scan / redeem</button><button class="tab ${stallTab==='map'?'active':''}" onclick="stallTab='map';render()">Stall details</button></div>${stallTab==='vouchers'?stallVouchers(stall):stallTab==='redeem'?redeemPanel():stallDetails(stall)}`}
-function stallVouchers(stall){let list=state.vouchers.filter(v=>v.status==='Active');return `<div class="card"><h3>Active student vouchers</h3>${list.length?list.map(v=>`<div class="receiptrow"><span><b>${esc(v.item)}</b><br><small>${esc(v.studentName)} · ${esc(v.id)}</small></span><button class="btn small" onclick="redeem('${v.id}')">Redeem</button></div>`).join(''):'<div class="empty">No active vouchers at the moment.</div>'}</div>`}
-function redeemPanel(){return `<div class="card"><h3>Verify voucher</h3><p class="muted">Enter the voucher reference from the student's QR code. A real version should scan and verify this code through the secure server.</p><div class="field"><label>Voucher ID</label><input id="redeemId" placeholder="VCH-..."></div><button class="btn" onclick="redeem($('redeemId').value.trim())">Verify & redeem</button></div>`}
-function redeem(id){let v=state.vouchers.find(x=>x.id===id);if(!v)return toast('Voucher not found.');if(v.status!=='Active')return toast('This voucher has already been used or expired.');if(new Date(v.expires)<new Date()){v.status='Expired';save();render();return toast('Voucher has expired.')}v.status='Redeemed';v.redeemed=now();state.redemptions.push({id:uid('RDM'),voucherId:v.id,item:v.item,created:now()});save();render();toast('Voucher successfully redeemed. Thank you!')}
-function stallDetails(stall){return `<div class="card"><h3>Stall information</h3><p><b>${esc(stall?.name||'Registered Stall')}</b></p><p class="muted">${esc(stall?.address||'UPSI Campus')}<br>${esc(stall?.hours||'Operating hours not set')}</p><a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stall?.address||'UPSI Campus Tanjong Malim')}">Open location in Google Maps ↗</a><div class="notice warning" style="margin-top:14px">Subscription: RM50/month after the first two free months. This prototype does not process subscription payments.</div></div>`}
-function adminPage(){return `<div class="eyebrow">Administration</div><h1 style="margin:6px 0">Platform control centre 🛡️</h1><p class="muted">Monitor users, inventory, vouchers, donations and platform activity.</p><div class="tabs"><button class="tab ${adminTab==='overview'?'active':''}" onclick="adminTab='overview';render()">Overview</button><button class="tab ${adminTab==='users'?'active':''}" onclick="adminTab='users';render()">Users</button><button class="tab ${adminTab==='inventory'?'active':''}" onclick="adminTab='inventory';render()">Inventory</button><button class="tab ${adminTab==='vouchers'?'active':''}" onclick="adminTab='vouchers';render()">Vouchers</button><button class="tab ${adminTab==='finance'?'active':''}" onclick="adminTab='finance';render()">Finance</button><button class="tab ${adminTab==='logs'?'active':''}" onclick="adminTab='logs';render()">Activity log</button></div>${adminTab==='overview'?adminOverview():adminTab==='users'?adminUsers():adminTab==='inventory'?adminInventory():adminTab==='vouchers'?adminVouchers():adminTab==='finance'?adminFinance():adminLogs()}`}
-function adminOverview(){return `<div class="grid four"><div class="card"><div class="stat">${state.users.length}</div><div class="statlabel">REGISTERED USERS</div></div><div class="card"><div class="stat">${state.dry.reduce((s,p)=>s+p.stock,0)+state.meals.reduce((s,p)=>s+p.stock,0)}</div><div class="statlabel">TOTAL FOOD UNITS</div></div><div class="card"><div class="stat">${state.vouchers.filter(v=>v.status==='Active').length}</div><div class="statlabel">ACTIVE VOUCHERS</div></div><div class="card"><div class="stat">${money(state.donations.reduce((s,d)=>s+d.total,0))}</div><div class="statlabel">DEMO DONATIONS</div></div></div><div class="grid two" style="margin-top:14px"><div class="card"><h3>Low stock alerts</h3>${[...state.dry,...state.meals].filter(p=>p.stock<5).map(p=>`<div class="receiptrow"><span>${esc(p.name)}</span><span class="badge red">${p.stock} left</span></div>`).join('')||'<p class="muted">No low-stock items.</p>'}</div><div class="card"><h3>Platform revenue model</h3><div class="receiptrow"><span>Stall subscription</span><b>RM50/month</b></div><div class="receiptrow"><span>Donation service charge</span><b>2% (displayed)</b></div><div class="receiptrow"><span>Corporate sponsorship</span><b>Partnership</b></div><p class="muted">Aid donations must be accounted for separately from operating revenue.</p></div></div>`}
-function adminUsers(){return `<div class="card"><h3>Registered accounts</h3><div class="tablewrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr></thead><tbody>${state.users.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${esc(u.role)}</td><td>${fmt(u.created)}</td></tr>`).join('')||'<tr><td colspan="4">No users yet.</td></tr>'}</tbody></table></div></div>`}
-function adminInventory(){return `<div class="card"><h3>Inventory control</h3><div class="tablewrap"><table><thead><tr><th>Item</th><th>Type</th><th>Stock</th><th>Adjust</th></tr></thead><tbody>${[...state.dry,...state.meals].map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.category)}</td><td>${p.stock}</td><td><button class="btn light small" onclick="adjustStock('${p.id}',-1)">−</button> <button class="btn light small" onclick="adjustStock('${p.id}',1)">+</button></td></tr>`).join('')}</tbody></table></div></div>`}
-function adjustStock(id,n){let p=[...state.dry,...state.meals].find(x=>x.id===id);p.stock=Math.max(0,p.stock+n);state.adminLogs.push({text:`Adjusted ${p.name} stock by ${n}`,created:now(),admin:current().name});save();render()}
-function adminVouchers(){return `<div class="card"><h3>All vouchers</h3><div class="tablewrap"><table><thead><tr><th>Voucher</th><th>Student</th><th>Item</th><th>Status</th><th>Created</th></tr></thead><tbody>${state.vouchers.map(v=>`<tr><td>${esc(v.id)}</td><td>${esc(v.studentName)}</td><td>${esc(v.item)}</td><td>${esc(v.status)}</td><td>${fmt(v.created)}</td></tr>`).join('')||'<tr><td colspan="5">No vouchers created.</td></tr>'}</tbody></table></div></div>`}
-function adminFinance(){return `<div class="grid two"><div class="card"><h3>Donation totals</h3><div class="stat">${money(state.donations.reduce((s,d)=>s+d.total,0))}</div><p class="muted">Total demo donation records. Not verified payments.</p></div><div class="card"><h3>Recorded service charges</h3><div class="stat">${money(state.donations.reduce((s,d)=>s+d.fee,0))}</div><p class="muted">Illustrative 2% fee records; not platform profit until legally and operationally established.</p></div></div><div class="card" style="margin-top:14px"><h3>Donation ledger</h3>${state.donations.map(d=>`<div class="receiptrow"><span>${esc(d.id)} · ${esc(d.donorName)}</span><b>${money(d.total)}</b></div>`).join('')||'<div class="empty">No donations recorded.</div>'}</div>`}
-function adminLogs(){return `<div class="card"><h3>Admin activity log</h3>${state.adminLogs.map(l=>`<div class="receiptrow"><span>${esc(l.text)}<br><small>${esc(l.admin)}</small></span><span class="muted">${fmt(l.created)}</span></div>`).join('')||'<div class="empty">No admin activity recorded yet.</div>'}</div>`}
-function modal(html){$('modalHost').innerHTML=`<div class="modalback" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`}function closeModal(){$('modalHost').innerHTML=''}
-function render(){header();let u=current(),html='';if(!u)html=home();else if(u.role==='Student')html=studentPage();else if(u.role==='Donor')html=donorPage();else if(u.role==='Organiser')html=organiserPage();else if(u.role==='Registered Stall')html=stallPage();else if(u.role==='Admin')html=adminPage();$('root').innerHTML=html}
-// Expire old active vouchers when the app is opened.
-state.vouchers.forEach(v=>{if(v.status==='Active'&&new Date(v.expires)<new Date())v.status='Expired'});save();render();
-</script></body></html>
+['Nasi Lemak',5.00,'nasi lemak banana leaf sambal egg peanuts',18],
+['Nasi Ayam',7.00,'Malaysian chicken rice roasted chicken rice cucumber',15],
+['Nasi Goreng Kampung',6.00,'nasi goreng kampung fried rice anchovies vegetables',12],
+['Mee Goreng',5.50,'Malaysian mee goreng fried yellow noodles',10],
+['Nasi Kandar',8.00,'nasi kandar Malaysian rice curry chicken',9],
+['Nasi Kerabu',7.00,'nasi kerabu blue rice herbs salted egg',8],
+['Bihun Goreng',5.00,'Malaysian fried bihun rice vermicelli noodles',11],
+['Kuey Teow Goreng',6.00,'char kuey teow flat rice noodles',10],
+['Roti Canai Set',3.50,'roti canai Malaysian flatbread dhal curry',20],
+['Chicken Sandwich',4.50,'chicken sandwich sliced bread lettuce',14]
+].map((x,i)=>({
+id:'M'+i,name:x[0],price:x[1],img:imageFor(x[2],i+201),
+stock:x[3],category:'Ready Meals'
+}));
+
+const defaultState=()=>({
+users:[],current:null,dry,meals,donations:[],vouchers:[],
+campaigns:[{
+id:'CAMP-001',name:'Breakfast for Better Days',
+desc:'Help provide nutritious breakfast packs for students.',
+target:1000,raised:420,goalPacks:100,packs:42,
+date:'2026-11-15',location:'UPSI Campus',status:'Active',
+img:'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=80'
+}],
+volunteers:[],feedback:[],notifications:[],redemptions:[],adminLogs:[],
+stalls:[
+{id:'ST-01',name:'Kafe Harmoni',location:'UPSI Campus',hours:'8:00 AM – 6:00 PM',address:'Sultan Idris Education University, Tanjong Malim',active:true},
+{id:'ST-02',name:'Dapur Siswa',location:'Tanjong Malim',hours:'9:00 AM – 5:00 PM',address:'Tanjong Malim, Perak',active:true}
+],
+settings:{service:2,claimLimit:1}
+});
+
+let state;
+try{
+state=JSON.parse(localStorage.getItem('upsinfaq_v3'))||defaultState();
+}catch(e){state=defaultState()}
+
+if(!state.dry||state.dry.length!==20)state.dry=dry;
+if(!state.meals||state.meals.length!==10)state.meals=meals;
+if(!state.campaigns)state.campaigns=defaultState().campaigns;
+if(!state.users)state.users=[];
+if(!state.donations)state.donations=[];
+if(!state.vouchers)state.vouchers=[];
+if(!state.stalls)state.stalls=defaultState().stalls;
+
+state.dry=state.dry.map((p,i)=>({
+...p,img:dry.find(x=>x.id===p.id)?.img||imageFor(p.name+' grocery product',i+101)
+}));
+state.meals=state.meals.map((p,i)=>({
+...p,img:meals.find(x=>x.id===p.id)?.img||imageFor(p.name+' Malaysian food',i+201)
+}));
+
+let page='home',studentTab='all',donorTab='catalogue',
+orgTab='campaigns',adminTab='overview',stallTab='vouchers',
+selectedRole='Student',cart={},tip=0;
+  function save(){
+ localStorage.setItem('upsinfaq_v3',JSON.stringify(state));
+}
+function toast(message){
+ $('toastHost').innerHTML=`<div class="toast">${message}</div>`;
+ setTimeout(()=>{$('toastHost').innerHTML=''},2600);
+}
+function currentUser(){return state.current}
+function roleName(){return currentUser()?.role||'Guest'}
+function isAdmin(){return roleName()==='Admin'}
+function escapeHTML(value){
+ return String(value??'').replace(/[&<>"']/g,c=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ }[c]));
+}
+function showAuth(){
+ $('modalHost').innerHTML=`
+ <div class="modalback" onclick="if(event.target===this)closeModal()">
+ <div class="modal">
+ <button class="close" onclick="closeModal()">×</button>
+ <div class="eyebrow">Welcome to UPSInfaq</div>
+ <h2>Sign in / Create account</h2>
+ <p class="muted">Choose your account role to access the demo platform.</p>
+ <div class="field"><label>Full name</label><input id="authName" placeholder="Enter your name"></div>
+ <div class="field"><label>Email address</label><input id="authEmail" type="email" placeholder="name@siswa.com"></div>
+ <div class="field"><label>Role</label>
+ <select id="authRole" onchange="toggleRoleFields()">
+ ${['Student','Donor','Organiser','Registered Stall','Admin'].map(r=>`<option>${r}</option>`).join('')}
+ </select></div>
+ <div id="roleFields"></div>
+ <div class="field" id="adminCodeField" style="display:none">
+ <label>Demo admin access code</label><input id="authAdminCode" type="password" placeholder="Access code">
+ </div>
+ <button class="btn" style="width:100%;margin-top:8px" onclick="login()">Continue</button>
+ <p class="muted" style="margin-top:12px">Demo only: accounts are stored in this browser. Do not enter real passwords or sensitive information.</p>
+ </div></div>`;
+ toggleRoleFields();
+}
+function closeModal(){$('modalHost').innerHTML=''}
+function toggleRoleFields(){
+ const role=$('authRole')?.value;
+ $('adminCodeField').style.display=role==='Admin'?'block':'none';
+ $('roleFields').innerHTML=role==='Student'?`
+ <div class="field"><label>Faculty</label><select id="authFaculty"><option>FPE</option><option>FSM</option><option>FSK</option></select></div>
+ <div class="field"><label>Residential college</label><select id="authCollege"><option>KUO</option><option>KHAR</option><option>KAHS</option><option>KZ</option></select></div>
+ <div class="field"><label>Student eligibility status</label><select id="authEligibility"><option>Pending verification</option><option>Eligible</option></select></div>`:
+ role==='Registered Stall'?`
+ <div class="field"><label>Stall name</label><input id="authStall" placeholder="Your registered stall name"></div>`:
+ role==='Organiser'?`
+ <div class="field"><label>Organisation / Club</label><input id="authOrg" placeholder="Club or organisation name"></div>`:'';
+}
+function login(){
+ const name=$('authName').value.trim();
+ const email=$('authEmail').value.trim().toLowerCase();
+ const role=$('authRole').value;
+ if(!name||!email||!email.includes('@'))return toast('Please enter your name and a valid email.');
+ if(role==='Student'&&!email.endsWith('@siswa.com'))return toast('Students must use an @siswa.com email address.');
+ if(role==='Admin'&&$('authAdminCode').value!=='112233')return toast('Incorrect demo admin code.');
+ let user=state.users.find(u=>u.email===email&&u.role===role);
+ if(!user){
+ user={
+ id:uid('USER'),name,email,role,
+ faculty:role==='Student'?$('authFaculty').value:'',
+ college:role==='Student'?$('authCollege').value:'',
+ eligibility:role==='Student'?$('authEligibility').value:'Not applicable',
+ stallName:role==='Registered Stall'?$('authStall').value:'',
+ organisation:role==='Organiser'?$('authOrg').value:'',
+ approved:role==='Admin'
+ };
+ state.users.push(user);
+ }
+ state.current=user;
+ save();closeModal();render();
+ toast('Welcome to UPSInfaq, '+name+'!');
+}
+function logout(){
+ state.current=null;save();page='home';render();toast('You have signed out.');
+}
+function setPage(p){page=p;render()}
+function nav(){
+ const u=currentUser();
+ $('userPill').textContent=u?u.name+' · '+u.role:'Guest access';
+ $('headerAction').textContent=u?'Sign out':'Sign in';
+ $('headerAction').onclick=u?logout:showAuth;
+}
+function homePage(){
+ return `
+ <section class="hero">
+ <div><div class="eyebrow">A little help can make a big difference</div>
+ <h1>Food support.<br>Stronger student community.</h1>
+ <p>Connecting students, donors, campus food stalls and volunteers through one caring food assistance platform.</p>
+ <div class="row" style="justify-content:flex-start">
+ <button class="btn" onclick="showAuth()">Get started</button>
+ <button class="btn light" onclick="setPage('about')">Discover UPSInfaq</button>
+ </div></div>
+ <div class="heroart">🥗</div>
+ </section>
+ <div class="grid four">
+ <div class="card"><div class="stat">${state.dry.reduce((a,x)=>a+x.stock,0)+state.meals.reduce((a,x)=>a+x.stock,0)}</div><div class="statlabel">Food items available</div></div>
+ <div class="card"><div class="stat">${state.donations.length}</div><div class="statlabel">Demo donations</div></div>
+ <div class="card"><div class="stat">${state.vouchers.length}</div><div class="statlabel">Food vouchers issued</div></div>
+ <div class="card"><div class="stat">${state.stalls.filter(s=>s.active).length}</div><div class="statlabel">Registered stalls</div></div>
+ </div>
+ <div class="sectionhead"><div><h2>Explore UPSInfaq</h2><p class="muted">Choose the service that suits your role.</p></div></div>
+ <div class="grid">
+ ${[['Student','🎓','Claim food assistance','student'],['Donor','💚','Contribute food and support students','donor'],['Organiser','🤝','Manage campaigns and volunteers','organiser'],['Registered Stall','🏪','Manage food voucher redemption','stall'],['Admin','⚙️','Manage the platform','admin']].map(x=>`
+ <div class="card"><div style="font-size:30px">${x[1]}</div><h3>${x[0]}</h3><p class="muted">${x[2]}</p><button class="btn light small" onclick="showAuth()">Continue</button></div>`).join('')}
+ </div>
+ <div class="sectionhead"><div><h2>How it works</h2><p class="muted">A simple food support journey.</p></div></div>
+ <div class="grid">
+ <div class="card"><div class="stat">01</div><h3>Register</h3><p class="muted">Students and community members access the platform through their selected role.</p></div>
+ <div class="card"><div class="stat">02</div><h3>Choose or donate</h3><p class="muted">Students select available food. Donors contribute food or financial support.</p></div>
+ <div class="card"><div class="stat">03</div><h3>Collect</h3><p class="muted">Students present their voucher at a participating food stall.</p></div>
+ </div>
+ <div class="notice" style="margin-top:18px">Prototype notice: This version uses browser storage for demonstration. Accounts, stock and vouchers are not yet synchronised between different devices.</div>`;
+}
+function aboutPage(){
+ return `<div class="card"><div class="eyebrow">About the platform</div><h2>What is UPSInfaq?</h2><p class="muted">UPSInfaq is a campus food assistance concept designed to connect students facing food insecurity with donors, organisers and participating food stalls.</p><h3>Our objectives</h3><ul class="muted"><li>Improve access to food assistance.</li><li>Encourage transparent community donations.</li><li>Connect students with participating campus food stalls.</li><li>Support a caring and sustainable campus community.</li></ul><button class="btn" onclick="setPage('home')">Back to home</button></div>`;
+}
+function studentPage(){
+ if(!currentUser()||roleName()!=='Student')return accessDenied('Student');
+ const tabs=[['all','All food'],['dry','Dry goods'],['meals','Ready-to-eat meals'],['vouchers','My vouchers'],['history','Claim history']];
+ return `
+ <div class="sectionhead"><div><div class="eyebrow">Student portal</div><h2>Hello, ${escapeHTML(currentUser().name)} 👋</h2><p class="muted">Find food assistance available on campus.</p></div><span class="badge">${escapeHTML(currentUser().eligibility)}</span></div>
+ <div class="notice">Your eligibility information is private in this demo. Please contact the programme administrator for verification.</div>
+ <div class="tabs">${tabs.map(t=>`<button class="tab ${studentTab===t[0]?'active':''}" onclick="studentTab='${t[0]}';render()">${t[1]}</button>`).join('')}</div>
+ ${studentTab==='vouchers'?voucherList():studentTab==='history'?claimHistory():foodCatalogue()}
+ `;
+}
+function foodCatalogue(){
+ const list=studentTab==='dry'?state.dry:studentTab==='meals'?state.meals:[...state.dry,...state.meals];
+ return `<div class="sectionhead"><div><h2>Available food</h2><p class="muted">Choose an item while stocks last.</p></div></div>
+ <div class="grid">${list.map(p=>`
+ <div class="card foodcard">
+ <img class="foodimg" src="${p.img}" alt="${escapeHTML(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e9f2e9/174b35?text='+encodeURIComponent('${escapeHTML(p.name)}')">
+ <h3>${escapeHTML(p.name)}</h3><p class="muted">${p.category}</p>
+ <div class="foodfoot"><span class="stock ${p.stock<=0?'out':''}">${p.stock>0?p.stock+' available':'Out of stock'}</span>
+ <button class="btn small" ${p.stock<=0?'disabled':''} onclick="claimFood('${p.id}')">Claim food</button></div>
+ </div>`).join('')}</div>`;
+}
+function claimFood(id){
+ const all=[...state.dry,...state.meals];
+ const item=all.find(x=>x.id===id);
+ if(!item||item.stock<=0)return toast('This item is currently unavailable.');
+ const today=new Date().toDateString();
+ const todayClaims=state.vouchers.filter(v=>v.studentId===currentUser().id&&new Date(v.createdAt).toDateString()===today).length;
+ if(todayClaims>=Number(state.settings.claimLimit||1))return toast('You have reached the daily demo claim limit.');
+ if(currentUser().eligibility!=='Eligible')return toast('Your eligibility is pending. Please contact the administrator.');
+ const stall=state.stalls.find(s=>s.active);
+ if(!stall)return toast('No participating stall is currently available.');
+ const voucher={
+ id:uid('UPS'),studentId:currentUser().id,studentName:currentUser().name,
+ itemId:item.id,itemName:item.name,stallId:stall.id,stallName:stall.name,
+ createdAt:now(),expiresAt:new Date(Date.now()+48*60*60*1000).toISOString(),
+ status:'Active'
+ };
+ item.stock--;
+ state.vouchers.push(voucher);
+ state.notifications.push({id:uid('N'),userId:currentUser().id,message:'Your food voucher is ready: '+item.name,date:now()});
+ save();render();showVoucher(voucher.id);
+}
+function voucherList(){
+ const list=state.vouchers.filter(v=>v.studentId===currentUser().id);
+ if(!list.length)return `<div class="card empty">No vouchers yet. Browse available food to make your first claim.</div>`;
+ return `<div class="grid">${list.slice().reverse().map(v=>`
+ <div class="card"><span class="badge ${v.status==='Active'?'':'gold'}">${v.status}</span><h3 style="margin-top:12px">${escapeHTML(v.itemName)}</h3><p class="muted">Voucher: ${v.id}</p><p class="muted">Stall: ${escapeHTML(v.stallName)}</p><p class="muted">Expires: ${fmt(v.expiresAt)}</p><button class="btn light small" onclick="showVoucher('${v.id}')">View QR voucher</button></div>`).join('')}</div>`;
+}
+function claimHistory(){
+ const list=state.vouchers.filter(v=>v.studentId===currentUser().id);
+ return `<div class="card"><h3>Claim history</h3>${list.length?`<div class="tablewrap"><table><tr><th>Food</th><th>Date</th><th>Status</th></tr>${list.map(v=>`<tr><td>${escapeHTML(v.itemName)}</td><td>${fmt(v.createdAt)}</td><td>${escapeHTML(v.status)}</td></tr>`).join('')}</table></div>`:'<div class="empty">No claim history yet.</div>'}</div>`;
+}
+function showVoucher(id){
+ const v=state.vouchers.find(x=>x.id===id);
+ if(!v)return;
+ const expired=new Date(v.expiresAt)<new Date()&&v.status==='Active';
+ if(expired)v.status='Expired';
+ save();
+ const qrText=encodeURIComponent('UPSINFAQ DEMO|'+v.id+'|'+v.itemName+'|'+v.stallName);
+ $('modalHost').innerHTML=`<div class="modalback" onclick="if(event.target===this)closeModal()"><div class="modal"><button class="close" onclick="closeModal()">×</button><div class="eyebrow">Food collection voucher</div><h2>${escapeHTML(v.itemName)}</h2><p class="muted">Present this voucher to the participating stall.</p><div class="qrbox"><img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${qrText}" alt="Demo QR voucher"><h3>${v.id}</h3><span class="badge ${v.status==='Active'?'':'gold'}">${v.status}</span></div><p class="muted">Collection point: ${escapeHTML(v.stallName)}</p><p class="muted">Expiry: ${fmt(v.expiresAt)}</p><div class="notice warning">Demo QR only. It is not a secure live redemption code. Real QR validation requires a connected backend.</div></div></div>`;
+}
+function donorPage(){
+ if(!currentUser()||roleName()!=='Donor')return accessDenied('Donor');
+ const tabs=[['catalogue','Food catalogue'],['basket','Donation basket'],['history','My donations'],['leaderboard','Leaderboard'],['wishlist','Food wish list']];
+ return `<div class="sectionhead"><div><div class="eyebrow">Donor portal</div><h2>Make a difference today</h2><p class="muted">Your contribution can help a student access a meal.</p></div></div>
+ <div class="tabs">${tabs.map(t=>`<button class="tab ${donorTab===t[0]?'active':''}" onclick="donorTab='${t[0]}';render()">${t[1]}</button>`).join('')}</div>
+ ${donorTab==='catalogue'?donorCatalogue():donorTab==='basket'?donorBasket():donorTab==='history'?donorHistory():donorTab==='leaderboard'?donorLeaderboard():donorWishlist()}`;
+}
+function donorCatalogue(){
+ return `<div class="notice">Select food items and quantities. Your donation will be added to the demo inventory after confirmation.</div><div class="grid" style="margin-top:14px">${state.dry.map(p=>`
+ <div class="card foodcard"><img class="foodimg" src="${p.img}" alt="${escapeHTML(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e9f2e9/174b35?text='+encodeURIComponent('${escapeHTML(p.name)}')"><h3>${escapeHTML(p.name)}</h3><p class="muted">${money(p.price)} per unit</p><div class="field"><label>Quantity</label><input type="number" min="0" max="100" value="${cart[p.id]||0}" id="qty-${p.id}" onchange="cart['${p.id}']=Math.max(0,Math.min(100,Number(this.value)||0))"></div><button class="btn light small" onclick="cart['${p.id}']=Math.max(0,Math.min(100,Number($('qty-${p.id}').value)||0));toast('Quantity updated')">Add quantity</button></div>`).join('')}</div><button class="btn" style="margin-top:17px" onclick="donorTab='basket';render()">Review donation basket</button>`;
+}
+function basketItems(){
+ return state.dry.filter(p=>Number(cart[p.id]||0)>0).map(p=>({...p,quantity:Number(cart[p.id]),line:p.price*Number(cart[p.id])}));
+}
+function donorBasket(){
+ const items=basketItems(),subtotal=items.reduce((a,p)=>a+p.line,0);
+ const fee=subtotal*Number(state.settings.service||2)/100;
+ const total=subtotal+fee+Number(tip||0);
+ return `<div class="card"><h3>Donation summary</h3>${items.length?items.map(p=>`<div class="receiptrow"><span>${escapeHTML(p.name)} × ${p.quantity}</span><b>${money(p.line)}</b></div>`).join(''):'<div class="empty">Your donation basket is empty.</div>'}<div class="receiptrow"><span>Subtotal</span><b>${money(subtotal)}</b></div><div class="receiptrow"><span>Service charge (${state.settings.service}%)</span><b>${money(fee)}</b></div><div class="field"><label>Optional tip (RM)</label><input type="number" min="0" step=".50" value="${tip}" onchange="tip=Math.max(0,Number(this.value)||0);donorTab='basket';render()"></div><div class="receiptrow total"><span>Total</span><span>${money(total)}</span></div><button class="btn" ${items.length?'':'disabled'} onclick="confirmDonation()">Confirm demo donation</button></div><div class="notice warning" style="margin-top:12px">This is a demonstration only. No actual payment is collected. The service charge is a prototype calculation, not a live transaction fee.</div>`;
+}
+function confirmDonation(){
+ const items=basketItems();
+ if(!items.length)return toast('Your basket is empty.');
+ const subtotal=items.reduce((a,p)=>a+p.line,0);
+ const fee=subtotal*Number(state.settings.service||2)/100;
+ const donation={
+ id:uid('DON'),donorId:currentUser().id,donorName:currentUser().name,
+ items:items.map(p=>({id:p.id,name:p.name,quantity:p.quantity,price:p.price,line:p.line})),
+ subtotal,fee,tip:Number(tip||0),total:subtotal+fee+Number(tip||0),
+ date:now(),status:'Demo confirmed'
+ };
+ state.donations.push(donation);
+ items.forEach(p=>{const stock=state.dry.find(x=>x.id===p.id);if(stock)stock.stock+=p.quantity;});
+ cart={};tip=0;save();
+ showReceipt(donation.id);
+}
+function showReceipt(id){
+ const d=state.donations.find(x=>x.id===id);
+ if(!d)return;
+ $('modalHost').innerHTML=`<div class="modalback" onclick="if(event.target===this)closeModal()"><div class="modal"><button class="close no-print" onclick="closeModal()">×</button><div id="printArea" class="receipt"><div class="rhead"><div style="font-size:30px">♡</div><h2>UPSInfaq</h2><div class="muted">DONATION RECEIPT</div></div><div class="receiptrow"><span>Receipt ID</span><b>${d.id}</b></div><div class="receiptrow"><span>Donor</span><b>${escapeHTML(d.donorName)}</b></div><div class="receiptrow"><span>Date</span><b>${fmt(d.date)}</b></div><hr style="border:0;border-top:1px dashed #bdc9bf">${d.items.map(p=>`<div class="receiptrow"><span>${escapeHTML(p.name)} × ${p.quantity}</span><b>${money(p.line)}</b></div>`).join('')}<div class="receiptrow"><span>Subtotal</span><b>${money(d.subtotal)}</b></div><div class="receiptrow"><span>Service charge</span><b>${money(d.fee)}</b></div><div class="receiptrow"><span>Optional tip</span><b>${money(d.tip)}</b></div><div class="receiptrow total"><span>Total</span><b>${money(d.total)}</b></div><p class="muted" style="text-align:center;margin-top:20px">Thank you for sharing food and hope.</p><p class="muted" style="text-align:center">Demo receipt · No payment was processed</p></div><button class="btn no-print" style="width:100%;margin-top:14px" onclick="window.print()">Print / Save receipt</button></div></div>`;
+}
+function donorHistory(){
+ const list=state.donations.filter(d=>d.donorId===currentUser().id).slice().reverse();
+ return `<div class="card"><h3>Donation history</h3>${list.length?`<div class="tablewrap"><table><tr><th>Receipt</th><th>Date</th><th>Total</th><th>Receipt</th></tr>${list.map(d=>`<tr><td>${d.id}</td><td>${fmt(d.date)}</td><td>${money(d.total)}</td><td><button class="btn light small" onclick="showReceipt('${d.id}')">View</button></td></tr>`).join('')}</table></div>`:'<div class="empty">No donations recorded yet.</div>'}</div>`;
+}
+function donorLeaderboard(){
+ const totals={};
+ state.donations.forEach(d=>{totals[d.donorName]=(totals[d.donorName]||0)+d.total});
+ const rows=Object.entries(totals).sort((a,b)=>b[1]-a[1]).slice(0,10);
+ return `<div class="card"><h3>Top 10 demo contributors</h3><p class="muted">Based on recorded demo donation values.</p>${rows.length?rows.map((r,i)=>`<div class="receiptrow"><span>${i+1}. ${escapeHTML(r[0])}</span><b>${money(r[1])}</b></div>`).join(''):'<div class="empty">Be the first contributor.</div>'}</div>`;
+}
+function donorWishlist(){
+ return `<div class="card"><div class="eyebrow">Community needs</div><h3>Food wish list</h3><p class="muted">Items that can help support student food assistance.</p>${[['Rice and staple food','Rice, flour, cooking oil and sugar'],['Breakfast essentials','Milk, oats, cereal and bread'],['Easy-to-prepare meals','Instant noodles, bihun and canned food'],['Nutritious food','Beans, sardines and tuna']].map(x=>`<div class="receiptrow"><span><b>${x[0]}</b><br><small class="muted">${x[1]}</small></span><span class="badge">Needed</span></div>`).join('')}</div>`;
+}
+function accessDenied(role){
+ return `<div class="card"><h2>Sign in required</h2><p class="muted">Please sign in using a ${role} account to access this section.</p><button class="btn" onclick="showAuth()">Sign in</button></div>`;
+} function organiserPage(){
+ if(!currentUser()||roleName()!=='Organiser')return accessDenied('Organiser');
+ const tabs=[['campaigns','Campaigns'],['volunteers','Volunteers'],['reports','Reports']];
+ return `<div class="sectionhead"><div><div class="eyebrow">Organiser portal</div><h2>Community programmes</h2><p class="muted">Create campaigns and coordinate food assistance activities.</p></div></div>
+ <div class="tabs">${tabs.map(t=>`<button class="tab ${orgTab===t[0]?'active':''}" onclick="orgTab='${t[0]}';render()">${t[1]}</button>`).join('')}</div>
+ ${orgTab==='campaigns'?organiserCampaigns():orgTab==='volunteers'?organiserVolunteers():organiserReports()}`;
+}
+function organiserCampaigns(){
+ return `<div class="card"><h3>Create a campaign</h3>
+ <div class="field"><label>Campaign name</label><input id="campName" placeholder="e.g. Food for Finals"></div>
+ <div class="field"><label>Description</label><textarea id="campDesc" placeholder="Describe the campaign"></textarea></div>
+ <div class="row"><div class="field"><label>Target funds (RM)</label><input id="campTarget" type="number" min="1" value="1000"></div><div class="field"><label>Target food packs</label><input id="campPacks" type="number" min="1" value="100"></div></div>
+ <div class="row"><div class="field"><label>Campaign date</label><input id="campDate" type="date"></div><div class="field"><label>Location</label><input id="campLocation" placeholder="UPSI Campus"></div></div>
+ <button class="btn" onclick="createCampaign()">Create campaign</button></div>
+ <div class="sectionhead"><div><h2>Current campaigns</h2><p class="muted">Campaign progress and status.</p></div></div>
+ <div class="grid">${state.campaigns.map(c=>`
+ <div class="card"><span class="badge">${escapeHTML(c.status)}</span><h3 style="margin-top:10px">${escapeHTML(c.name)}</h3><p class="muted">${escapeHTML(c.desc)}</p><div class="receiptrow"><span>Funds raised</span><b>${money(c.raised)} / ${money(c.target)}</b></div><div class="progress"><span style="width:${Math.min(100,c.raised/Math.max(1,c.target)*100)}%"></span></div><div class="receiptrow"><span>Food packs</span><b>${c.packs} / ${c.goalPacks}</b></div><p class="muted">${escapeHTML(c.location)} · ${escapeHTML(c.date)}</p></div>`).join('')}</div>`;
+}
+function createCampaign(){
+ const name=$('campName').value.trim();
+ const target=Number($('campTarget').value);
+ const packs=Number($('campPacks').value);
+ if(!name||target<=0||packs<=0)return toast('Please complete the campaign details.');
+ state.campaigns.push({
+ id:uid('CAMP'),name,desc:$('campDesc').value.trim(),
+ target,raised:0,goalPacks:packs,packs:0,
+ date:$('campDate').value||'To be announced',
+ location:$('campLocation').value.trim()||'UPSI Campus',
+ status:'Active'
+ });
+ logActivity('Created campaign: '+name);
+ save();render();toast('Campaign created.');
+}
+function organiserVolunteers(){
+ return `<div class="card"><h3>Volunteer registration</h3>
+ <div class="field"><label>Volunteer name</label><input id="volName" placeholder="Full name"></div>
+ <div class="field"><label>Volunteer email</label><input id="volEmail" type="email" placeholder="Email address"></div>
+ <div class="field"><label>Preferred role</label><select id="volRole"><option>Food packing</option><option>Food distribution</option><option>Registration desk</option><option>Logistics</option><option>Event support</option></select></div>
+ <button class="btn" onclick="addVolunteer()">Register volunteer</button></div>
+ <div class="sectionhead"><div><h2>Volunteer list</h2></div></div>
+ <div class="card">${state.volunteers.length?`<div class="tablewrap"><table><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th></tr>${state.volunteers.map(v=>`<tr><td>${escapeHTML(v.name)}</td><td>${escapeHTML(v.email)}</td><td>${escapeHTML(v.role)}</td><td><span class="badge">${v.status}</span></td></tr>`).join('')}</table></div>`:'<div class="empty">No volunteers registered yet.</div>'}</div>`;
+}
+function addVolunteer(){
+ const name=$('volName').value.trim(),email=$('volEmail').value.trim();
+ if(!name||!email.includes('@'))return toast('Enter a valid volunteer name and email.');
+ state.volunteers.push({id:uid('VOL'),name,email,role:$('volRole').value,status:'Registered',date:now()});
+ logActivity('Volunteer registered: '+name);
+ save();render();toast('Volunteer registered.');
+}
+function organiserReports(){
+ const totalDonations=state.donations.reduce((a,d)=>a+d.total,0);
+ const totalVouchers=state.vouchers.length;
+ const redeemed=state.vouchers.filter(v=>v.status==='Redeemed').length;
+ return `<div class="grid four">
+ <div class="card"><div class="stat">${state.campaigns.length}</div><div class="statlabel">Campaigns</div></div>
+ <div class="card"><div class="stat">${state.volunteers.length}</div><div class="statlabel">Volunteers</div></div>
+ <div class="card"><div class="stat">${totalVouchers}</div><div class="statlabel">Vouchers issued</div></div>
+ <div class="card"><div class="stat">${redeemed}</div><div class="statlabel">Vouchers redeemed</div></div></div>
+ <div class="card" style="margin-top:15px"><h3>Donation overview</h3><div class="stat">${money(totalDonations)}</div><p class="muted">Recorded demo donations. This figure is not a bank balance or verified fund total.</p><button class="btn light small" onclick="window.print()">Print report</button></div>`;
+}
+function stallPage(){
+ if(!currentUser()||roleName()!=='Registered Stall')return accessDenied('Registered Stall');
+ const tabs=[['vouchers','Voucher redemption'],['details','Stall information'],['reports','Daily report']];
+ return `<div class="sectionhead"><div><div class="eyebrow">Registered stall portal</div><h2>${escapeHTML(currentUser().stallName||'My food stall')}</h2><p class="muted">Manage student food voucher collection.</p></div></div>
+ <div class="tabs">${tabs.map(t=>`<button class="tab ${stallTab===t[0]?'active':''}" onclick="stallTab='${t[0]}';render()">${t[1]}</button>`).join('')}</div>
+ ${stallTab==='vouchers'?stallVouchers():stallTab==='details'?stallDetails():stallReports()}`;
+}
+function myStall(){
+ return state.stalls.find(s=>s.ownerId===currentUser().id)||
+ state.stalls.find(s=>s.name===currentUser().stallName)||
+ state.stalls[0];
+}
+function stallVouchers(){
+ const stall=myStall();
+ const list=state.vouchers.filter(v=>v.stallId===stall.id);
+ return `<div class="card"><h3>Find voucher</h3><div class="field"><label>Voucher ID</label><input id="redeemId" placeholder="Enter voucher ID"></div><button class="btn" onclick="redeemVoucher()">Validate and redeem</button><p class="muted">This demo uses manual voucher ID entry. Camera QR scanning is not connected.</p></div>
+ <div class="sectionhead"><div><h2>Vouchers assigned to this stall</h2></div></div>
+ <div class="card">${list.length?`<div class="tablewrap"><table><tr><th>Voucher</th><th>Student</th><th>Food</th><th>Status</th></tr>${list.slice().reverse().map(v=>`<tr><td>${v.id}</td><td>${escapeHTML(v.studentName)}</td><td>${escapeHTML(v.itemName)}</td><td><span class="badge ${v.status==='Active'?'':'gold'}">${v.status}</span></td></tr>`).join('')}</table></div>`:'<div class="empty">No vouchers assigned yet.</div>'}</div>`;
+}
+function redeemVoucher(){
+ const id=$('redeemId').value.trim();
+ const v=state.vouchers.find(x=>x.id.toLowerCase()===id.toLowerCase());
+ if(!v)return toast('Voucher not found.');
+ const stall=myStall();
+ if(v.stallId!==stall.id)return toast('This voucher belongs to another stall.');
+ if(v.status!=='Active')return toast('Voucher is already '+v.status.toLowerCase()+'.');
+ if(new Date(v.expiresAt)<new Date()){v.status='Expired';save();render();return toast('This voucher has expired.');}
+ v.status='Redeemed';v.redeemedAt=now();
+ state.redemptions.push({id:uid('RED'),voucherId:v.id,stallId:stall.id,date:now(),item:v.itemName});
+ logActivity('Voucher redeemed: '+v.id);
+ save();render();toast('Voucher successfully redeemed.');
+}
+function stallDetails(){
+ const s=myStall();
+ return `<div class="card"><h3>Stall information</h3><div class="field"><label>Stall name</label><input id="stallName" value="${escapeHTML(s.name)}"></div><div class="field"><label>Address</label><input id="stallAddress" value="${escapeHTML(s.address)}"></div><div class="field"><label>Opening hours</label><input id="stallHours" value="${escapeHTML(s.hours)}"></div><div class="field"><label>Location / area</label><input id="stallLocation" value="${escapeHTML(s.location)}"></div><button class="btn" onclick="saveStall()">Save stall information</button><p style="margin-top:15px"><a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.address)}">Open stall location in Google Maps ↗</a></p></div>`;
+}
+function saveStall(){
+ const s=myStall();
+ s.name=$('stallName').value.trim()||s.name;
+ s.address=$('stallAddress').value.trim();
+ s.hours=$('stallHours').value.trim();
+ s.location=$('stallLocation').value.trim();
+ logActivity('Updated stall information: '+s.name);
+ save();render();toast('Stall information updated.');
+}
+function stallReports(){
+ const list=state.redemptions.filter(r=>r.stallId===myStall().id);
+ return `<div class="grid two"><div class="card"><div class="stat">${list.length}</div><div class="statlabel">Total redeemed vouchers</div></div><div class="card"><div class="stat">${list.filter(r=>new Date(r.date).toDateString()===new Date().toDateString()).length}</div><div class="statlabel">Redeemed today</div></div></div><div class="card" style="margin-top:15px"><h3>Redemption records</h3>${list.length?list.map(r=>`<div class="receiptrow"><span>${escapeHTML(r.item)} · ${r.voucherId}</span><span>${fmt(r.date)}</span></div>`).join(''):'<div class="empty">No redemption records yet.</div>'}</div>`;
+}
+function adminPage(){
+ if(!currentUser()||roleName()!=='Admin')return accessDenied('Admin');
+ const tabs=[['overview','Overview'],['users','Users'],['inventory','Inventory'],['vouchers','Vouchers'],['stalls','Stalls'],['finance','Finance'],['settings','Settings'],['logs','Activity log']];
+ return `<div class="sectionhead"><div><div class="eyebrow">Administration</div><h2>Platform management</h2><p class="muted">Monitor demo operations and manage platform records.</p></div><span class="badge gold">Demo admin</span></div>
+ <div class="notice warning">Security notice: Access code 112233 is visible in this demo source code. This is not production-grade authentication. Do not use real personal or financial data.</div>
+ <div class="tabs">${tabs.map(t=>`<button class="tab ${adminTab===t[0]?'active':''}" onclick="adminTab='${t[0]}';render()">${t[1]}</button>`).join('')}</div>
+ ${adminTab==='overview'?adminOverview():adminTab==='users'?adminUsers():adminTab==='inventory'?adminInventory():adminTab==='vouchers'?adminVouchers():adminTab==='stalls'?adminStalls():adminTab==='finance'?adminFinance():adminTab==='settings'?adminSettings():adminLogs()}`;
+}
+function adminOverview(){
+ const totalStock=state.dry.reduce((a,p)=>a+p.stock,0)+state.meals.reduce((a,p)=>a+p.stock,0);
+ return `<div class="grid four">
+ <div class="card"><div class="stat">${state.users.length}</div><div class="statlabel">Registered accounts</div></div>
+ <div class="card"><div class="stat">${totalStock}</div><div class="statlabel">Food stock units</div></div>
+ <div class="card"><div class="stat">${state.vouchers.length}</div><div class="statlabel">Vouchers issued</div></div>
+ <div class="card"><div class="stat">${state.donations.length}</div><div class="statlabel">Demo donations</div></div></div>
+ <div class="sectionhead"><div><h2>Low stock alerts</h2><p class="muted">Items with five units or fewer.</p></div></div>
+ <div class="card">${[...state.dry,...state.meals].filter(p=>p.stock<=5).map(p=>`<div class="receiptrow"><span>${escapeHTML(p.name)}</span><span class="badge red">${p.stock} left</span></div>`).join('')||'<div class="empty">No low stock alerts.</div>'}</div>`;
+}
+function adminUsers(){
+ return `<div class="card"><h3>Account management</h3>${state.users.length?`<div class="tablewrap"><table><tr><th>Name</th><th>Email</th><th>Role</th><th>Eligibility</th><th>Action</th></tr>${state.users.map(u=>`<tr><td>${escapeHTML(u.name)}</td><td>${escapeHTML(u.email)}</td><td>${escapeHTML(u.role)}</td><td>${escapeHTML(u.eligibility||'—')}</td><td>${u.role==='Student'?`<select onchange="setEligibility('${u.id}',this.value)"><option ${u.eligibility==='Pending verification'?'selected':''}>Pending verification</option><option ${u.eligibility==='Eligible'?'selected':''}>Eligible</option><option ${u.eligibility==='Not eligible'?'selected':''}>Not eligible</option></select>`:'—'}</td></tr>`).join('')}</table></div>`:'<div class="empty">No accounts registered.</div>'}</div>`;
+}
+function setEligibility(id,value){
+ const u=state.users.find(x=>x.id===id);
+ if(!u)return;
+ u.eligibility=value;
+ logActivity('Eligibility updated for '+u.name);
+ save();toast('Eligibility updated.');
+}
+function adminInventory(){
+ const all=[...state.dry,...state.meals];
+ return `<div class="card"><h3>Inventory control</h3><div class="tablewrap"><table><tr><th>Item</th><th>Category</th><th>Stock</th><th>Update stock</th></tr>${all.map(p=>`<tr><td>${escapeHTML(p.name)}</td><td>${p.category}</td><td>${p.stock}</td><td><input style="width:85px;padding:7px;border:1px solid #ddd;border-radius:7px" type="number" min="0" value="${p.stock}" id="stock-${p.id}"><button class="btn light small" onclick="updateStock('${p.id}')">Save</button></td></tr>`).join('')}</table></div></div>`;
+}
+function updateStock(id){
+ const p=[...state.dry,...state.meals].find(x=>x.id===id);
+ const input=$('stock-'+id);
+ if(!p||!input)return;
+ p.stock=Math.max(0,Number(input.value)||0);
+ logActivity('Stock updated: '+p.name+' ('+p.stock+')');
+ save();render();toast('Inventory updated.');
+}
+function adminVouchers(){
+ return `<div class="card"><h3>Voucher management</h3>${state.vouchers.length?`<div class="tablewrap"><table><tr><th>Voucher ID</th><th>Student</th><th>Food</th><th>Stall</th><th>Status</th></tr>${state.vouchers.slice().reverse().map(v=>`<tr><td>${v.id}</td><td>${escapeHTML(v.studentName)}</td><td>${escapeHTML(v.itemName)}</td><td>${escapeHTML(v.stallName)}</td><td>${v.status}</td></tr>`).join('')}</table></div>`:'<div class="empty">No vouchers issued.</div>'}</div>`;
+}
+function adminStalls(){
+ return `<div class="card"><h3>Registered stalls</h3>${state.stalls.map(s=>`<div class="receiptrow"><span><b>${escapeHTML(s.name)}</b><br><small class="muted">${escapeHTML(s.address)}</small></span><span class="badge">${s.active?'Active':'Inactive'}</span></div>`).join('')}<div class="notice" style="margin-top:12px">New stall approval and identity verification should be handled through a secure backend in the production system.</div></div>`;
+}
+function adminFinance(){
+ const total=state.donations.reduce((a,d)=>a+d.total,0);
+ const fees=state.donations.reduce((a,d)=>a+d.fee,0);
+ return `<div class="grid two"><div class="card"><div class="stat">${money(total)}</div><div class="statlabel">Recorded demo donation totals</div></div><div class="card"><div class="stat">${money(fees)}</div><div class="statlabel">Calculated demo service charges</div></div></div><div class="notice warning" style="margin-top:14px">These are demonstration records only. They are not verified bank transactions. Restricted student-aid donations should be accounted for separately from platform operating revenue.</div>`;
+}
+function adminSettings(){
+ return `<div class="card"><h3>Platform settings</h3><div class="field"><label>Daily claim limit per student</label><input id="claimLimit" type="number" min="1" max="10" value="${state.settings.claimLimit}"></div><div class="field"><label>Demo service charge (%)</label><input id="serviceFee" type="number" min="0" max="20" step=".5" value="${state.settings.service}"></div><button class="btn" onclick="saveSettings()">Save settings</button><div class="notice warning" style="margin-top:14px">For production: implement server-side role permissions, encrypted authentication, admin approval, two-factor authentication, failed-login protection, automatic session expiry and audit logs.</div></div>`;
+}
+function saveSettings(){
+ state.settings.claimLimit=Math.max(1,Math.min(10,Number($('claimLimit').value)||1));
+ state.settings.service=Math.max(0,Math.min(20,Number($('serviceFee').value)||0));
+ logActivity('Platform settings updated');
+ save();render();toast('Settings saved.');
+}
+function logActivity(message){
+ state.adminLogs.unshift({id:uid('LOG'),message,date:now(),user:currentUser()?.name||'System'});
+ state.adminLogs=state.adminLogs.slice(0,100);
+}
+function adminLogs(){
+ return `<div class="card"><h3>Recent activity</h3>${state.adminLogs.length?state.adminLogs.map(l=>`<div class="receiptrow"><span>${escapeHTML(l.message)}<br><small class="muted">${escapeHTML(l.user)}</small></span><small class="muted">${fmt(l.date)}</small></div>`).join(''):'<div class="empty">No activity recorded yet.</div>'}</div>`;
+}
+function render(){
+ nav();
+ let html='';
+ if(page==='home')html=homePage();
+ else if(page==='about')html=aboutPage();
+ else if(page==='student')html=studentPage();
+ else if(page==='donor')html=donorPage();
+ else if(page==='organiser')html=organiserPage();
+ else if(page==='stall')html=stallPage();
+ else if(page==='admin')html=adminPage();
+ $('root').innerHTML=`
+ ${currentUser()?`<div class="tabs">
+ <button class="tab ${page==='home'?'active':''}" onclick="setPage('home')">Home</button>
+ ${currentUser().role==='Student'?`<button class="tab ${page==='student'?'active':''}" onclick="setPage('student')">Student</button>`:''}
+ ${currentUser().role==='Donor'?`<button class="tab ${page==='donor'?'active':''}" onclick="setPage('donor')">Donor</button>`:''}
+ ${currentUser().role==='Organiser'?`<button class="tab ${page==='organiser'?'active':''}" onclick="setPage('organiser')">Organiser</button>`:''}
+ ${currentUser().role==='Registered Stall'?`<button class="tab ${page==='stall'?'active':''}" onclick="setPage('stall')">Stall</button>`:''}
+ ${currentUser().role==='Admin'?`<button class="tab ${page==='admin'?'active':''}" onclick="setPage('admin')">Admin</button>`:''}
+ </div>`:''}
+ ${html}`;
+}
+render();
+</script>
+</body>
+</html>
