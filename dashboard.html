@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPSInfaq Student Dashboard</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f3eb;
+      color: #173d31;
+    }
+    header {
+      background: #123d30;
+      color: #f4d78b;
+      padding: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    main { max-width: 1000px; margin: 35px auto; padding: 20px; }
+    h1 { margin-top: 0; }
+    .welcome {
+      background: #123d30;
+      color: white;
+      padding: 30px;
+      border-radius: 16px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 25px;
+    }
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px #00000010;
+    }
+    .card h2 { color: #a77b27; }
+    button {
+      background: #c69b43;
+      color: #173d31;
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .logout { background: #f4d78b; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>UPSInfaq</strong>
+    <button class="logout" onclick="logout()">Log Out</button>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h1>Student Dashboard</h1>
+      <p>Welcome to UPSInfaq Student Food Assistance Platform.</p>
+      <p>No UPSI student should face hunger alone.</p>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h2>Food Catalogue</h2>
+        <p>Explore available food items and meals.</p>
+        <button onclick="alert('Food Catalogue coming soon!')">Explore Food</button>
+      </div>
+
+      <div class="card">
+        <h2>My Claims</h2>
+        <p>View your food claims and collection status.</p>
+        <button onclick="alert('My Claims coming soon!')">View Claims</button>
+      </div>
+
+      <div class="card">
+        <h2>My Wishlist</h2>
+        <p>Keep track of food items you wish to receive.</p>
+        <button onclick="alert('Wishlist coming soon!')">View Wishlist</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://vfzhszkzoufsocrgxdur.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_d8TdD672EiNxb3CsLrCecw_L2XKYPp5";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+    async function logout() {
+      await supabaseClient.auth.signOut();
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
