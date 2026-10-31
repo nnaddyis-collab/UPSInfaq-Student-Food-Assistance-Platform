@@ -1505,5 +1505,82 @@ const supabaseClient = window.supabase.createClient(
 
 console.log("UPSInfaq: Supabase berjaya dimuatkan!");
 </script>
+  
+<style>
+.hidden {
+  display: none !important;
+}
+</style>
+
+<script>
+window.handleAuth = async function(event) {
+  event.preventDefault();
+
+  const message = document.getElementById("authMessage");
+  const button = document.getElementById("authSubmit");
+
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+
+  message.style.color = "#a13c37";
+  button.disabled = true;
+  button.textContent = "Please wait...";
+
+  try {
+    if (currentAuthMode === "register") {
+      const name = document.getElementById("authName").value.trim();
+      const confirm = document.getElementById("authConfirmPassword").value;
+      const role = document.getElementById("authRole").value;
+
+      if (password !== confirm) {
+        throw new Error("Passwords do not match.");
+      }
+
+      const { error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: name,
+            requested_role: role
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      message.style.color = "#236448";
+      message.textContent =
+        "Registration successful! Please check your email to confirm your account.";
+
+    } else {
+      const { error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if (error) throw error;
+
+      message.style.color = "#236448";
+      message.textContent = "Login successful!";
+    }
+
+  } catch (error) {
+    message.textContent = error.message;
+
+  } finally {
+    button.disabled = false;
+    button.textContent =
+      currentAuthMode === "register"
+        ? "Create Account →"
+        : "Sign In →";
+  }
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("authOverlay").classList.add("hidden");
+});
+</script>
+
 </body>
 </html>
