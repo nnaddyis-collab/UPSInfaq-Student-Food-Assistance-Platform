@@ -1,1544 +1,1509 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPSInfaq</title>
+<meta name="theme-color" content="#103c2d">
+<title>UPSInfaq | Sharing Food, Spreading Hope</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --green: #145b43;
-  --dark: #18352a;
-  --light: #eaf4ee;
-  --gold: #d7ad55;
-  --bg: #f5f7f5;
+  --green: #103c2d;
+  --green2: #174d39;
+  --green3: #236448;
+  --cream: #f8f6ed;
+  --gold: #d8b46a;
+  --white: #ffffff;
+  --text: #243b30;
+  --muted: #819087;
+  --border: #e7e9e1;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
 }
 
-header {
-  background: var(--green);
-  color: white;
-  padding: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h2 { margin: 0; }
-
-main {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 14px;
-  margin-bottom: 16px;
-  border: 1px solid #e1e9e3;
-}
-
-.login {
-  max-width: 450px;
-  margin: 35px auto;
-}
-
-label {
-  display: block;
-  font-size: 13px;
-  font-weight: bold;
-  margin-top: 12px;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  border: 1px solid #ccd8d0;
-  border-radius: 8px;
+button, input, select {
   font: inherit;
 }
 
 button {
-  background: var(--green);
-  color: white;
-  border: 0;
-  padding: 11px 16px;
-  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
+  border: none;
 }
 
-button.secondary {
-  background: #e5eee8;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  width: min(1160px, 92%);
+  margin: auto;
+}
+
+/* NAVIGATION */
+
+.navbar {
+  background: var(--green);
+  color: white;
+  padding: 19px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.logo-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  background: var(--gold);
+  display: grid;
+  place-items: center;
+  color: var(--green);
+  font-size: 23px;
+}
+
+.logo-name {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo-name span {
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  gap: 27px;
+  align-items: center;
+  font-size: 13px;
+  color: #d5e3da;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 9px;
+}
+
+.btn {
+  padding: 12px 19px;
+  border-radius: 7px;
+  font-weight: 700;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-gold {
+  background: var(--gold);
   color: var(--green);
 }
 
-button.gold {
-  background: var(--gold);
-  color: var(--dark);
+.btn-outline {
+  background: transparent;
+  color: white;
+  border: 1px solid #789184;
 }
 
-.hidden { display: none !important; }
-
-.muted {
-  color: #68766f;
-  font-size: 13px;
-  line-height: 1.6;
+.btn-green {
+  background: var(--green);
+  color: white;
 }
 
-.row {
-  display: flex;
-  justify-content: space-between;
+.btn-light {
+  background: white;
+  color: var(--green);
+}
+
+/* HERO SECTION */
+
+.hero {
+  background:
+    radial-gradient(circle at 80% 20%, #286044 0%, transparent 38%),
+    linear-gradient(125deg, #103c2d, #0c3025);
+  color: white;
+  padding: 76px 0 70px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
   align-items: center;
+  gap: 50px;
+}
+
+.eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 23px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 5vw, 65px);
+  line-height: 1.13;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+.hero h1 span {
+  color: var(--gold);
+}
+
+.hero-description {
+  color: #d0ded5;
+  line-height: 1.9;
+  font-size: 15px;
+  max-width: 480px;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
-.grid {
+.hero-image-wrap {
+  position: relative;
+}
+
+.hero-image {
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+  border-radius: 17px;
+  border: 1px solid #ffffff35;
+  box-shadow: 0 25px 60px #00000040;
+}
+
+.hero-image-label {
+  position: absolute;
+  left: -20px;
+  bottom: 25px;
+  background: var(--cream);
+  color: var(--green);
+  padding: 17px 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 35px #00000025;
+}
+
+.hero-image-label strong {
+  display: block;
+  font-size: 15px;
+}
+
+.hero-image-label small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* DONATION PROGRESS */
+
+.progress-section {
+  background: #174c38;
+  color: white;
+  padding: 25px 0;
+}
+
+.progress-inner {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.progress-title {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.progress-title small {
+  display: block;
+  color: #c3d6ca;
+  margin-top: 5px;
+  font-weight: 400;
+}
+
+.progress-bar {
+  height: 9px;
+  background: #ffffff28;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 65%;
+  height: 100%;
+  background: var(--gold);
+  border-radius: 20px;
+}
+
+.progress-number {
+  text-align: right;
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.progress-number small {
+  display: block;
+  color: #c3d6ca;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* GENERAL SECTIONS */
+
+.section {
+  padding: 78px 0;
+}
+
+.section-heading {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 42px;
+}
+
+.section-heading .eyebrow {
+  color: var(--green3);
+  margin-bottom: 12px;
+}
+
+.section-heading h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(29px, 4vw, 42px);
+  color: var(--green);
+  margin-bottom: 12px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* MISSION */
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.mission-image {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.mission-content h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--green);
+  font-size: 38px;
+  line-height: 1.25;
+  margin-bottom: 18px;
+}
+
+.mission-content p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 22px;
+}
+
+.mission-points {
+  display: grid;
+  gap: 13px;
+}
+
+.mission-point {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.check-icon {
+  background: #e2eee4;
+  color: var(--green3);
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+/* HOW IT WORKS */
+
+.how-section {
+  background: #edf1e9;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-card {
+  background: white;
+  padding: 27px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  transition: .2s;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px #103c2d12;
+}
+
+.step-icon {
+  width: 53px;
+  height: 53px;
+  background: #e8f0e8;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.step-card h3 {
+  color: var(--green);
+  margin-bottom: 10px;
+  font-size: 17px;
+}
+
+.step-card p {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+/* IMPACT */
+
+.impact-section {
+  background: var(--green);
+  color: white;
+}
+
+.impact-section .section-heading h2 {
+  color: white;
+}
+
+.impact-section .section-heading p {
+  color: #c4d4ca;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 
-.tabs {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 10px 0;
-}
-
-.tabs button { white-space: nowrap; }
-
-.tag {
-  display: inline-block;
-  background: var(--light);
-  color: var(--green);
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-}
-
-.food-image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 9px;
-}
-
-footer {
+.impact-card {
+  padding: 27px 12px;
   text-align: center;
-  padding: 25px;
-  color: #849087;
-  font-size: 12px;
+  border: 1px solid #ffffff25;
+  border-radius: 12px;
+  background: #ffffff08;
 }
 
-@media(max-width:600px) {
-  main { padding: 13px; }
-  header { padding: 14px; }
+.impact-card strong {
+  display: block;
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.impact-card span {
+  font-size: 12px;
+  color: #d1ded5;
+}
+
+/* CAMPAIGNS */
+
+.campaign-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.campaign-card {
+  overflow: hidden;
+  background: white;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+}
+
+.campaign-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.campaign-body {
+  padding: 21px;
+}
+
+.campaign-body h3 {
+  color: var(--green);
+  margin-bottom: 9px;
+  font-size: 17px;
+}
+
+.campaign-body p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+/* CALL TO ACTION */
+
+.cta {
+  padding: 65px 0;
+  background: #e8eee5;
+}
+
+.cta-box {
+  background: linear-gradient(120deg, #164b36, #0d3327);
+  padding: 48px 30px;
+  border-radius: 17px;
+  text-align: center;
+  color: white;
+}
+
+.cta-box h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 35px;
+  margin-bottom: 12px;
+}
+
+.cta-box p {
+  color: #d0ded5;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/* FOOTER */
+
+.footer {
+  background: #09281e;
+  color: white;
+  padding: 40px 0 20px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.footer p {
+  color: #b8c9be;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid #ffffff20;
+  color: #9db0a4;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding: 52px 0;
+  }
+
+  .hero-inner,
+  .mission-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .hero-image {
+    height: 280px;
+  }
+
+  .hero-image-label {
+    left: 10px;
+  }
+
+  .progress-inner {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .progress-number {
+    text-align: left;
+  }
+
+  .steps-grid,
+  .campaign-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section {
+    padding: 55px 0;
+  }
+
+  .mission-image {
+    height: 260px;
+  }
+
+  .mission-content h2 {
+    font-size: 31px;
+  }
+
+  .nav-actions .btn {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .logo-name {
+    font-size: 19px;
+  }
+}
+
+@media(max-width:380px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div>
-    <h2>UPSInfaq</h2>
-    <small>Student Food Assistance Platform</small>
+<!-- NAVIGATION -->
+
+<header class="navbar">
+  <div class="container nav-inner">
+
+    <a href="#" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div class="logo-name">UPSI<span>nfaq</span></div>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#mission">Our Mission</a>
+      <a href="#how">How It Works</a>
+      <a href="#impact">Our Impact</a>
+      <a href="#campaigns">Campaigns</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn btn-outline"
+        onclick="openAuth('login')">Sign In</button>
+
+      <button class="btn btn-gold"
+        onclick="openAuth('register')">Join Us</button>
+    </div>
+
   </div>
-  <span id="headerUser">Welcome</span>
 </header>
 
-<main>
+<!-- HERO -->
 
-<section id="loginPage" class="login card">
-  <h1>Welcome to UPSInfaq</h1>
-  <p class="muted">Sign in to access your account.</p>
+<section class="hero" id="home">
+  <div class="container hero-inner">
 
-  <label>Full Name</label>
-  <input id="loginName" placeholder="Enter your full name">
-
-  <label>Email Address</label>
-  <input id="loginEmail" type="email" placeholder="Enter your email">
-
-  <label>Account Role</label>
-  <select id="loginRole">
-    <option>Student</option>
-    <option>Donor</option>
-    <option>Organiser</option>
-    <option>Registered Stall</option>
-    <option>Admin</option>
-  </select>
-
-  <div id="studentFields">
-    <label>Faculty</label>
-    <select id="loginFaculty">
-      <option>FPE</option>
-      <option>FSM</option>
-      <option>FSK</option>
-    </select>
-
-    <label>Residential College</label>
-    <select id="loginCollege">
-      <option>KUO</option>
-      <option>KHAR</option>
-      <option>KAHS</option>
-      <option>KZ</option>
-    </select>
-  </div>
-
-  <div id="adminField" class="hidden">
-    <label>Admin Access Code</label>
-    <input id="adminCode" type="password" placeholder="Admin code">
-  </div>
-
-  <button style="width:100%; margin-top:15px" onclick="login()">
-    Sign In
-  </button>
-
-  <p id="loginMessage" class="muted"></p>
-</section>
-
-<section id="appPage" class="hidden">
-  <div class="row">
     <div>
-      <h2 id="welcomeTitle">Dashboard</h2>
-      <p id="welcomeText" class="muted"></p>
-    </div>
-    <button class="secondary" onclick="logout()">Sign Out</button>
-  </div>
+      <div class="eyebrow">Universiti Pendidikan Sultan Idris</div>
 
-  <div id="tabs" class="tabs"></div>
-  <div id="content"></div>
+      <h1>
+        No UPSI Student Should Face
+        <span>Hunger Alone.</span>
+      </h1>
+
+      <p class="hero-description">
+        A community built on kindness, generosity and care.
+        UPSInfaq connects donors, students and food partners
+        to make sure that no student is left behind.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn btn-gold"
+          onclick="openAuth('register','Donor')">
+          Donate Now →
+        </button>
+
+        <button class="btn btn-outline"
+          onclick="openAuth('register','Student')">
+          I'm a Student
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap">
+
+      <img class="hero-image"
+        src="https://images.unsplash.com/photo-1547592180-85f173990554?w=1000"
+        alt="Fresh and nutritious food">
+
+      <div class="hero-image-label">
+        <strong>💚 Sharing Food, Spreading Hope</strong>
+        <small>Every contribution makes a difference.</small>
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
-</main>
+<!-- DONATION PROGRESS -->
 
-<footer>
-  UPSInfaq · Food Assistance with Care
-  <br>Universiti Pendidikan Sultan Idris
+<section class="progress-section">
+  <div class="container progress-inner">
+
+    <div class="progress-title">
+      Weekly Donation Campaign
+      <small>Help us reach our weekly goal.</small>
+    </div>
+
+    <div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="progress-number">
+      <span id="weeklyProgress">65%</span>
+      <small>Weekly campaign progress</small>
+    </div>
+
+  </div>
+</section>
+
+<!-- MISSION -->
+
+<section class="section" id="mission">
+  <div class="container mission-grid">
+
+    <div>
+      <img class="mission-image"
+        src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1000"
+        alt="Community food donation">
+    </div>
+
+    <div class="mission-content">
+
+      <div class="eyebrow">Our Mission</div>
+
+      <h2>Small Acts of Kindness. Big Changes.</h2>
+
+      <p>
+        UPSInfaq is a student food assistance platform
+        designed to connect generous donors with UPSI
+        students who need food support.
+      </p>
+
+      <div class="mission-points">
+        <div class="mission-point">
+          <span class="check-icon">✓</span>
+          Accessible food assistance
+        </div>
+
+        <div class="mission-point">
+          <span class="check-icon">✓</span>
+          Transparent donation management
+        </div>
+
+        <div class="mission-point">
+          <span class="check-icon">✓</span>
+          Stronger university community
+        </div>
+
+        <div class="mission-point">
+          <span class="check-icon">✓</span>
+          Sustainable food support
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+
+<section class="section how-section" id="how">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Simple & Meaningful</div>
+      <h2>How UPSInfaq Works</h2>
+      <p>
+        A simple platform that brings together people
+        who want to give and people who need support.
+      </p>
+    </div>
+
+    <div class="steps-grid">
+
+      <div class="step-card">
+        <div class="step-icon">💚</div>
+        <h3>1. Donate Food</h3>
+        <p>
+          Donors choose food items, select quantities
+          and contribute to the university food fund.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon">🎓</div>
+        <h3>2. Claim Assistance</h3>
+        <p>
+          Eligible students browse available food,
+          claim assistance and receive a voucher.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon">🏪</div>
+        <h3>3. Collect Food</h3>
+        <p>
+          Students visit registered stalls and
+          redeem their vouchers to collect food.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+
+<section class="section impact-section" id="impact">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Together We Make A Difference</div>
+      <h2>Our Community Impact</h2>
+      <p>
+        Every donation helps us build a more caring
+        and supportive campus community.
+      </p>
+    </div>
+
+    <div class="impact-grid">
+
+      <div class="impact-card">
+        <strong id="impactStudents">0</strong>
+        <span>Students Supported</span>
+      </div>
+
+      <div class="impact-card">
+        <strong id="impactDonors">0</strong>
+        <span>Generous Donors</span>
+      </div>
+
+      <div class="impact-card">
+        <strong id="impactMeals">0</strong>
+        <span>Food Items Distributed</span>
+      </div>
+
+      <div class="impact-card">
+        <strong id="impactFunds">RM 0</strong>
+        <span>Total Contributions</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CAMPAIGNS -->
+
+<section class="section" id="campaigns">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Be Part Of Something Good</div>
+      <h2>Our Food Campaigns</h2>
+      <p>
+        Support our food campaigns and help more
+        students receive the assistance they deserve.
+      </p>
+    </div>
+
+    <div class="campaign-grid">
+
+      <div class="campaign-card">
+        <img
+          src="https://images.unsplash.com/photo-1547592180-85f173990554?w=800"
+          alt="Food donation campaign">
+        <div class="campaign-body">
+          <h3>Food For Every Student</h3>
+          <p>
+            Help provide essential dry food supplies
+            to students in need.
+          </p>
+          <button class="btn btn-green"
+            onclick="openAuth('register','Donor')">
+            Support Campaign
+          </button>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <img
+          src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800"
+          alt="Healthy meals">
+        <div class="campaign-body">
+          <h3>Ready Meal Programme</h3>
+          <p>
+            Support nutritious ready-to-eat meals
+            for university students.
+          </p>
+          <button class="btn btn-green"
+            onclick="openAuth('register','Donor')">
+            Support Campaign
+          </button>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <img
+          src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800"
+          alt="Community giving">
+        <div class="campaign-body">
+          <h3>Community Food Drive</h3>
+          <p>
+            Bring donors, volunteers and local
+            food partners together.
+          </p>
+          <button class="btn btn-green"
+            onclick="openAuth('register','Donor')">
+            Support Campaign
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+
+<section class="cta">
+  <div class="container">
+
+    <div class="cta-box">
+      <h2>Be Someone's Reason To Smile.</h2>
+
+      <p>
+        One donation, one meal, one act of kindness
+        can change someone's day.
+      </p>
+
+      <button class="btn btn-gold"
+        onclick="openAuth('register','Donor')">
+        Become A Donor →
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer-inner">
+
+      <div>
+        <div class="logo-name">UPSI<span>nfaq</span></div>
+        <p>
+          Sharing Food, Spreading Hope.<br>
+          Universiti Pendidikan Sultan Idris.
+        </p>
+      </div>
+
+      <div>
+        <strong>Explore</strong>
+        <p>
+          <a href="#mission">Our Mission</a><br>
+          <a href="#how">How It Works</a><br>
+          <a href="#campaigns">Campaigns</a>
+        </p>
+      </div>
+
+      <div>
+        <strong>Get Involved</strong>
+        <p>
+          <a href="javascript:void(0)"
+            onclick="openAuth('register','Donor')">Become a Donor</a><br>
+          <a href="javascript:void(0)"
+            onclick="openAuth('register','Student')">Student Assistance</a>
+        </p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 UPSInfaq. All Rights Reserved.
+      <br>Made with care for the UPSI community.
+    </div>
+
+  </div>
 </footer>
 
+<!-- JAVASCRIPT WILL CONTINUE IN THE NEXT PART -->
+
 <script>
- 
-// DATABASE
-const STORAGE_KEY = "UPSINFAQ_DATABASE";
 
-let db = {
-  users: [],
-  products: [],
-  vendors: [],
-  sponsorships: [],
-  vouchers: [],
-  donations: [],
-  campaigns: [],
-  activities: []
-};
+// ==========================================
+// UPSINFAQ AUTHENTICATION INTERFACE
+// ==========================================
 
-let currentUser = null;
-let currentTab = "dashboard";
-let donorCart = [];
+const authStyles = document.createElement("style");
 
-function loadDatabase() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) db = { ...db, ...JSON.parse(saved) };
-  } catch (error) {
-    console.error("Unable to load database:", error);
-  }
+authStyles.textContent = `
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5,25,18,.82);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  overflow-y: auto;
 }
 
-function saveDatabase() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-  } catch (error) {
-    alert("Storage is full. Please use smaller images.");
-  }
+.auth-box {
+  width: 100%;
+  max-width: 460px;
+  background: #f8f6ed;
+  border-radius: 19px;
+  overflow: hidden;
+  box-shadow: 0 25px 80px #0005;
+  position: relative;
+  animation: authAppear .3s ease;
 }
 
-function createId(prefix) {
-  return prefix + "-" + Date.now().toString(36) +
-    "-" + Math.random().toString(36).slice(2, 7).toUpperCase();
+@keyframes authAppear {
+  from {opacity:0;transform:translateY(20px)}
+  to {opacity:1;transform:translateY(0)}
 }
 
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, function(character) {
-    return {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    }[character];
-  });
+.auth-top {
+  background: linear-gradient(135deg,#103c2d,#1d6144);
+  padding: 30px;
+  text-align: center;
+  color: white;
 }
 
-function formatRM(amount) {
-  return "RM " + Number(amount || 0).toFixed(2);
+.auth-logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 16px;
+  background: #d8b46a;
+  color: #103c2d;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  margin: 0 auto 13px;
 }
 
-function logActivity(action) {
-  db.activities.unshift({
-    id: createId("ACT"),
-    action,
-    user: currentUser ? currentUser.name : "System",
-    date: new Date().toLocaleString()
-  });
-
-  db.activities = db.activities.slice(0, 200);
-  saveDatabase();
+.auth-top h2 {
+  font-family: 'Playfair Display',serif;
+  font-size: 29px;
+  margin-bottom: 7px;
 }
 
-function showLoginMessage(message) {
-  document.getElementById("loginMessage").textContent = message;
+.auth-top p {
+  color: #d2e0d5;
+  font-size: 12px;
 }
 
-loadDatabase();
+.auth-close {
+  position: absolute;
+  top: 15px;
+  right: 17px;
+  background: #ffffff20;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 19px;
+}
 
-// CHANGE LOGIN FIELDS BASED ON ROLE
-document.getElementById("loginRole").addEventListener("change", function() {
-  const role = this.value;
+.auth-content {
+  padding: 27px;
+}
 
-  document.getElementById("studentFields").classList.toggle(
-    "hidden", role !== "Student"
-  );
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #e9eee7;
+  padding: 5px;
+  border-radius: 9px;
+  margin-bottom: 22px;
+}
 
-  document.getElementById("adminField").classList.toggle(
-    "hidden", role !== "Admin"
-  );
-});
+.auth-tabs button {
+  padding: 11px;
+  border-radius: 7px;
+  color: #65766b;
+  background: transparent;
+  font-weight: 700;
+  font-size: 13px;
+}
 
-// SIGN IN
-function login() {
-  const name = document.getElementById("loginName").value.trim();
-  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-  const role = document.getElementById("loginRole").value;
+.auth-tabs button.active {
+  background: #103c2d;
+  color: white;
+}
 
-  if (!name || !email) {
-    showLoginMessage("Please enter your name and email.");
-    return;
-  }
+.auth-form label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #365443;
+  margin: 14px 0 6px;
+}
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showLoginMessage("Please enter a valid email address.");
-    return;
-  }
+.auth-form input,
+.auth-form select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d8dfd7;
+  border-radius: 8px;
+  background: white;
+  outline: none;
+  color: #243b30;
+  font-size: 13px;
+}
 
-  if (role === "Student" && !email.endsWith("@siswa.com")) {
-    showLoginMessage("Students must use an @siswa.com email.");
-    return;
-  }
+.auth-form input:focus,
+.auth-form select:focus {
+  border-color: #236448;
+  box-shadow: 0 0 0 3px #23644815;
+}
+
+.auth-submit {
+  width: 100%;
+  padding: 14px;
+  margin-top: 22px;
+  background: #103c2d;
+  color: white;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.auth-submit:hover {
+  background: #236448;
+}
+
+.auth-message {
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 13px;
+  text-align: center;
+  color: #a13c37;
+}
+
+.auth-note {
+  font-size: 11px;
+  color: #89958c;
+  line-height: 1.7;
+  text-align: center;
+  margin-top: 17px;
+}
+
+.auth-back {
+  display: block;
+  text-align: center;
+  margin-top: 18px;
+  color: #236448;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  background: transparent;
+  width: 100%;
+}
+
+.admin-notice {
+  background: #fff2d9;
+  border: 1px solid #ead6a8;
+  padding: 12px;
+  border-radius: 8px;
+  color: #785b24;
+  font-size: 11px;
+  line-height: 1.6;
+  margin-top: 13px;
+}
+
+@media(max-width:480px) {
+  .auth-content {padding:22px}
+  .auth-top {padding:25px}
+}
+`;
+
+document.head.appendChild(authStyles);
+
+// CREATE AUTH WINDOW
+
+const authHTML = `
+<div class="auth-overlay" id="authOverlay"
+ onclick="if(event.target===this)closeAuth()">
+
+  <div class="auth-box">
+
+    <button class="auth-close"
+      onclick="closeAuth()">×</button>
+
+    <div class="auth-top">
+      <div class="auth-logo">🌿</div>
+      <h2>Welcome to UPSInfaq</h2>
+      <p>Sharing Food, Spreading Hope.</p>
+    </div>
+
+    <div class="auth-content">
+
+      <div class="auth-tabs">
+        <button id="loginTab"
+          class="active"
+          onclick="switchAuth('login')">
+          Sign In
+        </button>
+
+        <button id="registerTab"
+          onclick="switchAuth('register')">
+          Register
+        </button>
+      </div>
+
+      <form class="auth-form" id="authForm"
+        onsubmit="handleAuth(event)">
+
+        <div id="nameField" class="hidden">
+          <label>Full Name</label>
+          <input id="authName"
+            type="text"
+            placeholder="Enter your full name">
+        </div>
+
+        <label>Email Address</label>
+        <input id="authEmail"
+          type="email"
+          placeholder="Enter your email address"
+          required>
+
+        <div id="roleField">
+          <label>Account Type</label>
+          <select id="authRole">
+            <option value="Student">Student</option>
+            <option value="Donor">Donor</option>
+            <option value="Organiser">Organiser</option>
+            <option value="Stall">Registered Stall</option>
+          </select>
+        </div>
+
+        <div id="adminCodeField" class="hidden">
+          <label>Admin Access Code</label>
+          <input id="authAdminCode"
+            type="password"
+            placeholder="Enter authorised admin code">
+        </div>
+
+        <label>Password</label>
+        <input id="authPassword"
+          type="password"
+          placeholder="Enter your password"
+          minlength="8"
+          required>
+
+        <div id="confirmPasswordField" class="hidden">
+          <label>Confirm Password</label>
+          <input id="authConfirmPassword"
+            type="password"
+            placeholder="Re-enter your password">
+        </div>
+
+        <button class="auth-submit"
+          type="submit"
+          id="authSubmit">
+          Sign In →
+        </button>
+
+        <p class="auth-message"
+          id="authMessage"></p>
+
+      </form>
+
+      <div id="adminNotice" class="admin-notice hidden">
+        🔒 Restricted administrator access.
+        Only authorised administrators may enter.
+        Admin registration is not available to the public.
+      </div>
+
+      <p class="auth-note" id="authNote">
+        By continuing, you agree to use UPSInfaq
+        responsibly and respectfully.
+      </p>
+
+      <button class="auth-back"
+        onclick="closeAuth()">
+        ← Back to Homepage
+      </button>
+
+    </div>
+  </div>
+</div>
+`;
+
+document.body.insertAdjacentHTML("beforeend", authHTML);
+
+// AUTHENTICATION PAGE CONTROL
+
+let currentAuthMode = "login";
+let currentAuthRole = "Student";
+
+function openAuth(mode = "login", role = "") {
+
+  const overlay = document.getElementById("authOverlay");
+
+  overlay.classList.remove("hidden");
+
+  currentAuthRole = role || "Student";
+
+  switchAuth(mode);
 
   if (role === "Admin") {
-    const code = document.getElementById("adminCode").value;
+    document.getElementById("authRole").value = "Student";
+    showAdminLogin();
+  } else {
+    document.getElementById("authRole").value =
+      role || "Student";
+  }
 
-    if (code !== "112233") {
-      showLoginMessage("Incorrect admin access code.");
+  document.body.style.overflow = "hidden";
+}
+
+function closeAuth() {
+  document.getElementById("authOverlay")
+    .classList.add("hidden");
+
+  document.body.style.overflow = "";
+}
+
+function showAdminLogin() {
+  switchAuth("login");
+
+  document.getElementById("roleField")
+    .classList.add("hidden");
+
+  document.getElementById("adminCodeField")
+    .classList.remove("hidden");
+
+  document.getElementById("adminNotice")
+    .classList.remove("hidden");
+
+  document.getElementById("authSubmit").textContent =
+    "Admin Sign In →";
+}
+
+function switchAuth(mode) {
+
+  currentAuthMode = mode;
+
+  const isRegister = mode === "register";
+
+  document.getElementById("loginTab")
+    .classList.toggle("active", !isRegister);
+
+  document.getElementById("registerTab")
+    .classList.toggle("active", isRegister);
+
+  document.getElementById("nameField")
+    .classList.toggle("hidden", !isRegister);
+
+  document.getElementById("confirmPasswordField")
+    .classList.toggle("hidden", !isRegister);
+
+  document.getElementById("adminCodeField")
+    .classList.add("hidden");
+
+  document.getElementById("adminNotice")
+    .classList.add("hidden");
+
+  document.getElementById("roleField")
+    .classList.remove("hidden");
+
+  document.getElementById("authSubmit").textContent =
+    isRegister ? "Create Account →" : "Sign In →";
+
+  document.getElementById("authMessage").textContent = "";
+
+  document.getElementById("authPassword").value = "";
+
+  document.getElementById("authConfirmPassword").value = "";
+
+  document.getElementById("authAdminCode").value = "";
+
+  document.getElementById("authName").required = isRegister;
+
+  document.getElementById("authConfirmPassword").required =
+    isRegister;
+}
+
+// FORM SUBMISSION
+
+function handleAuth(event) {
+
+  event.preventDefault();
+
+  const message = document.getElementById("authMessage");
+
+  const email = document.getElementById("authEmail")
+    .value.trim();
+
+  const password = document.getElementById("authPassword")
+    .value;
+
+  const role = document.getElementById("authRole").value;
+
+  if (currentAuthMode === "register") {
+
+    const name = document.getElementById("authName")
+      .value.trim();
+
+    const confirmPassword =
+      document.getElementById("authConfirmPassword").value;
+
+    if (!name) {
+      message.textContent = "Please enter your full name.";
       return;
     }
-  }
 
-  let user = db.users.find(item => item.email === email);
-
-  if (user && user.role !== role) {
-    showLoginMessage("This email is registered under another role.");
-    return;
-  }
-
-  if (!user) {
-    user = {
-      id: createId("USER"),
-      name,
-      email,
-      role,
-      faculty: role === "Student"
-        ? document.getElementById("loginFaculty").value : "",
-      college: role === "Student"
-        ? document.getElementById("loginCollege").value : "",
-      eligibility: role === "Student" ? "Pending" : "Not Applicable",
-      createdAt: new Date().toLocaleString(),
-      active: true
-    };
-
-    db.users.push(user);
-  } else {
-    user.name = name;
-
-    if (role === "Student") {
-      user.faculty = document.getElementById("loginFaculty").value;
-      user.college = document.getElementById("loginCollege").value;
+    if (password.length < 8) {
+      message.textContent =
+        "Password must contain at least 8 characters.";
+      return;
     }
-  }
 
-  currentUser = user;
-  donorCart = [];
+    if (password !== confirmPassword) {
+      message.textContent = "Passwords do not match.";
+      return;
+    }
 
-  saveDatabase();
-  logActivity("Signed in as " + role);
+    message.style.color = "#236448";
 
-  document.getElementById("loginPage").classList.add("hidden");
-  document.getElementById("appPage").classList.remove("hidden");
-  document.getElementById("headerUser").textContent = name;
+    message.textContent =
+      "Registration form completed. Account creation will be connected to Supabase in the next setup.";
 
-  renderDashboard();
-}
-
-// SIGN OUT
-function logout() {
-  if (currentUser) logActivity("Signed out");
-
-  currentUser = null;
-  donorCart = [];
-
-  document.getElementById("appPage").classList.add("hidden");
-  document.getElementById("loginPage").classList.remove("hidden");
-  document.getElementById("headerUser").textContent = "Welcome";
-
-  document.getElementById("loginName").value = "";
-  document.getElementById("loginEmail").value = "";
-  document.getElementById("adminCode").value = "";
-
-  showLoginMessage("You have signed out successfully.");
-}
-
- 
-// DEFAULT FOOD CATALOGUE
-if (db.products.length === 0) {
-  const defaultProducts = [
-    ["Rice 1kg", "Dry Goods", 3.50],
-    ["Instant Noodles", "Dry Goods", 1.20],
-    ["Biscuits", "Dry Goods", 2.00],
-    ["Cooking Oil 1kg", "Dry Goods", 3.80],
-    ["Sugar 1kg", "Dry Goods", 2.90],
-    ["Flour 1kg", "Dry Goods", 2.50],
-    ["Canned Sardines", "Dry Goods", 4.20],
-    ["Canned Tuna", "Dry Goods", 4.50],
-    ["Milk Powder", "Dry Goods", 8.00],
-    ["Oats", "Dry Goods", 5.50],
-    ["Tea", "Dry Goods", 3.00],
-    ["Coffee", "Dry Goods", 4.00],
-    ["Soy Sauce", "Dry Goods", 2.80],
-    ["Salt", "Dry Goods", 1.50],
-    ["Peanut Butter", "Dry Goods", 5.00],
-    ["Crackers", "Dry Goods", 2.50],
-    ["UHT Milk", "Dry Goods", 3.00],
-    ["Cereal", "Dry Goods", 6.00],
-    ["Red Beans", "Dry Goods", 3.50],
-    ["Cooking Sauce", "Dry Goods", 3.00],
-    ["Nasi Lemak", "Ready-to-Eat", 4.00],
-    ["Fried Rice", "Ready-to-Eat", 5.00],
-    ["Chicken Rice", "Ready-to-Eat", 6.00],
-    ["Fried Noodles", "Ready-to-Eat", 5.00],
-    ["Bihun Goreng", "Ready-to-Eat", 4.50],
-    ["Sandwich", "Ready-to-Eat", 4.00],
-    ["Bun", "Ready-to-Eat", 2.00],
-    ["Porridge", "Ready-to-Eat", 4.00],
-    ["Curry Puff", "Ready-to-Eat", 2.00],
-    ["Packed Meal", "Ready-to-Eat", 6.00]
-  ];
-
-  defaultProducts.forEach(item => {
-    db.products.push({
-      id: createId("FOOD"),
-      name: item[0],
-      category: item[1],
-      price: item[2],
-      stock: 0,
-      image: "",
-      access: "General",
-      sponsorshipId: "",
-      vendorId: "",
-      active: true
-    });
-  });
-
-  saveDatabase();
-}
-
-// DEFAULT VENDOR
-if (db.vendors.length === 0) {
-  db.vendors.push({
-    id: createId("SHOP"),
-    name: "UPSInfaq Food Collection Point",
-    address: "Universiti Pendidikan Sultan Idris, Tanjong Malim",
-    map: "https://www.google.com/maps/search/?api=1&query=Universiti+Pendidikan+Sultan+Idris",
-    hours: "Monday - Friday, 8:00 AM - 5:00 PM",
-    email: "",
-    active: true
-  });
-
-  saveDatabase();
-}
-
-// PRODUCT HELPERS
-function getProduct(productId) {
-  return db.products.find(item => item.id === productId);
-}
-
-function getVendor(vendorId) {
-  return db.vendors.find(item => item.id === vendorId);
-}
-
-function getProductImage(product) {
-  if (product.image) {
-    return escapeHTML(product.image);
-  }
-
-  return "";
-}
-
-function getProductAccessLabel(product) {
-  if (product.access === "Sponsored") {
-    const sponsor = db.sponsorships.find(
-      item => item.id === product.sponsorshipId
-    );
-
-    return sponsor ? sponsor.name : "Sponsored Food";
-  }
-
-  return "General Assistance";
-}
-
-// SPONSORSHIP ACCESS CHECK
-function studentCanClaim(product, student) {
-  if (!student || student.role !== "Student") return false;
-  if (!product.active || Number(product.stock) <= 0) return false;
-
-  if (product.access === "General") {
-    return student.eligibility === "Eligible";
-  }
-
-  const sponsor = db.sponsorships.find(
-    item => item.id === product.sponsorshipId
-  );
-
-  if (!sponsor || !sponsor.active) return false;
-
-  if (sponsor.accessRule === "All Students") return true;
-  if (sponsor.accessRule === "Eligible Students") {
-    return student.eligibility === "Eligible";
-  }
-
-  if (sponsor.accessRule === "FPE Students") {
-    return student.faculty === "FPE";
-  }
-
-  if (sponsor.accessRule === "FSM Students") {
-    return student.faculty === "FSM";
-  }
-
-  if (sponsor.accessRule === "FSK Students") {
-    return student.faculty === "FSK";
-  }
-
-  return false;
-}
-
-saveDatabase();
-
-// STUDENT FOOD CLAIM
-function claimFood(productId) {
-  if (!currentUser || currentUser.role !== "Student") return;
-
-  const product = getProduct(productId);
-
-  if (!product || !studentCanClaim(product, currentUser)) {
-    alert("You are not eligible to claim this food.");
     return;
   }
 
-  const dailyLimit = 2;
-  const today = new Date().toDateString();
+  const adminCode =
+    document.getElementById("authAdminCode").value;
 
-  const todaysClaims = db.vouchers.filter(voucher =>
-    voucher.studentId === currentUser.id &&
-    new Date(voucher.createdAt).toDateString() === today
-  );
-
-  if (todaysClaims.length >= dailyLimit) {
-    alert("You have reached your daily claim limit.");
+  if (!email || !password) {
+    message.textContent = "Please complete all fields.";
     return;
   }
 
-  const vendor = getVendor(product.vendorId);
+  if (!document.getElementById("adminCodeField")
+      .classList.contains("hidden") && !adminCode) {
 
-  if (!vendor || !vendor.active) {
-    alert("No active collection point is available.");
+    message.textContent = "Admin access code is required.";
     return;
   }
 
-  const voucher = {
-    id: createId("VOUCHER"),
-    code: "UPI-" + Math.random().toString(36).slice(2, 8).toUpperCase(),
-    studentId: currentUser.id,
-    studentName: currentUser.name,
-    productId: product.id,
-    productName: product.name,
-    vendorId: vendor.id,
-    status: "Pending",
-    createdAt: new Date().toISOString(),
-    redeemedAt: ""
-  };
+  message.style.color = "#236448";
 
-  db.vouchers.push(voucher);
-  saveDatabase();
-  logActivity("Food voucher created: " + voucher.code);
-
-  alert("Your voucher has been created: " + voucher.code);
-  renderDashboard();
+  message.textContent =
+    "Login form completed. Secure authentication will be connected to Supabase in the next setup.";
 }
-
-// STALL VOUCHER REDEMPTION
-function redeemVoucher(voucherCode) {
-  if (!currentUser || currentUser.role !== "Registered Stall") return;
-
-  const voucher = db.vouchers.find(item =>
-    item.code.toUpperCase() === voucherCode.trim().toUpperCase()
-  );
-
-  if (!voucher) {
-    alert("Voucher not found.");
-    return;
-  }
-
-  if (voucher.status !== "Pending") {
-    alert("This voucher has already been redeemed or cancelled.");
-    return;
-  }
-
-  const vendor = db.vendors.find(item =>
-    item.id === voucher.vendorId &&
-    item.email.toLowerCase() === currentUser.email.toLowerCase()
-  );
-
-  if (!vendor) {
-    alert("This voucher does not belong to your registered stall.");
-    return;
-  }
-
-  const product = getProduct(voucher.productId);
-
-  if (!product || product.stock <= 0) {
-    alert("Food stock is unavailable.");
-    return;
-  }
-
-  product.stock -= 1;
-  voucher.status = "Redeemed";
-  voucher.redeemedAt = new Date().toISOString();
-
-  saveDatabase();
-  logActivity("Voucher redeemed: " + voucher.code);
-
-  alert("Voucher successfully redeemed.");
-  renderDashboard();
-}
-
-// CANCEL AN UNREDEEMED VOUCHER
-function cancelVoucher(voucherId) {
-  if (!currentUser || currentUser.role !== "Student") return;
-
-  const voucher = db.vouchers.find(item =>
-    item.id === voucherId &&
-    item.studentId === currentUser.id
-  );
-
-  if (!voucher || voucher.status !== "Pending") {
-    alert("This voucher cannot be cancelled.");
-    return;
-  }
-
-  voucher.status = "Cancelled";
-  saveDatabase();
-
-  logActivity("Voucher cancelled: " + voucher.code);
-  renderDashboard();
-}
-
-// STUDENT ELIGIBILITY LABEL
-function eligibilityLabel(student) {
-  if (student.eligibility === "Eligible") {
-    return "Eligible";
-  }
-
-  if (student.eligibility === "Non-Eligible") {
-    return "Non-Eligible";
-  }
-
-  return "Pending Verification";
-}
-
-// DONOR SHOPPING CART
-function addToCart(productId) {
-  const product = getProduct(productId);
-
-  if (!currentUser || currentUser.role !== "Donor") return;
-  if (!product || !product.active) return;
-
-  const existing = donorCart.find(item => item.productId === productId);
-
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    donorCart.push({
-      productId,
-      quantity: 1
-    });
-  }
-
-  renderDashboard();
-}
-
-function changeCartQuantity(productId, change) {
-  const item = donorCart.find(item => item.productId === productId);
-  if (!item) return;
-
-  item.quantity += change;
-
-  if (item.quantity <= 0) {
-    donorCart = donorCart.filter(item => item.productId !== productId);
-  }
-
-  renderDashboard();
-}
-
-function getCartTotal() {
-  return donorCart.reduce((total, item) => {
-    const product = getProduct(item.productId);
-    return total + (product ? product.price * item.quantity : 0);
-  }, 0);
-}
-
-// DEMO DONATION CHECKOUT
-function checkoutDonation() {
-  if (!currentUser || currentUser.role !== "Donor") return;
-  if (donorCart.length === 0) {
-    alert("Your cart is empty.");
-    return;
-  }
-
-  const itemsTotal = getCartTotal();
-  const serviceCharge = itemsTotal * 0.02;
-  const tipInput = document.getElementById("donorTip");
-  const tip = Math.max(0, Number(tipInput ? tipInput.value : 0));
-  const grandTotal = itemsTotal + serviceCharge + tip;
-
-  const confirmed = confirm(
-    "Donation summary\n\nItems: " + formatRM(itemsTotal) +
-    "\nService charge (2%): " + formatRM(serviceCharge) +
-    "\nOptional tip: " + formatRM(tip) +
-    "\n\nTotal: " + formatRM(grandTotal) +
-    "\n\nContinue with demo checkout?"
-  );
-
-  if (!confirmed) return;
-
-  const donation = {
-    id: createId("DON"),
-    donorId: currentUser.id,
-    donorName: currentUser.name,
-    items: donorCart.map(item => {
-      const product = getProduct(item.productId);
-      return {
-        productId: item.productId,
-        name: product.name,
-        quantity: item.quantity,
-        unitPrice: product.price
-      };
-    }),
-    itemsTotal,
-    serviceCharge,
-    tip,
-    total: grandTotal,
-    date: new Date().toISOString(),
-    status: "Demo Completed"
-  };
-
-  donation.items.forEach(item => {
-    const product = getProduct(item.productId);
-    if (product) product.stock += item.quantity;
-  });
-
-  db.donations.push(donation);
-  donorCart = [];
-
-  saveDatabase();
-  logActivity("Demo donation completed: " + donation.id);
-
-  alert("Thank you! Your demo donation has been recorded.");
-  renderDashboard();
-}
-
-// DONOR SPONSORSHIP
-function sponsorStudent(studentId, amount) {
-  if (!currentUser || currentUser.role !== "Donor") return;
-
-  const student = db.users.find(user =>
-    user.id === studentId && user.role === "Student"
-  );
-
-  if (!student) {
-    alert("Student account not found.");
-    return;
-  }
-
-  const value = Number(amount);
-
-  if (!Number.isFinite(value) || value <= 0) {
-    alert("Please enter a valid sponsorship amount.");
-    return;
-  }
-
-  db.donations.push({
-    id: createId("SPONSOR"),
-    donorId: currentUser.id,
-    donorName: currentUser.name,
-    studentId: student.id,
-    studentName: student.name,
-    total: value,
-    date: new Date().toISOString(),
-    status: "Demo Sponsorship"
-  });
-
-  saveDatabase();
-  logActivity("Student sponsorship recorded.");
-  alert("Demo sponsorship recorded successfully.");
-  renderDashboard();
-}
-
-// ADMIN: UPDATE STUDENT ELIGIBILITY
-function updateEligibility(studentId, status) {
-  if (!currentUser || currentUser.role !== "Admin") return;
-
-  const student = db.users.find(user =>
-    user.id === studentId && user.role === "Student"
-  );
-
-  if (!student) return;
-
-  student.eligibility = status;
-  saveDatabase();
-  logActivity("Updated eligibility for " + student.name);
-  renderDashboard();
-}
-
-// ADMIN: ADD FOOD PRODUCT
-function addProduct() {
-  if (!currentUser || currentUser.role !== "Admin") return;
-
-  const name = document.getElementById("newFoodName").value.trim();
-  const category = document.getElementById("newFoodCategory").value;
-  const price = Number(document.getElementById("newFoodPrice").value);
-  const stock = Number(document.getElementById("newFoodStock").value);
-  const access = document.getElementById("newFoodAccess").value;
-  const vendorId = document.getElementById("newFoodVendor").value;
-
-  if (!name || !Number.isFinite(price) || price < 0 ||
-      !Number.isInteger(stock) || stock < 0) {
-    alert("Please enter valid product details.");
-    return;
-  }
-
-  db.products.push({
-    id: createId("FOOD"),
-    name,
-    category,
-    price,
-    stock,
-    image: "",
-    access,
-    sponsorshipId: "",
-    vendorId,
-    active: true
-  });
-
-  saveDatabase();
-  logActivity("Added food product: " + name);
-  alert("Food product added.");
-  renderDashboard();
-}
-
-// ADMIN: UPLOAD A SMALL PRODUCT IMAGE
-function uploadFoodImage(productId, fileInput) {
-  if (!currentUser || currentUser.role !== "Admin") return;
-
-  const file = fileInput.files[0];
-  if (!file) return;
-
-  if (!file.type.startsWith("image/")) {
-    alert("Please select an image file.");
-    return;
-  }
-
-  if (file.size > 500000) {
-    alert("Please use an image smaller than 500KB.");
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = function(event) {
-    const product = getProduct(productId);
-    if (!product) return;
-
-    product.image = event.target.result;
-    saveDatabase();
-    logActivity("Updated image for " + product.name);
-    renderDashboard();
-  };
-
-  reader.readAsDataURL(file);
-}
-
-// ADMIN: UPDATE PRODUCT STOCK
-function updateProductStock(productId, amount) {
-  if (!currentUser || currentUser.role !== "Admin") return;
-
-  const product = getProduct(productId);
-  const newStock = Number(amount);
-
-  if (!product || !Number.isInteger(newStock) || newStock < 0) {
-    alert("Please enter a valid stock quantity.");
-    return;
-  }
-
-  product.stock = newStock;
-  saveDatabase();
-  logActivity("Updated stock for " + product.name);
-  renderDashboard();
-}
-
-// ADMIN: DELETE PRODUCT
-function deleteProduct(productId) {
-  if (!currentUser || currentUser.role !== "Admin") return;
-
-  const product = getProduct(productId);
-  if (!product) return;
-
-  if (!confirm("Delete " + product.name + "?")) return;
-
-  db.products = db.products.filter(item => item.id !== productId);
-  saveDatabase();
-  logActivity("Deleted food product: " + product.name);
-  renderDashboard();
-}
-
-// ADMIN: CREATE SPONSORSHIP
-function addSponsorship() {
-  if (!currentUser || currentUser.role !== "Admin") return;
-
-  const name = document.getElementById("sponsorName").value.trim();
-  const accessRule = document.getElementById("sponsorAccess").value;
-  const description = document.getElementById("sponsorDescription").value.trim();
-
-  if (!name) {
-    alert("Please enter a sponsorship name.");
-    return;
-  }
-
-  db.sponsorships.push({
-    id: createId("SP"),
-    name,
-    accessRule,
-    description,
-    active: true,
-    createdAt: new Date().toISOString()
-  });
-
-  saveDatabase();
-  logActivity("Created sponsorship: " + name);
-  alert("Sponsorship created.");
-  renderDashboard();
-}
-
-// ADMIN: ADD REGISTERED STALL
-function addVendor() {
-  if (!currentUser || currentUser.role !== "Admin") return;
-
-  const name = document.getElementById("vendorName").value.trim();
-  const email = document.getElementById("vendorEmail").value.trim().toLowerCase();
-  const address = document.getElementById("vendorAddress").value.trim();
-  const map = document.getElementById("vendorMap").value.trim();
-  const hours = document.getElementById("vendorHours").value.trim();
-
-  if (!name || !email || !address) {
-    alert("Please enter the stall name, email and address.");
-    return;
-  }
-
-  db.vendors.push({
-    id: createId("SHOP"),
-    name,
-    email,
-    address,
-    map,
-    hours,
-    active: true
-  });
-
-  saveDatabase();
-  logActivity("Added registered stall: " + name);
-  alert("Registered stall added.");
-  renderDashboard();
-}
-
-// DASHBOARD NAVIGATION
-function setTab(tabName) {
-  currentTab = tabName;
-  renderDashboard();
-}
-
-function renderDashboard() {
-  if (!currentUser) return;
-
-  const role = currentUser.role;
-  const tabs = document.getElementById("tabs");
-
-  document.getElementById("welcomeTitle").textContent =
-    role + " Dashboard";
-
-  document.getElementById("welcomeText").textContent =
-    "Welcome, " + currentUser.name;
-
-  let availableTabs = [];
-
-  if (role === "Student") {
-    availableTabs = [
-      ["dashboard", "Home"],
-      ["food", "Food Catalogue"],
-      ["vouchers", "My Vouchers"],
-      ["history", "My History"]
-    ];
-  } else if (role === "Donor") {
-    availableTabs = [
-      ["dashboard", "Home"],
-      ["food", "Donation Catalogue"],
-      ["cart", "My Cart"],
-      ["donations", "My Donations"],
-      ["leaderboard", "Top Donors"]
-    ];
-  } else if (role === "Admin") {
-    availableTabs = [
-      ["dashboard", "Overview"],
-      ["users", "Students"],
-      ["food", "Food Inventory"],
-      ["sponsorships", "Sponsorships"],
-      ["vendors", "Registered Stalls"],
-      ["vouchers", "Vouchers"],
-      ["reports", "Reports"]
-    ];
-  } else if (role === "Organiser") {
-    availableTabs = [
-      ["dashboard", "Home"],
-      ["campaigns", "Campaigns"],
-      ["reports", "Reports"]
-    ];
-  } else if (role === "Registered Stall") {
-    availableTabs = [
-      ["dashboard", "Stall Home"],
-      ["vouchers", "Redeem Voucher"],
-      ["reports", "Daily Report"]
-    ];
-  }
-
-  if (!availableTabs.some(item => item[0] === currentTab)) {
-    currentTab = "dashboard";
-  }
-
-  tabs.innerHTML = availableTabs.map(item =>
-    `<button class="${currentTab === item[0] ? "active" : ""}"
-      onclick="setTab('${item[0]}')">${item[1]}</button>`
-  ).join("");
-
-  const content = document.getElementById("content");
-
-  if (role === "Student") renderStudent(content);
-  else if (role === "Donor") renderDonor(content);
-  else if (role === "Admin") renderAdmin(content);
-  else if (role === "Organiser") renderOrganiser(content);
-  else if (role === "Registered Stall") renderStall(content);
-}
-
-// STUDENT DASHBOARD
-function renderStudent(content) {
-  if (currentTab === "dashboard") {
-    content.innerHTML = `
-      <div class="card">
-        <h3>Student Assistance</h3>
-        <p>Your eligibility status:
-          <span class="tag">${escapeHTML(eligibilityLabel(currentUser))}</span>
-        </p>
-        <p class="muted">General assistance is available to eligible students.
-        Sponsored food may have different access conditions.</p>
-        <button onclick="setTab('food')">Browse Food</button>
-      </div>`;
-  }
-
-  if (currentTab === "food") {
-    const products = db.products.filter(product =>
-      product.active &&
-      studentCanClaim(product, currentUser)
-    );
-
-    content.innerHTML = `
-      <h3>Available Food</h3>
-      <div class="grid">
-        ${products.map(product => {
-          const vendor = getVendor(product.vendorId);
-          return `
-            <div class="card">
-              ${product.image
-                ? `<img class="food-image" src="${product.image}" alt="${escapeHTML(product.name)}">`
-                : `<div class="food-image"></div>`}
-              <h3>${escapeHTML(product.name)}</h3>
-              <span class="tag">${escapeHTML(getProductAccessLabel(product))}</span>
-              <p>Available stock: ${product.stock}</p>
-              <p class="muted">${vendor ? escapeHTML(vendor.name) : "Collection point not assigned"}</p>
-              ${vendor && vendor.map
-                ? `<a href="${escapeHTML(vendor.map)}" target="_blank" rel="noopener">View location</a>`
-                : ""}
-              <br><br>
-              <button onclick="claimFood('${product.id}')">Claim Food</button>
-            </div>`;
-        }).join("") || `<p class="muted">No food is currently available for your account.</p>`}
-      </div>`;
-  }
-
-  if (currentTab === "vouchers" || currentTab === "history") {
-    const vouchers = db.vouchers.filter(item =>
-      item.studentId === currentUser.id
-    );
-
-    content.innerHTML = `
-      <h3>My Food Vouchers</h3>
-      ${vouchers.map(item => `
-        <div class="card">
-          <h3>${escapeHTML(item.productName)}</h3>
-          <p>Voucher: <strong>${escapeHTML(item.code)}</strong></p>
-          <p>Status: <span class="tag">${escapeHTML(item.status)}</span></p>
-          <p class="muted">${new Date(item.createdAt).toLocaleString()}</p>
-          ${item.status === "Pending"
-            ? `<button class="secondary" onclick="cancelVoucher('${item.id}')">Cancel Voucher</button>`
-            : ""}
-        </div>
-      `).join("") || `<p class="muted">No vouchers yet.</p>`}`;
-  }
-}
-
-// DONOR DASHBOARD
-function renderDonor(content) {
-  if (currentTab === "dashboard") {
-    content.innerHTML = `
-      <div class="card">
-        <h3>Make a Difference</h3>
-        <p class="muted">Your contribution helps provide food assistance to UPSI students.</p>
-        <button onclick="setTab('food')">Start Donating</button>
-      </div>`;
-  }
-
-  if (currentTab === "food") {
-    content.innerHTML = `
-      <h3>Donation Catalogue</h3>
-      <p class="muted">Choose dry goods or ready-to-eat meals for the food assistance stock.</p>
-      <div class="grid">
-        ${db.products.filter(item => item.active).map(product => `
-          <div class="card">
-            ${product.image
-              ? `<img class="food-image" src="${product.image}" alt="${escapeHTML(product.name)}">`
-              : `<div class="food-image"></div>`}
-            <h3>${escapeHTML(product.name)}</h3>
-            <p>${escapeHTML(product.category)}</p>
-            <p class="price">${formatRM(product.price)}</p>
-            <button onclick="addToCart('${product.id}')">Add to Cart</button>
-          </div>
-        `).join("")}
-      </div>`;
-  }
-
-  if (currentTab === "cart") {
-    content.innerHTML = `
-      <h3>My Donation Cart</h3>
-      ${donorCart.map(item => {
-        const product = getProduct(item.productId);
-        if (!product) return "";
-        return `
-          <div class="card row">
-            <div>
-              <strong>${escapeHTML(product.name)}</strong>
-              <p>${formatRM(product.price)} × ${item.quantity}</p>
-            </div>
-            <div>
-              <button class="secondary" onclick="changeCartQuantity('${product.id}',-1)">−</button>
-              ${item.quantity}
-              <button class="secondary" onclick="changeCartQuantity('${product.id}',1)">+</button>
-            </div>
-          </div>`;
-      }).join("") || `<p class="muted">Your cart is empty.</p>`}
-
-      <div class="card">
-        <p>Items total: <strong>${formatRM(getCartTotal())}</strong></p>
-        <p>Service charge: 2%</p>
-        <label>Optional tip (RM)</label>
-        <input id="donorTip" type="number" min="0" step="0.50" value="0">
-        <button class="gold" onclick="checkoutDonation()">Confirm Demo Donation</button>
-        <p class="muted">Demo checkout only. No real payment is collected.</p>
-      </div>`;
-  }
-
-  if (currentTab === "donations") {
-    const donations = db.donations.filter(item =>
-      item.donorId === currentUser.id
-    );
-
-    content.innerHTML = `
-      <h3>Donation History</h3>
-      ${donations.map(item => `
-        <div class="card">
-          <strong>${escapeHTML(item.id)}</strong>
-          <p>${formatRM(item.total)}</p>
-          <p class="muted">${new Date(item.date).toLocaleString()}</p>
-          <span class="tag">${escapeHTML(item.status)}</span>
-        </div>
-      `).join("") || `<p class="muted">No donations recorded yet.</p>`}`;
-  }
-
-  if (currentTab === "leaderboard") {
-    const totals = {};
-
-    db.donations.forEach(item => {
-      totals[item.donorId] = (totals[item.donorId] || 0) + Number(item.total || 0);
-    });
-
-    const leaders = Object.entries(totals)
-      .map(([id, total]) => ({
-        user: db.users.find(user => user.id === id),
-        total
-      }))
-      .filter(item => item.user)
-      .sort((a, b) => b.total - a.total)
-      .slice(0, 10);
-
-    content.innerHTML = `
-      <h3>Top 10 Donors</h3>
-      ${leaders.map((item, index) => `
-        <div class="card row">
-          <strong>#${index + 1} ${escapeHTML(item.user.name)}</strong>
-          <strong>${formatRM(item.total)}</strong>
-        </div>
-      `).join("") || `<p class="muted">No donor records yet.</p>`}`;
-  }
-}
-
-// ORGANISER DASHBOARD
-function renderOrganiser(content) {
-  if (currentTab === "dashboard") {
-    content.innerHTML = `
-      <div class="card">
-        <h3>Organiser Portal</h3>
-        <p class="muted">Manage food assistance campaigns and community activities.</p>
-        <button onclick="setTab('campaigns')">Manage Campaigns</button>
-      </div>`;
-  }
-
-  if (currentTab === "campaigns") {
-    content.innerHTML = `
-      <h3>Create Campaign</h3>
-      <div class="card">
-        <label>Campaign Name</label>
-        <input id="campaignName" placeholder="Campaign name">
-        <label>Description</label>
-        <textarea id="campaignDescription"></textarea>
-        <label>Event Date</label>
-        <input id="campaignDate" type="date">
-        <label>Location</label>
-        <input id="campaignLocation" placeholder="Event location">
-        <button onclick="addCampaign()">Create Campaign</button>
-      </div>
-      ${db.campaigns.map(item => `
-        <div class="card">
-          <h3>${escapeHTML(item.name)}</h3>
-          <p>${escapeHTML(item.description)}</p>
-          <p>${escapeHTML(item.date)} · ${escapeHTML(item.location)}</p>
-        </div>
-      `).join("")}`;
-  }
-
-  if (currentTab === "reports") {
-    content.innerHTML = `
-      <div class="card">
-        <h3>Campaign Summary</h3>
-        <p>Total campaigns: ${db.campaigns.length}</p>
-      </div>`;
-  }
-}
-
-function addCampaign() {
-  if (!currentUser || currentUser.role !== "Organiser") return;
-
-  const name = document.getElementById("campaignName").value.trim();
-  const description = document.getElementById("campaignDescription").value.trim();
-  const date = document.getElementById("campaignDate").value;
-  const location = document.getElementById("campaignLocation").value.trim();
-
-  if (!name || !date || !location) {
-    alert("Please enter the campaign name, date and location.");
-    return;
-  }
-
-  db.campaigns.push({
-    id: createId("CAMP"),
-    name,
-    description,
-    date,
-    location,
-    organiserId: currentUser.id
-  });
-
-  saveDatabase();
-  logActivity("Created campaign: " + name);
-  alert("Campaign created.");
-  renderDashboard();
-}
-
-// REGISTERED STALL DASHBOARD
-function renderStall(content) {
-  const vendor = db.vendors.find(item =>
-    item.email.toLowerCase() === currentUser.email.toLowerCase()
-  );
-
-  if (currentTab === "dashboard") {
-    content.innerHTML = `
-      <div class="card">
-        <h3>Registered Stall Portal</h3>
-        ${vendor ? `
-          <p><strong>${escapeHTML(vendor.name)}</strong></p>
-          <p>${escapeHTML(vendor.address)}</p>
-          <p>${escapeHTML(vendor.hours)}</p>
-          ${vendor.map ? `<a href="${escapeHTML(vendor.map)}" target="_blank" rel="noopener">Open Google Maps</a>` : ""}
-        ` : `<p class="muted">Your account is not linked to a registered stall yet. Please contact the administrator.</p>`}
-        <hr>
-        <p>Subscription: RM50/month after the first 2 free months.</p>
-        <p class="muted">Subscription information only. No payment is collected here.</p>
-      </div>`;
-  }
-
-  if (currentTab === "vouchers") {
-    content.innerHTML = `
-      <div class="card">
-        <h3>Redeem Student Voucher</h3>
-        <label>Voucher Code</label>
-        <input id="redeemCode" placeholder="Enter voucher code">
-        <button onclick="redeemVoucher(document.getElementById('redeemCode').value)">Redeem Voucher</button>
-      </div>`;
-  }
-
-  if (currentTab === "reports") {
-    const redeemed = db.vouchers.filter(item =>
-      item.status === "Redeemed" &&
-      vendor &&
-      item.vendorId === vendor.id
-    );
-
-    content.innerHTML = `
-      <div class="card">
-        <h3>Daily Report</h3>
-        <p>Redeemed vouchers: ${redeemed.length}</p>
-      </div>`;
-  }
-}
-
-// ADMIN DASHBOARD
-function renderAdmin(content) {
-  if (currentTab === "dashboard") {
-    content.innerHTML = `
-      <h3>Administration Overview</h3>
-      <div class="grid">
-        <div class="card"><h2>${db.users.length}</h2><p>Accounts</p></div>
-        <div class="card"><h2>${db.products.length}</h2><p>Food Products</p></div>
-        <div class="card"><h2>${db.vouchers.length}</h2><p>Vouchers</p></div>
-        <div class="card"><h2>${db.donations.length}</h2><p>Donation Records</p></div>
-      </div>
-      <div class="card">
-        <h3>Admin Access</h3>
-        <p class="muted">Manage students, food stock, sponsorships, stalls and reports.</p>
-      </div>`;
-  }
-
-  if (currentTab === "users") {
-    const students = db.users.filter(user => user.role === "Student");
-
-    content.innerHTML = `
-      <h3>Student Accounts</h3>
-      ${students.map(student => `
-        <div class="card">
-          <strong>${escapeHTML(student.name)}</strong>
-          <p>${escapeHTML(student.email)}</p>
-          <p>${escapeHTML(student.faculty)} · ${escapeHTML(student.college)}</p>
-          <p>Status: <span class="tag">${escapeHTML(student.eligibility)}</span></p>
-          <select id="eligibility-${student.id}">
-            <option ${student.eligibility === "Pending" ? "selected" : ""}>Pending</option>
-            <option ${student.eligibility === "Eligible" ? "selected" : ""}>Eligible</option>
-            <option ${student.eligibility === "Non-Eligible" ? "selected" : ""}>Non-Eligible</option>
-          </select>
-          <button onclick="updateEligibility('${student.id}',document.getElementById('eligibility-${student.id}').value)">Save Status</button>
-        </div>
-      `).join("") || `<p class="muted">No student accounts yet.</p>`}`;
-  }
-
-  if (currentTab === "food") {
-    content.innerHTML = `
-      <h3>Food Inventory</h3>
-      <div class="card">
-        <label>Food Name</label>
-        <input id="newFoodName" placeholder="Food name">
-        <label>Category</label>
-        <select id="newFoodCategory">
-          <option>Dry Goods</option>
-          <option>Ready-to-Eat</option>
-        </select>
-        <label>Price (RM)</label>
-        <input id="newFoodPrice" type="number" min="0" step="0.01">
-        <label>Initial Stock</label>
-        <input id="newFoodStock" type="number" min="0" step="1">
-        <label>Access Type</label>
-        <select id="newFoodAccess">
-          <option>General</option>
-          <option>Sponsored</option>
-        </select>
-        <label>Collection Stall</label>
-        <select id="newFoodVendor">
-          ${db.vendors.map(vendor => `
-            <option value="${vendor.id}">${escapeHTML(vendor.name)}</option>
-          `).join("")}
-        </select>
-        <button onclick="addProduct()">Add Food Product</button>
-      </div>
-
-      <div class="grid">
-        ${db.products.map(product => `
-          <div class="card">
-            ${product.image
-              ? `<img class="food-image" src="${product.image}" alt="${escapeHTML(product.name)}">`
-              : ""}
-            <strong>${escapeHTML(product.name)}</strong>
-            <p>${escapeHTML(product.category)} · ${formatRM(product.price)}</p>
-            <label>Stock</label>
-            <input id="stock-${product.id}" type="number" min="0" value="${product.stock}">
-            <button class="secondary" onclick="updateProductStock('${product.id}',document.getElementById('stock-${product.id}').value)">Update Stock</button>
-            <label>Upload Image</label>
-            <input type="file" accept="image/*" onchange="uploadFoodImage('${product.id}',this)">
-            <br><br>
-            <button class="danger" onclick="deleteProduct('${product.id}')">Delete</button>
-          </div>
-        `).join("")}
-      </div>`;
-  }
-
-  if (currentTab === "sponsorships") {
-    content.innerHTML = `
-      <h3>Sponsorship Management</h3>
-      <div class="card">
-        <label>Sponsorship Name</label>
-        <input id="sponsorName" placeholder="Example: FPE Food Sponsorship">
-        <label>Who can claim?</label>
-        <select id="sponsorAccess">
-          <option>All Students</option>
-          <option>Eligible Students</option>
-          <option>FPE Students</option>
-          <option>FSM Students</option>
-          <option>FSK Students</option>
-        </select>
-        <label>Description</label>
-        <textarea id="sponsorDescription"></textarea>
-        <button onclick="addSponsorship()">Create Sponsorship</button>
-      </div>
-      ${db.sponsorships.map(item => `
-        <div class="card">
-          <strong>${escapeHTML(item.name)}</strong>
-          <p>${escapeHTML(item.accessRule)}</p>
-          <p class="muted">${escapeHTML(item.description)}</p>
-        </div>
-      `).join("")}`;
-  }
-
-  if (currentTab === "vendors") {
-    content.innerHTML = `
-      <h3>Registered Stalls</h3>
-      <div class="card">
-        <label>Stall Name</label>
-        <input id="vendorName" placeholder="Stall name">
-        <label>Stall Login Email</label>
-        <input id="vendorEmail" type="email" placeholder="Stall account email">
-        <label>Address</label>
-        <input id="vendorAddress" placeholder="Full address">
-        <label>Google Maps Link</label>
-        <input id="vendorMap" placeholder="https://maps.google.com/...">
-        <label>Operating Hours</label>
-        <input id="vendorHours" placeholder="Example: 8 AM - 5 PM">
-        <button onclick="addVendor()">Add Registered Stall</button>
-      </div>
-      ${db.vendors.map(vendor => `
-        <div class="card">
-          <strong>${escapeHTML(vendor.name)}</strong>
-          <p>${escapeHTML(vendor.address)}</p>
-          <p>${escapeHTML(vendor.email)}</p>
-          ${vendor.map ? `<a href="${escapeHTML(vendor.map)}" target="_blank" rel="noopener">View Map</a>` : ""}
-        </div>
-      `).join("")}`;
-  }
-
-  if (currentTab === "vouchers") {
-    content.innerHTML = `
-      <h3>Voucher Records</h3>
-      ${db.vouchers.map(voucher => `
-        <div class="card">
-          <strong>${escapeHTML(voucher.code)}</strong>
-          <p>${escapeHTML(voucher.studentName)} · ${escapeHTML(voucher.productName)}</p>
-          <span class="tag">${escapeHTML(voucher.status)}</span>
-          <p class="muted">${new Date(voucher.createdAt).toLocaleString()}</p>
-        </div>
-      `).join("") || `<p class="muted">No vouchers recorded.</p>`}`;
-  }
-
-  if (currentTab === "reports") {
-    const totalDonations = db.donations.reduce(
-      (sum, item) => sum + Number(item.total || 0), 0
-    );
-
-    content.innerHTML = `
-      <h3>Platform Reports</h3>
-      <div class="grid">
-        <div class="card"><h2>${db.users.length}</h2><p>Total Accounts</p></div>
-        <div class="card"><h2>${db.products.reduce((sum,item) => sum + Number(item.stock || 0),0)}</h2><p>Total Food Stock</p></div>
-        <div class="card"><h2>${db.vouchers.filter(item => item.status === "Redeemed").length}</h2><p>Redeemed Vouchers</p></div>
-        <div class="card"><h2>${formatRM(totalDonations)}</h2><p>Demo Donation Records</p></div>
-      </div>
-      <h3>Recent Activity</h3>
-      ${db.activities.slice(0,30).map(item => `
-        <div class="card">
-          <strong>${escapeHTML(item.action)}</strong>
-          <p class="muted">${escapeHTML(item.user)} · ${escapeHTML(item.date)}</p>
-        </div>
-      `).join("")}`;
-  }
-}
-
-// INITIAL LOGIN FIELD DISPLAY
-document.getElementById("loginRole").dispatchEvent(
-  new Event("change")
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://vfzhszkzoufsocrgxdur.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_d8TdD672EiNxb3CsLrCecw_L2XKYPp5";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
 );
 
-// END OF APPLICATION SCRIPT
+console.log("UPSInfaq: Supabase berjaya dimuatkan!");
 </script>
 </body>
 </html>
