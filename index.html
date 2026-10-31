@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123c2d">
+<title>UPSInfaq | Campus Food Support</title>
+<style>
+:root{--green:#123c2d;--mint:#dceee3;--gold:#d5ae65;--bg:#f5f7f3;--ink:#1e3028;--muted:#718078;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif}
+header{background:var(--green);color:white;padding:22px 18px 25px}
+.brand{font-size:23px;font-weight:800;letter-spacing:.3px}
+.tag{font-size:12px;color:#d7e7dc;margin-top:5px}
+.topline{display:flex;justify-content:space-between;align-items:center}
+.pill{background:#ffffff20;border:1px solid #ffffff40;border-radius:20px;padding:7px 10px;font-size:11px}
+main{max-width:850px;margin:auto;padding:16px 14px 90px}
+.welcome{margin:10px 0 18px}
+h2{font-size:22px;margin:0 0 6px}
+h3{font-size:16px;margin:0 0 12px}
+p{color:var(--muted);font-size:13px;line-height:1.5}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px 14px;background:white;position:sticky;top:0;z-index:5;border-bottom:1px solid #e5eae5}
+nav button{border:0;border-radius:22px;padding:10px 14px;background:#edf2ed;color:var(--green);font-weight:700;white-space:nowrap}
+nav button.active{background:var(--green);color:white}
+.card{background:white;border-radius:17px;padding:17px;margin:12px 0;box-shadow:0 3px 14px #102c1710}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{background:var(--mint);border-radius:14px;padding:14px}
+.stat strong{display:block;font-size:22px;color:var(--green);margin-top:6px}
+.small{font-size:11px;color:var(--muted)}
+.btn{background:var(--green);color:white;border:0;border-radius:11px;padding:12px 15px;font-weight:700;width:100%;margin-top:9px}
+.btn.gold{background:#a77a32}
+.btn.light{background:var(--mint);color:var(--green)}
+input,select{width:100%;padding:12px;border:1px solid #dce4dd;border-radius:10px;margin:6px 0 12px;background:white;font-size:14px}
+label{font-size:12px;font-weight:700}
+.item{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #edf0ed;font-size:13px}
+.item:last-child{border:0}
+.rank{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #edf0ed}
+.medal{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--mint);font-weight:800;color:var(--green)}
+.amount{margin-left:auto;font-weight:800;color:var(--green)}
+.badge{font-size:10px;background:var(--mint);color:var(--green);padding:5px 8px;border-radius:20px}
+.hidden{display:none!important}
+.voucher{text-align:center;border:2px dashed var(--gold);border-radius:16px;padding:18px;background:#fffdf7}
+.voucher h2{color:var(--green);letter-spacing:2px}
+.qr{width:180px;height:180px;object-fit:contain;margin:12px auto;display:block}
+footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header>
+ <div class="topline"><div><div class="brand">🌿 UPSInfaq</div><div class="tag">Campus Food Support Platform</div></div><span class="pill">UPSI COMMUNITY</span></div>
+</header>
+<nav id="nav">
+ <button class="active" onclick="show('home',this)">Home</button>
+ <button onclick="show('student',this)">Student</button>
+ <button onclick="show('donor',this)">Donor</button>
+ <button onclick="show('programs',this)">Programs</button>
+ <button onclick="show('stalls',this)">Stalls</button>
+ <button onclick="show('admin',this)">Admin</button>
+</nav>
+<main>
+<section id="home">
+ <div class="welcome"><h2>Welcome to UPSInfaq</h2><p>Sharing food, supporting students and building a caring campus community.</p></div>
+ <div class="grid">
+  <div class="stat"><span class="small">Funds raised</span><strong id="raised">RM 1,240</strong></div>
+  <div class="stat"><span class="small">Meals supported</span><strong>186</strong></div>
+  <div class="stat"><span class="small">Campus partners</span><strong>12</strong></div>
+  <div class="stat"><span class="small">Food items</span><strong>320</strong></div>
+ </div>
+ <div class="card"><h3>Weekly Donation Goal</h3><div class="item"><span>RM 1,240 raised of RM 2,000</span><b>62%</b></div><div style="height:10px;background:#e8eee9;border-radius:10px"><div style="width:62%;height:10px;background:#28734e;border-radius:10px"></div></div><p>Every contribution helps provide food assistance to UPSI students.</p></div>
+ <div class="card"><h3>How UPSInfaq works</h3><div class="item"><span>01 · Donate food or funds</span><span>♡</span></div><div class="item"><span>02 · Students claim available support</span><span>♡</span></div><div class="item"><span>03 · Show voucher at selected stall</span><span>♡</span></div></div>
+</section>
+
+<section id="student" class="hidden">
+ <h2>Student Portal</h2><p>Sign in with your UPSI student email to check support and claim meals.</p>
+ <div class="card">
+  <label>Student email</label><input id="studentEmail" placeholder="name@siswa.com">
+  <label>Faculty</label><select id="faculty"><option>FPE</option><option>FSM</option><option>FSK</option></select>
+  <label>College</label><select id="college"><option>KUO</option><option>KHAR</option><option>KAHS</option><option>KZ</option></select>
+  <button class="btn" onclick="studentLogin()">Check eligibility</button>
+  <p id="studentMsg"></p>
+ </div>
+ <div id="studentOptions" class="hidden">
+  <div class="card"><h3>Your student assistance</h3><div class="grid"><div class="stat"><span class="small">Eligibility</span><strong style="font-size:18px">B40</strong></div><div class="stat"><span class="small">Meal credit</span><strong>RM5</strong></div></div><p>Demo status only. Final eligibility must be approved by UPSInfaq Admin.</p></div>
+  <div class="card"><h3>Available meals</h3>
+   <div class="item"><span>🍚 Nasi Lemak · Kedai Selera Siswa</span><b>FREE</b></div>
+   <div class="item"><span>🍜 Fried Noodles · Kiosk Cempaka</span><b>FREE</b></div>
+   <div class="item"><span>🥪 Sandwich · Cafe Campus</span><b>FREE</b></div>
+   <label>Choose participating stall</label><select id="claimStall"><option>Kedai Selera Siswa</option><option>Kiosk Cempaka</option><option>Cafe Campus</option></select>
+   <label>Choose meal</label><select id="claimMeal"><option>Nasi Lemak</option><option>Fried Noodles</option><option>Sandwich</option></select>
+   <button class="btn" onclick="createVoucher()">Claim meal & generate voucher</button>
+  </div>
+  <div id="voucherArea" class="card hidden"></div>
+ </div>
+</section>
+
+<section id="donor" class="hidden">
+ <h2>Donor Portal</h2><p>Your kindness makes a difference. Support meals and essential food items.</p>
+ <div class="card"><h3>Make a donation</h3>
+  <label>Donor name</label><input id="donorName" placeholder="Your name or Anonymous">
+  <label>Donation type</label><select id="donationType"><option value="cash">Cash donation</option><option value="items">Food items</option></select>
+  <label>Donation amount (RM)</label><input id="donationAmount" type="number" min="1" value="20">
+  <label>Optional tip (RM)</label><input id="tip" type="number" min="0" value="0">
+  <button class="btn" onclick="donate()">Confirm demo donation</button><p id="donationMsg"></p>
+ </div>
+ <div class="card"><h3>🏆 Donor appreciation ranking</h3><label>Ranking period</label><select id="rankPeriod" onchange="renderRanks()"><option value="week">This week</option><option value="month">This month</option></select><div id="rankList"></div><p class="small">Donors may choose to appear as Anonymous. Demo ranking data.</p></div>
+ <div class="card"><h3>Donation impact</h3><div class="grid"><div class="stat"><span class="small">Meals funded</span><strong>186</strong></div><div class="stat"><span class="small">Food packages</span><strong>74</strong></div></div></div>
+</section>
+
+<section id="programs" class="hidden">
+ <h2>Food Programs</h2><p>Claim free meals offered by campus organisers. Limited packs available.</p>
+ <div class="card"><h3>FPE Student Meal Day</h3><p>Monday · 12:00 PM · Faculty of Management</p><div class="item"><span>Available packs</span><b id="packs1">30</b></div><button class="btn" onclick="programClaim('FPE Student Meal Day','Kedai Selera Siswa','packs1')">Claim a pack</button></div>
+ <div class="card"><h3>FSM Community Lunch</h3><p>Wednesday · 1:00 PM · Faculty of Science</p><div class="item"><span>Available packs</span><b id="packs2">20</b></div><button class="btn" onclick="programClaim('FSM Community Lunch','Kiosk Cempaka','packs2')">Claim a pack</button></div>
+ <div class="card"><h3>KUO Sharing Friday</h3><p>Friday · 12:30 PM · KUO College</p><div class="item"><span>Available packs</span><b id="packs3">25</b></div><button class="btn" onclick="programClaim('KUO Sharing Friday','Cafe Campus','packs3')">Claim a pack</button></div>
+ <div id="programVoucher" class="card hidden"></div>
+</section>
+
+<section id="stalls" class="hidden">
+ <h2>Registered Stalls</h2><p>Find participating food partners and view their subscription details.</p>
+ <div class="card"><h3>Kedai Selera Siswa</h3><p>Campus food court · Meal redemption partner</p><span class="badge">Active partner</span><a class="btn light" style="display:block;text-align:center;text-decoration:none" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Universiti+Pendidikan+Sultan+Idris">Open Google Maps</a></div>
+ <div class="card"><h3>Kiosk Cempaka</h3><p>Campus kiosk · Meal redemption partner</p><span class="badge">Active partner</span><a class="btn light" style="display:block;text-align:center;text-decoration:none" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Universiti+Pendidikan+Sultan+Idris">Open Google Maps</a></div>
+ <div class="card"><h3>Cafe Campus</h3><p>Campus cafe · Meal redemption partner</p><span class="badge">Active partner</span><a class="btn light" style="display:block;text-align:center;text-decoration:none" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Universiti+Pendidikan+Sultan+Idris">Open Google Maps</a></div>
+ <div class="card"><h3>Stall subscription</h3><div class="grid"><div class="stat"><span class="small">Monthly fee</span><strong>RM50</strong></div><div class="stat"><span class="small">Free trial</span><strong>2 months</strong></div></div><p>After the two-month introductory period, participating stalls pay RM50 per month (RM600 per year).</p><span class="badge">Demo subscription information</span></div>
+ <div class="card"><h3>Stall voucher redemption</h3><label>Enter voucher code</label><input id="redeemCode" placeholder="Example: UPI-123456"><button class="btn" onclick="redeem()">Verify & redeem voucher</button><p id="redeemMsg"></p></div>
+</section>
+
+<section id="admin" class="hidden">
+ <h2>Admin Dashboard</h2><p>Demo access only. Production administration requires secure server-side authentication.</p>
+ <div class="card" id="adminLogin"><label>Admin access code</label><input id="adminCode" type="password" placeholder="Enter demo code"><button class="btn" onclick="adminLogin()">Login as Admin</button><p class="small">Demo code: UPSI2026</p></div>
+ <div id="adminPanel" class="hidden">
+  <div class="grid"><div class="stat"><span class="small">Donation service fee (2%)</span><strong id="feeTotal">RM24.80</strong></div><div class="stat"><span class="small">Stall subscription</span><strong>RM50</strong></div><div class="stat"><span class="small">University annual fee</span><strong>RM4,000</strong></div><div class="stat"><span class="small">Voucher records</span><strong id="voucherCount">0</strong></div></div>
+  <div class="card"><h3>Student eligibility management</h3><label>Student email</label><input id="adminStudent" placeholder="student@siswa.com"><label>Household category</label><select id="category"><option>B40</option><option>M40</option><option>T20</option></select><button class="btn" onclick="alert('Demo: student category saved locally.')">Save student category</button></div>
+  <div class="card"><h3>Voucher activity</h3><div id="voucherRecords">No vouchers generated yet.</div></div>
+  <div class="card"><h3>Revenue transparency</h3><p>Donation service charges and stall subscription income are operating revenue. Restricted student-aid donations should be accounted for separately.</p></div>
+ </div>
+</section>
+<footer>UPSInfaq · A campus community that cares<br>Prototype demonstration · Not connected to real payments or university records</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let vouchers=JSON.parse(localStorage.getItem('upiVouchers')||'{}');
+let donors=JSON.parse(localStorage.getItem('upiDonors')||'[]');
+let donationTotal=1240,fees=24.8;
+function show(id,btn){document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(id==='donor')renderRanks();if(id==='admin'&&sessionStorage.getItem('upiAdmin'))unlockAdmin()}
+function studentLogin(){let e=$('studentEmail').value.trim();if(!e.toLowerCase().endsWith('@siswa.com')){$('studentMsg').textContent='Please use your @siswa.com student email.';return}$('studentMsg').textContent='Demo student account recognised. Please review the assistance information below.';$('studentOptions').classList.remove('hidden')}
+function makeCode(){return 'UPI-'+Math.random().toString(36).slice(2,8).toUpperCase()+'-'+Date.now().toString().slice(-4)}
+function voucherHTML(v){let qr='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(v.code);return `<div class="voucher"><span class="badge">FREE MEAL VOUCHER</span><h2>UPSInfaq</h2><h3>${v.meal||v.program}</h3><p>Redeem at: <b>${v.stall}</b></p><img class="qr" src="${qr}" alt="QR code for voucher"><h3>${v.code}</h3><p>Show this voucher to the participating stall. One-time redemption only.</p><span class="badge">${v.status}</span></div>`}
+function saveVouchers(){localStorage.setItem('upiVouchers',JSON.stringify(vouchers));$('voucherCount').textContent=Object.keys(vouchers).length;renderRecords()}
+function createVoucher(){let v={code:makeCode(),meal:$('claimMeal').value,stall:$('claimStall').value,status:'AVAILABLE',created:new Date().toLocaleString()};vouchers[v.code]=v;saveVouchers();$('voucherArea').innerHTML=voucherHTML(v);$('voucherArea').classList.remove('hidden')}
+function programClaim(program,stall,id){let n=Number($(id).textContent);if(n<=0){alert('Sorry, all packs have been claimed.');return}$(id).textContent=n-1;let v={code:makeCode(),program,stall,meal:'Free program meal',status:'AVAILABLE',created:new Date().toLocaleString()};vouchers[v.code]=v;saveVouchers();$('programVoucher').innerHTML=voucherHTML(v);$('programVoucher').classList.remove('hidden');$('programVoucher').scrollIntoView({behavior:'smooth'})}
+function redeem(){let code=$('redeemCode').value.trim().toUpperCase(),v=vouchers[code];if(!v){$('redeemMsg').textContent='Voucher not found. Please check the code.';return}if(v.status!=='AVAILABLE'){$('redeemMsg').textContent='This voucher has already been redeemed or is unavailable.';return}v.status='REDEEMED';v.redeemedAt=new Date().toLocaleString();saveVouchers();$('redeemMsg').textContent='SUCCESS! '+v.meal+' voucher redeemed at '+v.stall+'.'}
+function donate(){let name=$('donorName').value.trim()||'Anonymous',type=$('donationType').value,amount=Number($('donationAmount').value),tip=Number($('tip').value)||0;if(amount<=0){alert('Enter a valid donation amount.');return}let fee=amount*.02;donationTotal+=amount;fees+=fee;donors.push({name,type,amount,period:'week'});localStorage.setItem('upiDonors',JSON.stringify(donors));$('raised').textContent='RM '+donationTotal.toFixed(2);$('feeTotal').textContent='RM '+fees.toFixed(2);$('donationMsg').innerHTML='Thank you! Demo donation recorded.<br>Donation: RM '+amount.toFixed(2)+' · 2% service fee: RM '+fee.toFixed(2)+' · Tip: RM '+tip.toFixed(2)+'<br><b>Total: RM '+(amount+fee+tip).toFixed(2)+'</b><br><button class="btn light" onclick="window.print()">Print donation receipt</button>';renderRanks()}
+function renderRanks(){let period=$('rankPeriod').value,base=period==='week'?[['Aiman',250],['Sarah',180],['Anonymous',120]]:[['Aiman',850],['Sarah',620],['Daniel',480]];donors.forEach(d=>{let x=base.find(x=>x[0]===d.name);if(x)x[1]+=d.amount;else base.push([d.name,d.amount])});base.sort((a,b)=>b[1]-a[1]);$('rankList').innerHTML=base.slice(0,10).map((d,i)=>`<div class="rank"><div class="medal">${i+1}</div><b>${d[0]}</b><span class="amount">RM ${d[1].toFixed(2)}</span></div>`).join('')}
+function adminLogin(){if($('adminCode').value==='UPSI2026'){sessionStorage.setItem('upiAdmin','yes');unlockAdmin()}else alert('Incorrect demo access code.')}
+function unlockAdmin(){$('adminLogin').classList.add('hidden');$('adminPanel').classList.remove('hidden');$('feeTotal').textContent='RM '+fees.toFixed(2);$('voucherCount').textContent=Object.keys(vouchers).length;renderRecords()}
+function renderRecords(){$('voucherRecords').innerHTML=Object.values(vouchers).length?Object.values(vouchers).map(v=>`<div class="item"><span>${v.code}<br><small>${v.stall}</small></span><b>${v.status}</b></div>`).join(''):'No vouchers generated yet.'}
+renderRanks();
+</script>
+</body>
+</html>
