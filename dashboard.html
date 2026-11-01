@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,10 +25,15 @@ main{max-width:1100px;margin:auto;padding:30px 20px}
 .claim-button{background:#103d30;color:white;width:100%;margin-top:10px}
 .claim-button:disabled{opacity:.5;cursor:not-allowed}
 .status{background:white;padding:20px;border-radius:12px;text-align:center;margin-bottom:15px}
-.notice{padding:14px;border-radius:8px;margin:12px 0;display:none}
+.notice{padding:14px;border-radius:8px;margin:12px 0;display:none;overflow-wrap:anywhere}
 .success{background:#e2f3e8;color:#155b37}
 .failure{background:#fbe7e5;color:#922f28}
+.cart-box{background:white;padding:20px;border-radius:14px;box-shadow:0 4px 14px #00000012;margin:20px 0}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #eee}
+.remove-button{background:#fbe7e5;color:#922f28}
+.cart-total{font-weight:bold;margin-top:15px}
 footer{text-align:center;padding:25px;color:#65766d}
+@media(max-width:500px){header{padding:16px 5%}.cart-item{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -48,9 +53,21 @@ footer{text-align:center;padding:25px;color:#65766d}
 
 <section>
 <h2 class="section-title">Food Catalogue</h2>
-<p>Choose available food items to claim.</p>
+<p>Select up to 3 different food items. Each item is limited to 1 unit per claim.</p>
 <div id="catalogueStatus" class="status">Loading food catalogue...</div>
 <div id="foodGrid" class="food-grid"></div>
+</section>
+
+<section>
+<h2 class="section-title">My Food Cart</h2>
+<div class="cart-box">
+<p>You can select a maximum of 3 different food items.</p>
+<div id="cartList">Your cart is empty.</div>
+<p class="cart-total" id="cartCount">0 of 3 items selected</p>
+<button id="submitCartButton" class="claim-button" onclick="submitCart()" disabled>
+Submit Food Claim
+</button>
+</div>
 </section>
 
 <section>
@@ -69,10 +86,12 @@ const SUPABASE_PUBLISHABLE_KEY="sb_publishable_d8TdD672EiNxb3CsLrCecw_L2XKYPp5";
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 
 let currentUser=null;
+let foodItems=[];
+let cart=[];
 
 function escapeHTML(value){
  return String(value??"").replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
  })[c]);
 }
 
@@ -86,11 +105,17 @@ function showNotice(message,success){
 
 async function loadStudentProfile(){
  const {data:{user},error}=await supabaseClient.auth.getUser();
- if(error||!user){window.location.href="index.html";return null;}
+
+ if(error||!user){
+  window.location.href="index.html";
+  return null;
+ }
+
  currentUser=user;
  document.getElementById("studentEmail").textContent=user.email;
  document.getElementById("studentName").textContent=
- "Welcome, "+(user.user_metadata?.full_name||"Student")+"!";
+  "Welcome, "+(user.user_metadata?.full_name||"Student")+"!";
+
  return user;
 }
 
@@ -98,65 +123,174 @@ async function loadFoodCatalogue(){
  const status=document.getElementById("catalogueStatus");
  const grid=document.getElementById("foodGrid");
 
- const {data,error}=await supabaseClient.from("food_items")
- .select("id,name,category,description,unit,price,quantity_available,image_url")
- .eq("is_active",true).gt("quantity_available",0).order("name");
+ const {data,error}=await supabaseClient
+  .from("food_items")
+  .select("id,name,category,description,unit,price,quantity_available,image_url")
+  .eq("is_active",true)
+  .gt("quantity_available",0)
+  .order("name");
 
- if(error){status.textContent="Unable to load food items: "+error.message;return;}
- if(!data||data.length===0){status.textContent="No food items currently available.";return;}
+ if(error){
+  status.textContent="Unable to load food items: "+error.message;
+  return;
+ }
+
+ foodItems=data||[];
+
+ if(foodItems.length===0){
+  status.textContent="No food items currently available.";
+  grid.innerHTML="";
+  return;
+ }
 
  status.style.display="none";
 
- grid.innerHTML=data.map(item=>{
- const image=item.image_url||"https://placehold.co/600x400?text=Food+Item";
- return `
- <article class="food-card">
- <img src="${escapeHTML(image)}" alt="${escapeHTML(item.name)}"
- onerror="this.src='https://placehold.co/600x400?text=Food+Item'">
- <div class="food-info">
- <h3>${escapeHTML(item.name)}</h3>
- <p>${escapeHTML(item.description||"")}</p>
- <p class="price">RM ${Number(item.price||0).toFixed(2)}</p>
- <p class="stock">Available: ${Number(item.quantity_available)} ${escapeHTML(item.unit||"units")}</p>
- <label for="qty-${escapeHTML(item.id)}">Quantity:</label>
- <select id="qty-${escapeHTML(item.id)}">
- <option value="1">1</option>
- <option value="2">2</option>
- </select>
- <button class="claim-button" onclick="claimFood('${escapeHTML(item.id)}',this)">
- Claim Food
- </button>
- </div>
- </article>`;
+ grid.innerHTML=foodItems.map(item=>{
+  const image=item.image_url||"https://placehold.co/600x400?text=Food+Item";
+  const alreadyAdded=cart.includes(item.id);
+  const cartFull=cart.length>=3;
+
+  return `
+   <article class="food-card">
+    <img src="${escapeHTML(image)}" alt="${escapeHTML(item.name)}"
+     onerror="this.src='https://placehold.co/600x400?text=Food+Item'">
+    <div class="food-info">
+     <h3>${escapeHTML(item.name)}</h3>
+     <p>${escapeHTML(item.description||"")}</p>
+     <p class="price">RM ${Number(item.price||0).toFixed(2)}</p>
+     <p class="stock">Available: ${Number(item.quantity_available)}
+      ${escapeHTML(item.unit||"units")}</p>
+     <button class="claim-button"
+      onclick="addToCart('${escapeHTML(item.id)}')"
+      ${alreadyAdded||cartFull?"disabled":""}>
+      ${alreadyAdded?"Added to Cart":cartFull?"Cart Full":"Add to Cart"}
+     </button>
+    </div>
+   </article>
+  `;
  }).join("");
 }
 
-async function claimFood(foodId,button){
- if(!currentUser){showNotice("Please log in again.",false);return;}
+function addToCart(foodId){
+ if(cart.includes(foodId))return;
 
- const quantity=Number(document.getElementById("qty-"+foodId).value);
+ if(cart.length>=3){
+  showNotice("You can only select 3 different food items.",false);
+  return;
+ }
+
+ const item=foodItems.find(food=>food.id===foodId);
+
+ if(!item||Number(item.quantity_available)<1){
+  showNotice("This food item is no longer available.",false);
+  return;
+ }
+
+ cart.push(foodId);
+ renderCart();
+ renderFoodButtons();
+}
+
+function removeFromCart(foodId){
+ cart=cart.filter(id=>id!==foodId);
+ renderCart();
+ renderFoodButtons();
+}
+
+function renderCart(){
+ const container=document.getElementById("cartList");
+ const count=document.getElementById("cartCount");
+ const submitButton=document.getElementById("submitCartButton");
+
+ count.textContent=cart.length+" of 3 items selected";
+ submitButton.disabled=cart.length===0;
+
+ if(cart.length===0){
+  container.textContent="Your cart is empty.";
+  return;
+ }
+
+ container.innerHTML=cart.map(id=>{
+  const item=foodItems.find(food=>food.id===id);
+  if(!item)return "";
+
+  return `
+   <div class="cart-item">
+    <div>
+     <strong>${escapeHTML(item.name)}</strong>
+     <div class="stock">Quantity: 1 ${escapeHTML(item.unit||"unit")}</div>
+    </div>
+    <button class="remove-button" onclick="removeFromCart('${escapeHTML(id)}')">
+     Remove
+    </button>
+   </div>
+  `;
+ }).join("");
+}
+
+function renderFoodButtons(){
+ const buttons=document.querySelectorAll("#foodGrid button");
+
+ buttons.forEach(button=>{
+  const card=button.closest(".food-card");
+  const title=card?.querySelector("h3")?.textContent;
+  const item=foodItems.find(food=>food.name===title);
+
+  if(!item)return;
+
+  const added=cart.includes(item.id);
+  const full=cart.length>=3;
+
+  button.disabled=added||full;
+  button.textContent=added?"Added to Cart":full?"Cart Full":"Add to Cart";
+ });
+}
+
+async function submitCart(){
+ if(!currentUser){
+  showNotice("Please log in again.",false);
+  return;
+ }
+
+ if(cart.length<1||cart.length>3){
+  showNotice("Please select between 1 and 3 food items.",false);
+  return;
+ }
+
+ const button=document.getElementById("submitCartButton");
  button.disabled=true;
- button.textContent="Processing...";
+ button.textContent="Processing Claim...";
 
  try{
- const {data,error}=await supabaseClient.rpc("submit_food_claim",{
- p_food_item_id:foodId,
- p_quantity:quantity
- });
+  const selectedIds=[...cart];
 
- if(error)throw error;
+  const {data,error}=await supabaseClient.rpc("submit_food_cart",{
+   p_food_item_ids:selectedIds
+  });
 
- const result=typeof data==="string"?JSON.parse(data):data;
- if(!result||!result.success)throw new Error("Claim could not be completed.");
+  if(error)throw error;
 
- showNotice("Claim successful! Your voucher code is: "+result.voucher_code,true);
+  const result=typeof data==="string"?JSON.parse(data):data;
 
- await loadFoodCatalogue();
- await loadMyClaims();
+  if(!result||!result.success){
+   throw new Error(result?.message||"Your food claim could not be completed.");
+  }
+
+  cart=[];
+  renderCart();
+
+  showNotice(
+   "Food claim successful! Your voucher code is: "+result.voucher_code,
+   true
+  );
+
+  await Promise.all([loadFoodCatalogue(),loadMyClaims()]);
+
  }catch(error){
- showNotice(error.message||"Unable to submit claim.",false);
- button.disabled=false;
- button.textContent="Claim Food";
+  showNotice(error.message||"Unable to submit your food claim.",false);
+ }finally{
+  button.textContent="Submit Food Claim";
+  button.disabled=cart.length===0;
  }
 }
 
@@ -164,24 +298,36 @@ async function loadMyClaims(){
  const status=document.getElementById("claimsStatus");
  const container=document.getElementById("claimsList");
 
- const {data,error}=await supabaseClient.from("claims")
- .select("id,voucher_code,status,claim_date,created_at")
- .eq("student_id",currentUser.id)
- .order("created_at",{ascending:false});
+ const {data,error}=await supabaseClient
+  .from("claims")
+  .select("id,voucher_code,status,claim_date,created_at,total_items")
+  .eq("student_id",currentUser.id)
+  .order("created_at",{ascending:false});
 
- if(error){status.textContent="Unable to load claims. Please check database permissions.";return;}
- if(!data||data.length===0){status.textContent="You have no food claims yet.";return;}
+ if(error){
+  status.textContent="Unable to load claims. Please check database permissions.";
+  return;
+ }
+
+ if(!data||data.length===0){
+  status.textContent="You have no food claims yet.";
+  container.innerHTML="";
+  return;
+ }
 
  status.style.display="none";
+
  container.innerHTML=data.map(claim=>`
- <article class="claim-card">
- <div class="claim-info">
- <h3>Food Claim</h3>
- <p><strong>Voucher:</strong> ${escapeHTML(claim.voucher_code||"Pending")}</p>
- <p><strong>Status:</strong> ${escapeHTML(claim.status||"Pending")}</p>
- <p><strong>Date:</strong> ${escapeHTML(claim.claim_date||claim.created_at||"-")}</p>
- </div>
- </article>`).join("");
+  <article class="claim-card">
+   <div class="claim-info">
+    <h3>Food Claim</h3>
+    <p><strong>Voucher:</strong> ${escapeHTML(claim.voucher_code||"Pending")}</p>
+    <p><strong>Status:</strong> ${escapeHTML(claim.status||"Pending")}</p>
+    <p><strong>Food items:</strong> ${Number(claim.total_items||0)}</p>
+    <p><strong>Date:</strong> ${escapeHTML(claim.claim_date||claim.created_at||"-")}</p>
+   </div>
+  </article>
+ `).join("");
 }
 
 async function logout(){
@@ -192,9 +338,13 @@ async function logout(){
 async function startDashboard(){
  const user=await loadStudentProfile();
  if(!user)return;
+
+ renderCart();
  await Promise.all([loadFoodCatalogue(),loadMyClaims()]);
 }
+
 startDashboard();
 </script>
 </body>
 </html>
+```
