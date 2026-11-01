@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPSInfaq | Admin Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #071b16;
+      color: #f5f1e6;
+    }
+    header {
+      padding: 24px;
+      background: #0d2b22;
+      border-bottom: 1px solid #b99a55;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    header h1 { margin: 0; color: #d7b96e; font-size: 22px; }
+    main { max-width: 1100px; margin: 30px auto; padding: 0 18px; }
+    .panel {
+      background: #103126;
+      border: 1px solid #315647;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+    h2 { color: #e0c47c; margin-top: 0; }
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 3px;
+    }
+    .refresh { background: #d7b96e; color: #10251d; }
+    .approve { background: #2e9d69; color: white; }
+    .reject { background: #b94b4b; color: white; }
+    .logout { background: transparent; border: 1px solid #d7b96e; color: #f5f1e6; }
+    .student {
+      border: 1px solid #456556;
+      background: #0b251d;
+      padding: 16px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+    .student h3 { margin: 0 0 8px; color: #f1d58c; }
+    .student p { margin: 6px 0; overflow-wrap: anywhere; }
+    .status { font-weight: bold; }
+    .pending { color: #e8c46e; }
+    .eligible { color: #65d69b; }
+    .not_eligible { color: #ff8585; }
+    #message { margin-top: 12px; white-space: pre-wrap; }
+    .muted { color: #b8c9bf; }
+    @media (max-width: 600px) {
+      header { align-items: flex-start; }
+      .student button { width: 100%; margin: 5px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>UPSInfaq | Admin Dashboard</h1>
+  <button class="logout" id="logoutBtn">Log Out</button>
+</header>
+
+<main>
+  <section class="panel">
+    <h2>Student Eligibility Management</h2>
+    <p class="muted">Review student applications and manage food assistance eligibility.</p>
+    <button class="refresh" id="refreshBtn">Refresh Applications</button>
+    <div id="message">Checking admin access...</div>
+  </section>
+
+  <section class="panel">
+    <h2>Student Applications</h2>
+    <div id="students">
+      Loading applications...
+    </div>
+  </section>
+</main>
+
+<script>
+const SUPABASE_URL = "https://vfzhszkzoufsocrgxdur.supabase.co";
+const SUPABASE_KEY = "sb_publishable_d8TdD672EiNxb3CsLrCecw_L2XKYPp5";
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const message = document.getElementById("message");
+const studentsBox = document.getElementById("students");
+
+function showMessage(text, error = false) {
+  message.textContent = text;
+  message.style.color = error ? "#ff8585" : "#9de0b8";
+}
+
+async function loadStudents() {
+  studentsBox.textContent = "Loading applications...";
+  showMessage("Checking admin permission...");
+
+  const { data: userData, error: userError } = await db.auth.getUser();
+
+  if (userError || !userData.user) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  const { data, error } = await db.rpc("admin_list_students");
+
+  if (error) {
+    studentsBox.textContent = "Unable to load applications.";
+    showMessage(error.message, true);
+    return;
+  }
+
+  studentsBox.replaceChildren();
+
+  if (!data || data.length === 0) {
+    studentsBox.textContent = "No student applications found.";
+  } else {
+    data.forEach(student => {
+      const card = document.createElement("div");
+      card.className = "student";
+
+      const heading = document.createElement("h3");
+      heading.textContent = student.full_name || "Unnamed student";
+
+      const email = document.createElement("p");
+      email.textContent = "Email: " + (student.email || "Not available");
+
+      const status = document.createElement("p");
+      status.className = "status " + student.eligibility_status;
+      status.textContent = "Status: " + student.eligibility_status;
+
+      const approveBtn = document.createElement("button");
+      approveBtn.className = "approve";
+      approveBtn.textContent = "Approve Student";
+      approveBtn.addEventListener("click", () =>
+        reviewStudent(student.id, "eligible")
+      );
+
+      const rejectBtn = document.createElement("button");
+      rejectBtn.className = "reject";
+      rejectBtn.textContent = "Reject Student";
+      rejectBtn.addEventListener("click", () =>
+        reviewStudent(student.id, "not_eligible")
+      );
+
+      card.append(heading, email, status, approveBtn, rejectBtn);
+      studentsBox.appendChild(card);
+    });
+  }
+
+  showMessage("Admin access verified. Applications loaded.");
+}
+
+async function reviewStudent(studentId, status) {
+  const action = status === "eligible" ? "approve" : "reject";
+
+  if (!confirm("Are you sure you want to " + action + " this student?")) {
+    return;
+  }
+
+  showMessage("Updating student status...");
+
+  const { error } = await db.rpc("admin_review_student", {
+    p_student_id: studentId,
+    p_status: status
+  });
+
+  if (error) {
+    showMessage(error.message, true);
+    return;
+  }
+
+  showMessage("Student status updated successfully.");
+  await loadStudents();
+}
+
+document.getElementById("refreshBtn").addEventListener("click", loadStudents);
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await db.auth.signOut();
+  window.location.href = "index.html";
+});
+
+loadStudents();
+</script>
+
+</body>
+</html>
