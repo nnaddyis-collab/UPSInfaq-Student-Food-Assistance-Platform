@@ -1557,8 +1557,24 @@ window.handleAuth = async function(event) {
   if (error) throw error;
   message.style.color = "#236448";
   message.textContent = "Login successful! Redirecting...";
-  window.location.href = "dashboard.html";
+  const { data: roleData, error: roleError } = await supabase
+  .from("user_roles")
+  .select("role, approved")
+  .eq("user_id", data.user.id)
+  .eq("approved", true)
+  .maybeSingle();
+
+if (roleError) {
+  alert("Unable to check account role: " + roleError.message);
   return;
+}
+
+if (roleData && roleData.role === "Admin") {
+  window.location.href = "admin.html";
+} else {
+  window.location.href = "dashboard.html";
+}
+return;
 }
  
 
