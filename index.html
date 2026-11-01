@@ -1610,13 +1610,31 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <script>
+
 (async function checkLoginRedirect() {
   const { data } = await supabaseClient.auth.getSession();
 
   if (data.session) {
-    window.location.href = "dashboard.html";
+    const { data: roleData, error } = await supabaseClient
+      .from("user_roles")
+      .select("role, approved")
+      .eq("user_id", data.session.user.id)
+      .eq("approved", true)
+      .maybeSingle();
+
+    if (error) {
+      console.error("Role check failed:", error.message);
+      return;
+    }
+
+    if (roleData && roleData.role === "Admin") {
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "dashboard.html";
+    }
   }
 })();
+
 </script>
 </body>
 </html>
