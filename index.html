@@ -1337,7 +1337,6 @@ let currentAuthMode = "login";
 let currentAuthRole = "Student";
 
 function openAuth(mode = "login", role = "") {
-
   const overlay = document.getElementById("authOverlay");
 
   overlay.classList.remove("hidden");
@@ -1346,17 +1345,14 @@ function openAuth(mode = "login", role = "") {
 
   switchAuth(mode);
 
-  if (role === "Admin") {
-    document.getElementById("authRole").value = "Student";
-    showAdminLogin();
-  } else {
-    document.getElementById("authRole").value =
-      role || "Student";
+  const roleDropdown = document.getElementById("authRole");
+
+  if (roleDropdown) {
+    roleDropdown.value = role || "Student";
   }
 
   document.body.style.overflow = "hidden";
 }
-
 function closeAuth() {
   document.getElementById("authOverlay")
     .classList.add("hidden");
