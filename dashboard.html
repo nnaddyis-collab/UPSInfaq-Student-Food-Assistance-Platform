@@ -48,7 +48,7 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
-    .food-card {
+    .food-card, .claim-card {
       background: white;
       border-radius: 14px;
       overflow: hidden;
@@ -60,8 +60,8 @@
       object-fit: cover;
       background: #e8e5dc;
     }
-    .food-info { padding: 17px; }
-    .food-info h3 { margin: 0 0 8px; }
+    .food-info, .claim-info { padding: 17px; }
+    .food-info h3, .claim-info h3 { margin: 0 0 8px; }
     .price { color: #a47b20; font-weight: bold; font-size: 18px; }
     .stock { color: #557265; font-size: 14px; }
     .empty, .status {
@@ -70,6 +70,13 @@
       border-radius: 12px;
       text-align: center;
     }
+    .claims-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .claim-card { padding: 18px; }
+    .claim-card p { overflow-wrap: anywhere; }
     footer {
       text-align: center;
       padding: 25px;
@@ -91,11 +98,19 @@
     <p>Welcome to your UPSInfaq Student Food Assistance Dashboard.</p>
   </section>
 
-  <h2 class="section-title">Food Catalogue</h2>
-  <p>Explore available food items and meals.</p>
+  <section>
+    <h2 class="section-title">Food Catalogue</h2>
+    <p>Explore available food items and meals.</p>
+    <div id="catalogueStatus" class="status">Loading food catalogue...</div>
+    <div id="foodGrid" class="food-grid"></div>
+  </section>
 
-  <div id="catalogueStatus" class="status">Loading food catalogue...</div>
-  <div id="foodGrid" class="food-grid"></div>
+  <section>
+    <h2 class="section-title">My Claims</h2>
+    <p>View your food claim history and voucher details.</p>
+    <div id="claimsStatus" class="status">Loading your claims...</div>
+    <div id="claimsList" class="claims-grid"></div>
+  </section>
 </main>
 
 <footer>© 2026 UPSInfaq Student Food Assistance Platform</footer>
@@ -109,17 +124,29 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
 async function loadStudentProfile() {
   const { data: { user }, error } = await supabaseClient.auth.getUser();
 
   if (error || !user) {
     window.location.href = "index.html";
-    return;
+    return null;
   }
 
   document.getElementById("studentEmail").textContent = user.email;
   document.getElementById("studentName").textContent =
     "Welcome, " + (user.user_metadata?.full_name || "Student") + "!";
+
+  return user;
 }
 
 async function loadFoodCatalogue() {
@@ -146,33 +173,56 @@ async function loadFoodCatalogue() {
   status.style.display = "none";
 
   grid.innerHTML = data.map(item => {
-    const image = item.image_url
-      ? item.image_url
-      : "https://placehold.co/600x400?text=Food+Item";
+    const image = item.image_url ||
+      "https://placehold.co/600x400?text=Food+Item";
 
     return `
       <article class="food-card">
-        <img src="${image}" alt="${item.name || "Food item"}"
-             onerror="this.src='https://placehold.co/600x400?text=Food+Item'">
+        <img src="${escapeHTML(image)}" alt="${escapeHTML(item.name)}"
+          onerror="this.src='https://placehold.co/600x400?text=Food+Item'">
         <div class="food-info">
           <h3>${escapeHTML(item.name || "Food item")}</h3>
           <p>${escapeHTML(item.description || "")}</p>
           <p class="price">RM ${Number(item.price || 0).toFixed(2)}</p>
-          <p class="stock">Available: ${item.quantity_available} ${escapeHTML(item.unit || "units")}</p>
+          <p class="stock">Available: ${Number(item.quantity_available)} ${escapeHTML(item.unit || "units")}</p>
         </div>
       </article>
     `;
   }).join("");
 }
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
+async function loadMyClaims(user) {
+  const status = document.getElementById("claimsStatus");
+  const container = document.getElementById("claimsList");
+
+  const { data, error } = await supabaseClient
+    .from("claims")
+    .select("id, voucher_code, status, claim_date, created_at")
+    .eq("student_id", user.id)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    status.textContent = "Unable to load claims. Please check database permissions.";
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    status.textContent = "You have no food claims yet.";
+    return;
+  }
+
+  status.style.display = "none";
+
+  container.innerHTML = data.map(claim => `
+    <article class="claim-card">
+      <div class="claim-info">
+        <h3>Food Claim</h3>
+        <p><strong>Voucher Code:</strong> ${escapeHTML(claim.voucher_code || "Pending")}</p>
+        <p><strong>Status:</strong> ${escapeHTML(claim.status || "Pending")}</p>
+        <p><strong>Claim Date:</strong> ${escapeHTML(claim.claim_date || claim.created_at || "-")}</p>
+      </div>
+    </article>
+  `).join("");
 }
 
 async function logout() {
@@ -181,8 +231,13 @@ async function logout() {
 }
 
 async function startDashboard() {
-  await loadStudentProfile();
-  await loadFoodCatalogue();
+  const user = await loadStudentProfile();
+  if (!user) return;
+
+  await Promise.all([
+    loadFoodCatalogue(),
+    loadMyClaims(user)
+  ]);
 }
 
 startDashboard();
