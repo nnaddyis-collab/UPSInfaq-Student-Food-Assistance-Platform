@@ -1433,75 +1433,7 @@ if (isRegister && document.getElementById("authRole").value === "Admin") {
     isRegister;
 }
 
-// FORM SUBMISSION
 
-function handleAuth(event) {
-
-  event.preventDefault();
-
-  const message = document.getElementById("authMessage");
-
-  const email = document.getElementById("authEmail")
-    .value.trim();
-
-  const password = document.getElementById("authPassword")
-    .value;
-
-  const role = document.getElementById("authRole").value;
-
-  if (currentAuthMode === "register") {
-
-    const name = document.getElementById("authName")
-      .value.trim();
-
-    const confirmPassword =
-      document.getElementById("authConfirmPassword").value;
-
-    if (!name) {
-      message.textContent = "Please enter your full name.";
-      return;
-    }
-
-    if (password.length < 8) {
-      message.textContent =
-        "Password must contain at least 8 characters.";
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      message.textContent = "Passwords do not match.";
-      return;
-    }
-
-    message.style.color = "#236448";
-
-    message.textContent =
-      "Registration form completed. Account creation will be connected to Supabase in the next setup.";
-
-    return;
-  }
-
-  const adminCode =
-    document.getElementById("authAdminCode").value;
-
-  if (!email || !password) {
-    message.textContent = "Please complete all fields.";
-    return;
-  }
-
-  if (!document.getElementById("adminCodeField")
-      .classList.contains("hidden") && !adminCode) {
-
-    message.textContent = "Admin access code is required.";
-    return;
-  }
-
-  message.style.color = "#236448";
-
-  message.textContent =
-    "Login form completed. Secure authentication will be connected to Supabase in the next setup.";
-}
-</script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -1532,8 +1464,8 @@ window.handleAuth = async function(event) {
 
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value;
+  const selectedRole = document.getElementById("authRole").value;
 
-  message.style.color = "#a13c37";
   button.disabled = true;
   button.textContent = "Please wait...";
 
@@ -1541,11 +1473,10 @@ window.handleAuth = async function(event) {
     if (currentAuthMode === "register") {
       const name = document.getElementById("authName").value.trim();
       const confirm = document.getElementById("authConfirmPassword").value;
-      const role = document.getElementById("authRole").value;
 
-      if (password !== confirm) {
-        throw new Error("Passwords do not match.");
-      }
+      if (!name) throw new Error("Please enter your full name.");
+      if (password.length < 8) throw new Error("Password must contain at least 8 characters.");
+      if (password !== confirm) throw new Error("Passwords do not match.");
 
       const { error } = await supabaseClient.auth.signUp({
         email,
@@ -1553,7 +1484,7 @@ window.handleAuth = async function(event) {
         options: {
           data: {
             full_name: name,
-            requested_role: role
+            requested_role: selectedRole
           }
         }
       });
@@ -1562,36 +1493,39 @@ window.handleAuth = async function(event) {
 
       message.style.color = "#236448";
       message.textContent = "Registration successful!";
-
-    } else {
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
-
-      if (error) throw error;
-
-      const { data: roleData, error: roleError } =
-        await supabaseClient
-          .from("user_roles")
-          .select("role, approved")
-          .eq("user_id", data.user.id)
-          .eq("approved", true)
-          .maybeSingle();
-
-      if (roleError) throw roleError;
-
-      message.style.color = "#236448";
-      message.textContent = "Login successful! Redirecting...";
-
-      if (roleData && roleData.role === "Admin") {
-        window.location.href = "admin.html";
-      } else {
-        window.location.href = "dashboard.html";
-      }
       return;
     }
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) throw error;
+
+    const { data: roleData, error: roleError } = await supabaseClient
+      .from("user_roles")
+      .select("role, approved")
+      .eq("user_id", data.user.id)
+      .eq("approved", true)
+      .maybeSingle();
+
+    if (roleError) throw roleError;
+
+    if (selectedRole === "Admin") {
+      if (!roleData || roleData.role !== "Admin") {
+        throw new Error("This account is not an approved Admin account.");
+      }
+
+      window.location.href = "admin.html";
+      return;
+    }
+
+    if (roleData && roleData.role === "Admin") {
+      throw new Error("Please select Admin for this account.");
+    }
+
+    window.location.href = "dashboard.html";
 
   } catch (error) {
     message.style.color = "#a13c37";
@@ -1599,19 +1533,9 @@ window.handleAuth = async function(event) {
 
   } finally {
     button.disabled = false;
-    button.textContent =
-      currentAuthMode === "register"
-        ? "Create Account →"
-        : "Sign In →";
-  }
-};
-
-  } finally {
-    button.disabled = false;
-    button.textContent =
-      currentAuthMode === "register"
-        ? "Create Account →"
-        : "Sign In →";
+    button.textContent = currentAuthMode === "register"
+      ? "Create Account →"
+      : "Sign In →";
   }
 };
 
