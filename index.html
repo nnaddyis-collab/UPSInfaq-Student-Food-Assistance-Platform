@@ -1385,7 +1385,16 @@ function switchAuth(mode) {
   currentAuthMode = mode;
 
   const isRegister = mode === "register";
+const adminOption = document.querySelector('#authRole option[value="Admin"]');
 
+if (adminOption) {
+  adminOption.hidden = isRegister;
+  adminOption.disabled = isRegister;
+}
+
+if (isRegister && document.getElementById("authRole").value === "Admin") {
+  document.getElementById("authRole").value = "Student";
+}
   document.getElementById("loginTab")
     .classList.toggle("active", !isRegister);
 
