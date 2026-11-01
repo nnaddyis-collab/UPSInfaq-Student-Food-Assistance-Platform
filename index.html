@@ -1552,18 +1552,15 @@ window.handleAuth = async function(event) {
       message.style.color = "#236448";
       message.textContent =
         "Registration successful! Please check your email to confirm your account.";
-
-    } else {
-      const { error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
-
-      if (error) throw error;
-
-      message.style.color = "#236448";
-      message.textContent = "Login successful!";
-    }
+} else {
+  const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+  message.style.color = "#236448";
+  message.textContent = "Login successful! Redirecting...";
+  window.location.href = "dashboard.html";
+  return;
+}
+ 
 
   } catch (error) {
     message.textContent = error.message;
